@@ -17,6 +17,7 @@ Guest (Unregistered Users) Requirements
 User (Registered) Requirements
   * *All requirements for guests.*
   * Create an account with name, e-mail and image.
+  * Login in using a unique username and password.
   * Create a blog for posting pictures/videos of food reviews, recipes, hacks, advertisements, etc.
   * Like other blog posts, post reviews, comments, etc.
   * Browse through other blogs without having to create a blog for yourself (public blogs, brand blogs).
