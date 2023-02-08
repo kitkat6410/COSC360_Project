@@ -1,1 +1,3 @@
-# COSC360-Project
+# COSC360 Project Proposal
+
+## Topic - My Food Blog
