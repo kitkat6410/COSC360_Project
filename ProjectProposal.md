@@ -2,7 +2,7 @@
 
 ## CulinaryCloud - My Food Blog
 
-Team Members: Mrunal Aroskar and Kyra Barnes
+### Team Members: Mrunal Aroskar and Kyra Barnes
 
 __Project Description__
 
