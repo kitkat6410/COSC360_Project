@@ -2,6 +2,8 @@
 
 ## CulinaryCloud - My Food Blog
 
+Team Members: Mrunal Aroskar and Kyra Barnes
+
 __Project Description__
 
 CulinaryCloud is a platform for food enthusiasts to come together and share their love for food, cooking and culinary experiences. The website features a variety of blog categories for users to explore and engage with, including food making contests, recipes, personal food blogs, chef life, and cuisine specific blogs. With a focus on community and collaboration, CulinaryCloud is the ultimate destination for food lovers to connect, share and learn.
@@ -13,6 +15,9 @@ Guest (Unregistered Users) Requirements
   * Like all blogs.
   * Can sort by category, author, subcategory, etc.
   * Report inappropriate content.
+  * Can search for topics and blogs.
+  * Can filter by date.
+  * Can collapse certain sections of blogs to make it more readable/concise.
 
 User (Registered) Requirements
   * *All requirements for guests.*
@@ -29,6 +34,6 @@ Administrator Requiremnts
   * Have access to the database on the backend.
   * Access to archived blog history.
   * Ability to ban users.
-  * Access to customer profiles.
+  * Access to customer profiles and usage history.
   * Access to visual data information.
 
