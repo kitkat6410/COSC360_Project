@@ -28,7 +28,7 @@ User (Registered) Requirements
   * Browse through other blogs without having to create a blog for yourself (public blogs, brand blogs).
   * Delete any of their own content anytime they want.
 
-Administrator Requiremnts
+Administrator Requirements
   * *All requirements for users.*
   * Approve/reject public blog post requests.
   * Have access to the database on the backend.
