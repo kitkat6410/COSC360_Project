@@ -1,2 +1,2 @@
 # project-kitkat6410
-project-kitkat6410 created by GitHub Classroom
+The project proposal can be found as a markdown file.
