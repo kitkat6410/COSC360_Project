@@ -5,8 +5,10 @@
     <title>
         CulinaryCloud | Home
     </title>
-    <link rel="stylesheet" href="css/reset.css"></link>
-    <link rel="stylesheet" href="css/styles.css"></link>
+    <link rel="stylesheet" href="css/reset.css">
+    </link>
+    <link rel="stylesheet" href="css/styles.css">
+    </link>
     <nav>
         <div class="site-title">
             <a href="/">
@@ -16,97 +18,160 @@
             <p>Social Media Links</p>
         </div>
         <ul>
-            <li><a href="/home.html">Browse Blogs</a></li>
+            <li><a href="/blogs.html">Browse Blogs</a></li>
             <li><a href="/about.html">About</a></li>
             <li><a href="/login.html">Login</a></li>
         </ul>
     </nav>
+
 </head>
 
 <body>
-    
-    <header id="masthead">
-<p>hi</p>
+
+    <header class="third-color">
+
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 4</div>
+                <img src="images/food_photo.png">
+                <div class="text">Share Your Creations</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 4</div>
+                <img src="images/pizza.png">
+                <div class="text">Learn Fun Recipes</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 4</div>
+                <img src="images/food_together.jpg">
+                <div class="text">Create a Community</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 4</div>
+                <img src="images/salad.png">
+                <div class="text">Participate in Food Challenges</div>
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
     </header>
-    <div id="main">
+
     
-        </article>
-        <article id="center">
-            <h1>Discover</h1>
-            <div class="entry">
-                <figure>
-                    <img src="images/travel/9498358806.jpg" alt="" />
-                    <figcaption>Florence</figcaption>
-                    <img src="images/travel/new-banner.png" alt="" class="overlayed" />
-                </figure>
-                <div>
-                    <h2>Florence Tour</h2>
-                    <p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti
-                        del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent
-                        Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental.</p>
-                    <div class="right">
-                        <a href="#" class="linkbutton">Read More</a>
-                    </div>
-                </div>
-            </div>
+    <section class="fourth-color">
+        <div class="info">
+            <h1>First Steps: Create An Account</h1>
+            <p>Welcome to CulinaryCloud! We hope you enjoy your stay. We are a group of food enthusiasts who came
+                together
+                to create this online community. Once you create an account the Login link at the top right, you can
+                start
+                to share your creations with your own blog </p>
+        </div>
+        <div class="info">
+            <h1>Share Your Food Passions</h1>
 
-            <div class="entry">
-                <figure>
-                    <img src="images/travel/9504449928.jpg" alt="" />
-                    <figcaption>Florence</figcaption>
-                </figure>
-                <div>
-                    <h2>Lovin' Tuscany</h2>
-                    <p>Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi
-                        traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun
-                        paroles.</p>
-                    <div class="right">
-                        <a href="#" class="linkbutton">Read More</a>
-                    </div>
-                </div>
-            </div>
+            <p>
 
-            <div class="entry">
-                <figure>
-                    <img src="images/travel/9494472443.jpg" alt="" />
-                    <figcaption>Venice</figcaption>
-                    <img src="images/travel/new-banner.png" alt="" class="overlayed" />
-                </figure>
-                <div>
-                    <h2>Love in Venezia</h2>
-                    <p>
-                    <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie,
-                        musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li
-                        grammatica, li pronunciation e li plu commun vocabules.</p>
-                    <div class="right">
-                        <a href="#" class="linkbutton">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </div>
+                To create your own blog, travel to your account and click create blog! You can then make a title and
+                description for your blog and start posting! You can have multiple blogs for different categories or
+                just
+                one!
+            </p>
+        </div>
+        <div class="info">
+            <h1>Find a Community</h1>
+            <p>
+                To discover blogs you may find interesting, head over the the Browse Blogs page. You can sort public
+                blogs
+                by category and author. If you know which blog you want, you can search for it directly
+            </p>
+        </div>
+
+    </section>
+    <section id="categories"class=second-color>
+
+        <h1>Categories</h1>
+        <figure id="first">
+            <img src="images/recipe_2.jpg">
+            <figcaption>
+                Recipes
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="images/food_challenge_2.jpg">
+            <figcaption>
+                Food Challenges
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="images/business_food_2.jpeg">
+            <figcaption>
+                Promote Business
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="images/review_2.jpg">
+            <figcaption>
+                Food Reviews
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="images/travel_2.jpg">
+            <figcaption>
+                Travel Blogs
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="images/community_2.jpg">
+            <figcaption>
+                Community
+            </figcaption>
+        </figure>
+    </section>
+
+
+
+
+
+
+
+
+
     <footer>
-        <div class="footer-related">
-            <h2>Related Posts</h2>
-            <div>
-                <img src="images/travel/tiny/9495574327.jpg" /><img src="images/travel/tiny/9496787858.jpg" /><img
-                    src="images/travel/tiny/9502740177.jpg" /><img src="images/travel/tiny/9504609042.jpg" /><img
-                    src="images/travel/tiny/9505536014.jpg" /><br />
-                <img src="images/travel/tiny/9505893300.jpg" /><img src="images/travel/tiny/8710247776.jpg" /><img
-                    src="images/travel/tiny/8710320515.jpg" /><img src="images/travel/tiny/9494282329.jpg" /><img
-                    src="images/travel/tiny/9494464567.jpg" />
-            </div>
-        </div>
-        <div class="footer-section">
-            <h2>About Us</h2>
-            <p>Bacon ipsum dolor sit amet kielbasa officia ribeye tri-tip sausage, swine salami occaecat biltong. Strip
-                steak shoulder rump swine sunt commodo turducken sint eu ut kielbasa meatball duis. Do chicken laboris
-                officia ut. </p>
-            <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica,
-                sport etc, litot Europa usa li sam vocabular.</p>
-            <p>&copy; Copyright 2023 Company X
-        </div>
+        <p>&copy; Copyright 2023 CulinaryCloud</p>
+
     </footer>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 4000); // Change image every 2 seconds
+        }
+    </script>
 </body>
 
 </html>
