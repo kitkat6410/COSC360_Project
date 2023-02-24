@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+   <meta charset="utf-8">
+   <title>Sign Up</title>
+   <link rel="stylesheet" href="css/reset.css" />
+   <link rel="stylesheet" href="css/login.css" />
+   
+   <script type="text/javascript" src="script/lab5-1.js"></script>
+</head>
+<body>
+<form method="get" action="http://www.randyconnolly.com/tests/process.php" id="mainForm">
+   <fieldset>
+      <legend>Create an account on Culinary Cloud</legend>
+      <table>
+        <tr>
+            <td colspan="2">
+               <p>
+                <label>Your name:</label><br/>
+                <input type="text" name="name" size="90" class="required"/>
+                </p>
+               <p>
+                <label>Your email address:</label><br/>
+                <input type="text" name="email" size="90" class="required"/>
+                </p>
+                <p></p>
+                    <div class="box">
+                        <p>
+                        <label>Date of Birth: <br/>
+                        <input type="date"  name="date" class="required" />
+                        </p>
+                    </div>
+               <p>
+                <label>Your preferred username:</label><br/>
+                <input type="text" name="username" size="90" class="required"/>
+                </p> 
+               <p>
+                <label>Your password:</label><br/>
+                <input type="text" name="password" size="50" class="required"/>
+                </p>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="2">
+                <p></p>
+                <hr>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="2">
+               <p>
+               <label>Title of your blog:</label><br/>
+               <input type="text" name="title" size="90" class="required"/>
+               </p>
+               <p>
+               <label>Description:</label><br/>
+               <textarea name="description" rows="5" cols="61" class="required"></textarea>
+               </p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>
+               <label>Continent</label><br/>
+               <select name="continent">
+                  <option>Choose continent</option>
+                  <option>Africa</option>
+                  <option>Asia</option>
+                  <option>Europe</option>
+                  <option>North America</option>
+                  <option>South America</option>
+                  <option>Australia</option>
+                  <option>Antarctica</option>
+               </select>
+               </p>
+               
+               <p>
+               <label>City, Country</label><br/>
+               <input type="text" name="cityandcountry" size="40"/>
+               </p>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="2">
+                <p></p>
+                <hr>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="3">
+                <p>What would you like to do with your blog?</p>
+                <div class="box">
+                    <label>Select all that apply </label><br/>
+                    <input type="checkbox" name="cc" >Post recipes <br/>
+                    <input type="checkbox" name="cc" >Food challenges <br/>
+                    <input type="checkbox" name="cc" >Business/marketing <br/>
+                    <input type="checkbox" name="cc" >Restaurant reviews<br/>
+                    <input type="checkbox" name="cc" >Travel vlogs <br/>
+                    <input type="checkbox" name="cc" >Collaborate with other bloggers <br/>
+                    <label>Other (please specify):</label><br/>
+                    <input type="text" name="other" size="80"/>
+                </div>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="2" >
+            <div class="rectangle">
+               <label>I want my blog to be public</label>
+               <input type="checkbox" name="accept">
+            </div>
+            </td>
+         </tr>
+         <tr>
+            <td>
+            <div class="rectangle">
+               <label>I agree with the terms and conditions</label>
+               <input type="checkbox" name="agree" class="required">
+            </div>
+            </td>
+            <td>
+                <div class="box">
+                   <p>
+                   <label>Today's Date: <br/>
+                   <input type="date"  name="date" />
+                   </p>
+                </div>
+             </td>
+         </tr>
+         <tr>
+            <td colspan="2">
+               <div class="rectangle centered">
+                  <input type="submit" class="rounded"> <input type="reset" value="Reset" class="rounded">
+               </div>
+            </td>
+         </tr>
+      </table>
+   </fieldset>
+</form>
+</body>
+</html>
