@@ -103,12 +103,18 @@
  }
 
  h2 {
+   font-size: 1.5em;
    margin-bottom: 40px;
  }
 
  h3 {
    text-transform: capitalize;
    margin-bottom: 8px;
+ }
+
+ .border{
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dddd;
  }
 
  section {
