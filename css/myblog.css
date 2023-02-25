@@ -42,7 +42,6 @@ article {
 #desc {
     margin: 0;
     background-color: #ffb3c6;
-    /* padding:1em; */
     padding-left:1em;
     padding-right:1em;
     padding-top:1em;
@@ -95,7 +94,7 @@ li {
 }
  
  .baking-image {
-    width: 400px;
+    height: 400px;
     display:block;
     margin:auto;
     margin-bottom: 1.33em;
