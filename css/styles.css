@@ -280,7 +280,7 @@
    }
  }
 
- .blogPrev {
+ .blogPrev{
    clear: left;
 
    padding: 1em;
@@ -313,11 +313,13 @@
 
  }
 
- #blogBrowse {
+ #blogBrowse{
    overflow: auto;
    display: block;
    width: 80%;
  }
+
+
 
  #browse {
    color: white;
@@ -326,6 +328,8 @@
 
 
  }
+
+ 
 
  #blogPage {
    padding-bottom: 1em;
@@ -340,7 +344,6 @@
  .linkbutton {
    display: block;
    float: right;
-
    margin-right: 2em;
    margin-top: 0.2em;
    padding: 0.5em;
