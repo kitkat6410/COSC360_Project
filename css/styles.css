@@ -44,6 +44,34 @@
    padding-top: 2em;
  }
 
+ .title2{
+  padding-top: 2em;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+ }
+
+ #aboutPage {
+  color: white;
+  text-align: center;
+  clear: left;
+  padding: 1em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  width: 100%;
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq {
+  clear: left;
+  padding: 1em;
+  margin-top: 1em;
+  height: fit-content;
+  overflow: hidden;
+}
+
  nav {
    display: flex;
    justify-content: space-between;
@@ -72,7 +100,7 @@
  }
 
  h1 {
-   font-size: 1.5em;
+   font-size: 2em;
  }
 
  nav h1 {
@@ -113,8 +141,9 @@
  }
 
  .border{
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #dddd;
+  margin-bottom: 20px;
  }
 
  section {
@@ -280,7 +309,7 @@
    }
  }
 
- .blogPrev{
+ .blogPrev {
    clear: left;
 
    padding: 1em;
@@ -313,13 +342,11 @@
 
  }
 
- #blogBrowse{
+ #blogBrowse {
    overflow: auto;
    display: block;
    width: 80%;
  }
-
-
 
  #browse {
    color: white;
@@ -328,8 +355,6 @@
 
 
  }
-
- 
 
  #blogPage {
    padding-bottom: 1em;
@@ -344,6 +369,7 @@
  .linkbutton {
    display: block;
    float: right;
+
    margin-right: 2em;
    margin-top: 0.2em;
    padding: 0.5em;
