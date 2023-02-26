@@ -81,20 +81,17 @@
          var username = document.forms["loginForm"]["username"].value;
          var password = document.forms["loginForm"]["password"].value;
          if (username == "" && password == "") {
-            var errorMessage = "Username and password must be filled out";
-            document.getElementById("error-message").innerHTML = errorMessage;
+            document.getElementById("error-message").innerHTML = "Username and password must be filled out";
             return false;
          }
          else if (username == "" && password != "") {
-            var errorMessage = "Username must be filled out";
-            document.getElementById("error-message").innerHTML = errorMessage;
+            document.getElementById("error-message").innerHTML = "Username must be filled out";
             return false;
 
 
          }
          else if (username != "" && password == "") {
-            var errorMessage = "Password must be filled out";
-            document.getElementById("error-message").innerHTML = errorMessage;
+            document.getElementById("error-message").innerHTML = "Password must be filled out";
             return false;
          }
          
