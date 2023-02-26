@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
    <meta charset="utf-8">
-   <title>Login</title>
+   <title>Admin Login</title>
    <link rel="stylesheet" href="css/reset.css" />
    <link rel="stylesheet" href="css/login.css" />
    <link rel="stylesheet" href="css/styles.css" />
@@ -15,7 +15,7 @@
               <h1>Culinary Cloud</h1>
               </a>
          
-          <p>Login Page</p>
+          <p>Admin Login Page</p>
       </div>
       <ul>
          <li><a href="home.html">Back</a></li></li>
@@ -26,7 +26,7 @@
 <body>
 <form method="get" action="http://www.randyconnolly.com/tests/process.php" >
    <fieldset>
-      <legend>Login to your account on Culinary Cloud</legend>
+      <legend>Administrator Login</legend>
       <table>
         <tr>
             <td colspan="2">
@@ -39,6 +39,11 @@
                 <label>Password:</label><br/>
                 <input type="text" name="password" size="50" class="required"/>
                 </p>
+
+                <p>
+                 <label>Admin reference number:</label><br/>
+                 <input type="text" name="refnumber" size="50" class="required"/>
+                 </p>
             </td>
          </tr>
          <tr>
@@ -50,18 +55,13 @@
          <tr>
             <td colspan="2">
                <div class="rectangle centered">
-                  <input type="submit" class="rounded" onclick="href='index.html';"> <input type="reset" value="Reset" class="rounded">
+                  <input type="submit" class="rounded" onclick="href='index.html';">
                </div>
             </td>
          </tr>
          <tr>
             <td colspan="2" class="centered">
                 <a href="#">Forgot Password?</a>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2" class="centered">
-                <a href="signup.html">Create an account</a>
             </td>
          </tr>
       </table>
