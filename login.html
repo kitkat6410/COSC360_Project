@@ -1,71 +1,105 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
    <meta charset="utf-8">
-   <title>Sign Up</title>
+   <title>Login</title>
    <link rel="stylesheet" href="css/reset.css" />
    <link rel="stylesheet" href="css/login.css" />
    <link rel="stylesheet" href="css/styles.css" />
-   
+
    <script type="text/javascript" src="script/lab5-1.js"></script>
 
    <nav>
       <div class="site-title">
-          <a href="home.html">
-              <h1>Culinary Cloud</h1>
-              </a>
-         
-          <p>Login Page</p>
+         <a href="home.html">
+            <h1>Culinary Cloud</h1>
+         </a>
+
+         <p>Login Page</p>
       </div>
       <ul>
-         <li><a href="home.html">Back</a></li></li>
+         <li><a href="home.html">Back</a></li>
+         </li>
       </ul>
-  </nav>
+   </nav>
 
 </head>
+
 <body>
-<form method="get" action="http://www.randyconnolly.com/tests/process.php" >
-   <fieldset>
-      <legend>Login to your account on Culinary Cloud</legend>
-      <table>
-        <tr>
-            <td colspan="2">
-               <p>
-                <label>Username/Email address:</label><br/>
-                <input type="text" name="name" size="90" class="required"/>
-                </p>
-               
-               <p>
-                <label>Password:</label><br/>
-                <input type="text" name="password" size="50" class="required"/>
-                </p>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2">
-                <p></p>
-                <hr>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2">
-               <div class="rectangle centered">
-                  <input type="submit" class="rounded" onclick="href='index.html';"> <input type="reset" value="Reset" class="rounded">
-               </div>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2" class="centered">
-                <a href="#">Forgot Password?</a>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2" class="centered">
-                <a href="signup.html">Create an account</a>
-            </td>
-         </tr>
-      </table>
-   </fieldset>
-</form>
+   <form method="post" action="http://www.randyconnolly.com/tests/process.php" name="loginForm"
+      onsubmit="return validateForm()">
+      <fieldset>
+         <legend>Login to your account on Culinary Cloud</legend>
+         <table>
+            <tr>
+               <td colspan="2">
+                  <p>
+                     <label for="username">Username:</label>
+                     <br>
+                     <input type="text" name="username" size="70" class="required" />
+
+                  </p>
+
+                  <p>
+                     <label for="password">Password:</label><br>
+                     <input type="password" name="password" size="50" class="required" />
+                  </p>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  
+                  <hr>
+                  <p id="error-message"></p>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <div class="rectangle centered">
+                     <input type="submit" value="Submit" class="rounded"> <input type="reset" value="Reset"
+                        class="rounded">
+                  </div>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2" class="centered">
+                  <a href="#">Forgot Password?</a>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2" class="centered">
+                  <a href="signup.html">Create an account</a>
+               </td>
+            </tr>
+         </table>
+      </fieldset>
+   </form>
+
+   <script>
+      function validateForm() {
+         var username = document.forms["loginForm"]["username"].value;
+         var password = document.forms["loginForm"]["password"].value;
+         if (username == "" && password == "") {
+            var errorMessage = "Username and password must be filled out";
+            document.getElementById("error-message").innerHTML = errorMessage;
+            return false;
+         }
+         else if (username == "" && password != "") {
+            var errorMessage = "Username must be filled out";
+            document.getElementById("error-message").innerHTML = errorMessage;
+            return false;
+
+
+         }
+         else if (username != "" && password == "") {
+            var errorMessage = "Password must be filled out";
+            document.getElementById("error-message").innerHTML = errorMessage;
+            return false;
+         }
+         
+      }
+   </script>
 </body>
+
 </html>

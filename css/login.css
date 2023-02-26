@@ -79,3 +79,14 @@ h1, h2, h3, nav, footer {
    .rounded:hover {
       background-color: #f0e29c;
    }
+
+   #error-message {
+      color:#94001E;
+      text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 1px #000;
+   }
+   #agree{
+      color:white;
+   }
+   legend{
+      color:white;
+   }

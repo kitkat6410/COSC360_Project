@@ -1,95 +1,163 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
    <meta charset="utf-8">
    <title>Sign Up</title>
    <link rel="stylesheet" href="css/reset.css" />
    <link rel="stylesheet" href="css/login.css" />
    <link rel="stylesheet" href="css/styles.css" />
-   
+
    <script type="text/javascript" src="script/lab5-1.js"></script>
    <nav>
       <div class="site-title">
-          <a href="home.html">
-              <h1>Culinary Cloud</h1>
-              </a>
-         
-          <p>Sign Up Page</p>
+         <a href="home.html">
+            <h1>Culinary Cloud</h1>
+         </a>
+
+         <p>Sign Up Page</p>
       </div>
       <ul>
-         <li><a href="login.html">Back</a></li></li>
+         <li><a href="login.html">Back</a></li>
+         </li>
       </ul>
-  </nav>
+   </nav>
 
 </head>
+
 <body>
-<form method="get" action="http://www.randyconnolly.com/tests/process.php" id="mainForm">
-   <fieldset>
-      <legend>Create an account on Culinary Cloud</legend>
-      <table>
-        <tr>
-            <td colspan="2">
-               <p>
-                <label>Your name:</label><br/>
-                <input type="text" name="name" size="90" class="required"/>
-                </p>
-               <p>
-                <label>Your email address:</label><br/>
-                <input type="text" name="email" size="90" class="required"/>
-                </p>
-                <p></p>
-                    <div class="box">
-                        <p>
-                        <label>Date of Birth: <br/>
-                        <input type="date"  name="date" class="required" />
-                        </p>
-                    </div>
-               <p>
-                <label>Your preferred username:</label><br/>
-                <input type="text" name="username" size="90" class="required"/>
-                </p> 
-               <p>
-                <label>Your password:</label><br/>
-                <input type="text" name="password" size="50" class="required"/>
-                </p>
-               <p>
-                <label>Confirm password:</label><br/>
-                <input type="text" name="password" size="50" class="required"/>
-                </p>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2">
-                <p></p>
-                <hr>
-            </td>
-         </tr>
-         
-         <tr>
-            <td>
-            <div class="rectangle">
-               <label>I agree with the terms and conditions</label>
-               <input type="checkbox" name="agree" class="required">
-            </div>
-            </td>
-            <td>
-                <div class="box">
-                   <p>
-                   <label>Today's Date: <br/>
-                   <input type="date"  name="date" />
-                   </p>
-                </div>
-             </td>
-         </tr>
-         <tr>
-            <td colspan="2">
-               <div class="rectangle centered">
-                  <input type="submit" class="rounded" onclick="href='index.html';"> <input type="reset" value="Reset" class="rounded">
-               </div>
-            </td>
-         </tr>
-      </table>
-   </fieldset>
-</form>
+   <form method="post" action="http://www.randyconnolly.com/tests/process.php" name="signupForm" id="mainForm"
+      onsubmit="return validateForm()">
+      <fieldset>
+         <legend>Create an account on Culinary Cloud</legend>
+         <table>
+            <tr>
+               <td colspan="2">
+                  <p>
+                     <label>Your name:</label>*<br>
+                     <input type="text" name="name" size="90" pattern="[A-Za-z'-]+ [A-Za-z'-]+" title="Please enter your full name (first and last name separated by a space)">
+                  </p>
+                  <p>
+                     <label for="email">Your email address:</label>*<br>
+                     <input type="email" name="email" size="90">
+                  </p>
+                  <p></p>
+                  <div class="box">
+                     <p>
+                        <label for="birth">Date of Birth:</label>*<br>
+                        <input type="date" name="birth">
+                     </p>
+                  </div>
+                  <p>
+                     <label for="username">Your preferred username:</label>*<br>
+                     <input type="text" name="username" size="90">
+                  </p>
+                  <p>
+                     <label for="password">Your password:</label>*<br />
+                     <input type="password" name="password" size="50">
+                  </p>
+                  <p>
+                     <label for="validatePassword">Confirm password:</label>*<br />
+                     <input type="password" name="validatePassword" size="50">
+                  </p>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <p></p>
+                  <hr>
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  <div class="rectangle" id="agree">
+                     <label>
+                        <input type="checkbox" name="agree" value="yes">
+                        I agree to the terms and conditions*
+                     </label>
+
+                  </div>
+               </td>
+               <td>
+                  <div class="box">
+                     <p>
+                        <label for="date">Today's Date:</label>* <br>
+                        <input type="date" name="date">
+                     </p>
+                  </div>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <hr>
+                  <p id="error-message"></p>
+                  <div class="rectangle centered">
+                     <input type="submit" value="Submit" class="rounded"> <input type="reset" value="Reset"
+                        class="rounded">
+                  </div>
+               </td>
+            </tr>
+         </table>
+      </fieldset>
+   </form>
+   <script>
+      function validateForm() {
+         var name = document.forms["signupForm"]["name"].value;
+         var email = document.forms["signupForm"]["email"].value;
+         var birth = document.forms["signupForm"]["birth"].value;
+         var username = document.forms["signupForm"]["username"].value;
+         var password = document.forms["signupForm"]["password"].value;
+         var validatePassword = document.forms["signupForm"]["validatePassword"].value;
+         var agree = document.forms["signupForm"]["agree"].checked;
+         var date = document.forms["signupForm"]["date"].value;
+
+         if (name == "") {
+            document.getElementById("error-message").innerHTML = "Please enter your name.";
+            return false;
+         }
+
+         if (email == "") {   
+            document.getElementById("error-message").innerHTML = "Please enter your email address.";
+            return false;
+         }
+
+         if (birth == "") {
+            document.getElementById("error-message").innerHTML = "Please enter your date of birth.";
+            return false;
+         }
+
+         if (username == "") {
+            document.getElementById("error-message").innerHTML = "Please enter your preferred username.";
+            return false;
+         }
+
+         if (password == "") {
+            document.getElementById("error-message").innerHTML = "Please enter your password";
+            return false;
+         }
+
+         if (validatePassword == "") {
+            document.getElementById("error-message").innerHTML = "Please confirm your password";
+            return false;
+         }
+
+         if (password != validatePassword) {
+            document.getElementById("error-message").innerHTML = "Passwords do not match.";
+            return false;
+         }
+
+         if (!agree) {
+            document.getElementById("error-message").innerHTML = "Please agree to the terms and conditions";
+            return false;
+         }
+
+         if (date == "") {
+            document.getElementById("error-message").innerHTML = "Please enter today's date.";
+            return false;
+         }
+      }
+   </script>
 </body>
+
 </html>
