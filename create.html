@@ -24,7 +24,7 @@
 
 </head>
 <body>
-<form method="get" action="http://www.randyconnolly.com/tests/process.php" id="mainForm">
+<form method="get" action="http://www.randyconnolly.com/tests/process.php" name="createBlog" id="mainForm" onsubmit="return validateForm()">
    <fieldset>
       <legend>Create Your Blog</legend>
       <table>
@@ -32,11 +32,11 @@
          <tr>
             <td colspan="2">
                <p>
-               <label>Title of your blog:</label><br/>
+               <label>Title of your blog:</label>*<br/>
                <input type="text" name="title" size="90" class="required"/>
                </p>
                <p>
-               <label>Description:</label><br/>
+               <label>Description:</label>*<br/>
                <textarea name="description" rows="5" cols="61" class="required"></textarea>
                </p>
             </td>
@@ -44,7 +44,7 @@
          <tr>
             <td>
                <p>
-               <label>Continent</label><br/>
+               <label>Continent</label>*<br/>
                <select name="continent">
                   <option>Choose continent</option>
                   <option>Africa</option>
@@ -58,7 +58,7 @@
                </p>
                
                <p>
-               <label>City, Country</label><br/>
+               <label>City, Country</label>*<br/>
                <input type="text" name="cityandcountry" size="40"/>
                </p>
             </td>
@@ -71,15 +71,15 @@
          </tr>
          <tr>
             <td colspan="3">
-                <p>What would you like to do with your blog?</p>
+                <p>What would you like to do with your blog?*</p>
                 <div class="box">
                     <label>Select all that apply </label><br/>
-                    <input type="checkbox" name="cc" >Post recipes <br/>
-                    <input type="checkbox" name="cc" >Food challenges <br/>
-                    <input type="checkbox" name="cc" >Business/marketing <br/>
-                    <input type="checkbox" name="cc" >Restaurant reviews<br/>
-                    <input type="checkbox" name="cc" >Travel vlogs <br/>
-                    <input type="checkbox" name="cc" >Collaborate with other bloggers <br/>
+                    <input type="checkbox" name="cc1" >Post recipes <br/>
+                    <input type="checkbox" name="cc2" >Food challenges <br/>
+                    <input type="checkbox" name="cc3" >Business/marketing <br/>
+                    <input type="checkbox" name="cc4" >Restaurant reviews<br/>
+                    <input type="checkbox" name="cc5" >Travel vlogs <br/>
+                    <input type="checkbox" name="cc6" >Collaborate with other bloggers <br/>
                     <label>Other (please specify):</label><br/>
                     <input type="text" name="other" size="80"/>
                 </div>
@@ -96,28 +96,88 @@
          <tr>
             <td>
             <div class="rectangle">
-               <label style="color: white;">I agree with the terms and conditions</label>
+               <label style="color: white;">I agree with the terms and conditions*</label>
                <input type="checkbox" name="agree" class="required">
             </div>
             </td>
             <td>
                 <div class="box">
                    <p>
-                   <label>Today's Date: <br/>
+                   <label>Today's Date:* <br/>
                    <input type="date"  name="date" />
                    </p>
                 </div>
              </td>
          </tr>
          <tr>
+         <td colspan="2">
+            <hr>
+            <p id="error-message"></p>
+         </td>
+         </tr>
+         <tr>
             <td colspan="2">
                <div class="rectangle centered">
-                  <input type="submit" class="rounded"> <input type="reset" value="Reset" class="rounded">
+                <input type="submit" value="Submit" class="rounded"> <input type="reset" value="Reset"
+                class="rounded">
                </div>
             </td>
          </tr>
       </table>
    </fieldset>
 </form>
+<script>
+    
+    function validateForm() {
+       var title = document.forms["createBlog"]["title"].value;
+       var desc = document.forms["createBlog"]["description"].value;
+       var continent = document.forms["createBlog"]["continent"].value;
+       var cnc = document.forms["createBlog"]["cityandcountry"].value;
+       var cc1 = document.forms["createBlog"]["cc1"].checked;
+       var cc2 = document.forms["createBlog"]["cc2"].checked;
+       var cc3 = document.forms["createBlog"]["cc3"].checked;
+       var cc4 = document.forms["createBlog"]["cc4"].checked;
+       var cc5 = document.forms["createBlog"]["cc5"].checked;
+       var cc6 = document.forms["createBlog"]["cc6"].checked;
+       var other = document.forms["createBlog"]["other"].value;
+       var agree = document.forms["createBlog"]["agree"].checked;
+       var date = document.forms["createBlog"]["date"].value;
+
+       if (title == "") {
+          document.getElementById("error-message").innerHTML = "Please enter a title.";
+          return false;
+       }
+
+       if (desc == "") {
+          document.getElementById("error-message").innerHTML = "Please enter your blog description.";
+          return false;
+       }
+
+       if (continent == "Choose continent") {
+          document.getElementById("error-message").innerHTML = "Please choose your continent.";
+          return false;
+       }
+
+       if (cnc == "") {
+          document.getElementById("error-message").innerHTML = "Please enter your city/country.";
+          return false;
+       }
+
+       if (!cc1 && !cc2 && !cc3 && !cc4 && !cc5 && !cc6 && other == "") {
+          document.getElementById("error-message").innerHTML = "Please select or enter a category.";
+          return false;
+       }
+
+       if (!agree) {
+          document.getElementById("error-message").innerHTML = "Please agree to the terms and conditions";
+          return false;
+       }
+
+       if (date == "") {
+          document.getElementById("error-message").innerHTML = "Please enter today's date.";
+          return false;
+       }
+    }
+ </script>
 </body>
 </html>
