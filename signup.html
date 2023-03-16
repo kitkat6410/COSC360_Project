@@ -43,12 +43,27 @@
                      <input type="email" name="email" size="90">
                   </p>
                   <p></p>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <div class="box">
+                     Select image to upload:
+                     <p></p>
+                     <input type="file" name="fileToUpload" id="fileToUpload">
+                  </div>
+               </td>
+               <td>
                   <div class="box">
                      <p>
                         <label for="birth">Date of Birth:</label>*<br>
                         <input type="date" name="birth">
                      </p>
                   </div>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
                   <p>
                      <label for="username">Your preferred username:</label>*<br>
                      <input type="text" name="username" size="90">
@@ -71,21 +86,13 @@
             </tr>
 
             <tr>
-               <td>
+               <td colspan="2">
                   <div class="rectangle" id="agree">
                      <label>
                         <input type="checkbox" name="agree" value="yes">
                         I agree to the terms and conditions*
                      </label>
 
-                  </div>
-               </td>
-               <td>
-                  <div class="box">
-                     <p>
-                        <label for="date">Today's Date:</label>* <br>
-                        <input type="date" name="date">
-                     </p>
                   </div>
                </td>
             </tr>
@@ -119,7 +126,6 @@
          var password = document.forms["signupForm"]["password"].value;
          var validatePassword = document.forms["signupForm"]["validatePassword"].value;
          var agree = document.forms["signupForm"]["agree"].checked;
-         var date = document.forms["signupForm"]["date"].value;
 
          if (name == "") {
             document.getElementById("error-message").innerHTML = "Please enter your name.";
@@ -173,10 +179,6 @@
             return false;
          }
 
-         if (date == "") {
-            document.getElementById("error-message").innerHTML = "Please enter today's date.";
-            return false;
-         }
       }
    </script>
 </body>
