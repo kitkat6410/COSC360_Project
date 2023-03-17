@@ -52,6 +52,11 @@
                   
                   <hr>
                   <p id="error-message"></p>
+                  <?php
+                  if (isset($_GET['error']) && $_GET['error'] == 1) {
+                     echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username and Password do not match\";</script>";
+                  }
+                  ?>
                </td>
             </tr>
             <tr>
@@ -84,21 +89,15 @@
             document.getElementById("error-message").innerHTML = "Username and password must be filled out";
             return false;
          }
-         else if (username == "" && password != "") {
+         else if (username == "" || password == "") {
+        if (username == "") {
             document.getElementById("error-message").innerHTML = "Username must be filled out";
-            return false;
-
-
-         }
-         else if (username != "" && password == "") {
+        } else {
             document.getElementById("error-message").innerHTML = "Password must be filled out";
-            return false;
-         }
-         <?php
-         if (isset($_GET['error']) && $_GET['error'] == 1) {
-            echo "Incorrect username or password.";
-         }
-         ?>
+        }
+        return false;
+    }
+  
          
       }
    </script>

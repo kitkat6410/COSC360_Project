@@ -27,7 +27,7 @@ require 'connectiondb.php';
         <ul>
             <li><a href="blogs.html">Browse Blogs</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="login.html">Login</a></li>
+            <li><a href="login.php">Login</a></li>
             <li><a href="adminLogin.html">Admin</a></li>
         </ul>
     </nav>
