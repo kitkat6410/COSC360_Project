@@ -27,7 +27,7 @@
 </head>
 
 <body>
-   <form method="post" action="http://www.randyconnolly.com/tests/process.php" name="loginForm"
+   <form method="post" action="profile.php" name="loginForm"
       onsubmit="return validateForm()">
       <fieldset>
          <legend>Login to your account on Culinary Cloud</legend>
@@ -94,6 +94,11 @@
             document.getElementById("error-message").innerHTML = "Password must be filled out";
             return false;
          }
+         <?php
+         if (isset($_GET['error']) && $_GET['error'] == 1) {
+            echo "Incorrect username or password.";
+         }
+         ?>
          
       }
    </script>

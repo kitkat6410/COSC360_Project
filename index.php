@@ -2,6 +2,12 @@
 <html>
 
 <head>
+    <?php
+// Include the contents of connectiondb.php
+require 'connectiondb.php';
+
+// Your HTML code here
+?>
     <title>
         CulinaryCloud | Home
     </title>
