@@ -1,7 +1,7 @@
 <?php
 try{
 
-    $connString = "mysql:host=localhost;dbname=culinarycloud";
+    $connString = "mysql:host=127.0.0.1;dbname=culinarycloud";
     $user = "root";
     $pass = "";
 
