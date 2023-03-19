@@ -1,9 +1,10 @@
 <?php
 try{
 
-    $connString = "mysql:host=127.0.0.1;dbname=culinarycloud";
-    $user = "root";
-    $pass = "";
+    // $connString = "mysql:host=127.0.0.1;dbname=culinarycloud";
+    $connString = "mysql:host=cosc360.ok.ubc.ca;dbname=db_93648137";
+    $user = "93648137";
+    $pass = "93648137";
 
     $pdo = new PDO($connString, $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
