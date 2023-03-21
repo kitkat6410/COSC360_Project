@@ -26,7 +26,7 @@
 </head>
 
 <body>
-   <form method="post" action="http://www.randyconnolly.com/tests/process.php" name="signupForm" id="mainForm"
+   <form method="post" action="validateSignup.php" name="signupForm" id="mainForm"
       onsubmit="return validateForm()">
       <fieldset>
          <legend>Create an account on Culinary Cloud</legend>
@@ -50,7 +50,7 @@
                   <div class="box">
                      Select image to upload:
                      <p></p>
-                     <input type="file" name="fileToUpload" id="fileToUpload">
+                     <input type="file" name="image" id="fileToUpload">
                   </div>
                </td>
                <td>
@@ -60,6 +60,12 @@
                         <input type="date" name="birth">
                      </p>
                   </div>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <p></p>
+                  <hr>
                </td>
             </tr>
             <tr>
@@ -76,12 +82,6 @@
                      <label for="validatePassword">Confirm password:</label>*<br />
                      <input type="password" name="validatePassword" size="50">
                   </p>
-               </td>
-            </tr>
-            <tr>
-               <td colspan="2">
-                  <p></p>
-                  <hr>
                </td>
             </tr>
 
