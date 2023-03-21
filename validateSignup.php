@@ -12,7 +12,9 @@ try {
             VALUES (:name, :email, :bdate, :image, :username, :password)";
     $stmt = $pdo->prepare($input);
     $stmt->execute(array(':name' => $name, ':email' => $email, ':bdate' => $bdate, ':image' => $image, ':username' => $username, ':password' => $password));
-     
+    
+    header("Location: login.php");
+    exit();
 } catch (Exception $e) {
     echo ($e);
 }

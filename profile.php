@@ -65,7 +65,6 @@ else{
 
 <body>
     <h1 class="third-color">Welcome <strong><?php echo $row['Name'] ?></strong></h1>
-    <button class="rounded">Edit</button>
     <div class = "profile fourth-color">
     <img src=<?php echo $row['ProfileImage'] ?> alt="Profile Image">
 
