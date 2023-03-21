@@ -2,8 +2,11 @@
 <html>
 
 <head>
+    <?php if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    } ?>
     <title>
-        CulinaryCloud | Index
+        CulinaryCloud | Home
     </title>
     <link rel="stylesheet" href="css/reset.css">
     </link>
@@ -11,18 +14,28 @@
     </link>
     <nav>
         <div class="site-title">
-            <a href="home.html">
+            <a href="home.php">
                 <h1>Culinary Cloud</h1>
-                </a>
-           
+            </a>
+
             <p>Social Media Links</p>
         </div>
         <ul>
-            <li><a href="blogs.html">Browse Blogs</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="blogs.php">Browse Blogs</a></li>
+            <li><a href="about.php">About</a></li>
             <li><a href="create.html">Create a blog</a></li>
-            <li><a href="profile.php">Account></a></li>
+            <?php
+            if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
+                echo $_SESSION['LoggedIn'];
+                header('Location: index.php');
+                exit;
+            
+            } else { ?>
+            <li><a href="profile.php">Account</a></li>
             <li><a href="index.php">Logout</a></li>
+
+            <?php } ?>
+
         </ul>
     </nav>
 
@@ -74,7 +87,7 @@
         </div>
     </header>
 
-    
+
     <section class="fourth-color">
         <div class="info">
             <h1>First Steps: Create An Account</h1>
@@ -105,7 +118,7 @@
         </div>
 
     </section>
-    <section id="categories"class=second-color>
+    <section id="categories" class=second-color>
 
         <h1>Categories</h1>
         <figure id="first">
@@ -159,20 +172,22 @@
 
     </footer>
     <script>
-        let slideIndex = 0;
-        showSlides();
+    let slideIndex = 0;
+    showSlides();
 
-        function showSlides() {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1 }
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 4000); // Change image every 2 seconds
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
         }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 4000); // Change image every 2 seconds
+    }
     </script>
 </body>
 

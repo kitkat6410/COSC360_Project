@@ -3,10 +3,12 @@
 
 <head>
     <?php
-// Include the contents of connectiondb.php
-// require 'connectiondb.php';
+session_start(); // start the session
+unset($_SESSION['LoggedIn']);
+unset($_SESSION['user_id']);
+unset($_SESSION['pass_id']);
+session_destroy(); // destroy all session data
 
-// Your HTML code here
 ?>
     <title>
         CulinaryCloud | Home
@@ -17,7 +19,7 @@
     </link>
     <nav>
         <div class="site-title">
-            <a href="home.html">
+            <a href="home.php">
                 <h1>Culinary Cloud</h1>
                 </a>
            
@@ -25,8 +27,8 @@
         </div>
         
         <ul>
-            <li><a href="blogs.html">Browse Blogs</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="blogs.php">Browse Blogs</a></li>
+            <li><a href="about.php">About</a></li>
             <li><a href="login.php">Login</a></li>
             <li><a href="adminLogin.html">Admin</a></li>
         </ul>

@@ -2,6 +2,9 @@
 <html>
 
 <head>
+<?php if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    } ?>
     <title>
         CulinaryCloud | About
     </title>
@@ -9,15 +12,23 @@
     <link rel="stylesheet" href="css/styles.css"></link>
     <nav>
         <div class="site-title">
-            <a href="home.html">
+            <a href="home.php">
                 <h1>Culinary Cloud</h1>
             </a>
             <p>Social Media Links</p>
         </div>
         <ul>
-            <li><a href="blogs.html">Browse Blogs</a></li>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="login.php">Login</a></li>
+            <li><a href="blogs.php">Browse Blogs</a></li>
+            <li><a href="home.php">Home</a></li>
+            <?php
+            if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {?>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="adminLogin.html">Admin</a></li>
+           <?php }else{?>
+                <li><a href="profile.php">Account</a></li>
+                <li><a href="index.php">Logout</a></li>
+         <?php  }?>
+    
         </ul>
     </nav>
 </head>

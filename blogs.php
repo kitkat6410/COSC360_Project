@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    <?php if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    } ?>
     <title>
         CulinaryCloud | Browse Blogs
     </title>
@@ -11,15 +14,21 @@
     </link>
     <nav>
         <div class="site-title">
-            <a href="home.html">
+            <a href="home.php">
                 <h1>Culinary Cloud</h1>
             </a>
             <p>Social Media Links</p>
         </div>
         <ul>
-            <li><a href="blogs.html">Browse Blogs</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="login.php">Login</a></li>
+            <li><a href="blogs.php">Browse Blogs</a></li>
+            <li><a href="about.php">About</a></li>
+           <?php if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) { ?>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="adminLogin.html">Admin</a></li>
+           <?php } else { ?>
+                    <li><a href="profile.php">Account</a></li>
+                    <li><a href="index.php">Logout</a></li>
+         <?php } ?>
         </ul>
     </nav>
 
@@ -38,8 +47,8 @@
     <section id="blogBrowse">
         <div id="myBtnContainer" class="fourth-color ">
             <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-            <button class="btn" onclick="filterSelection('Recipes')"> Recipes</button>
-            <button class="btn" onclick="filterSelection('Food-Challenges')"> Food Challenges</button>
+            <button class="btn" onclick="filterSelection('Recipes')"> Recipes</button> <!--cc1 -->
+            <button class="btn" onclick="filterSelection('Food-Challenges')"> Food Challenges</button> <!--cc2 -->
             <button class="btn" onclick="filterSelection('Business')"> Business</button>
             <button class="btn" onclick="filterSelection('Restaurant-Reviews')"> Restaurant Reviews</button>
             <button class="btn" onclick="filterSelection('Travel-Blogs')"> Travel Blogs</button>

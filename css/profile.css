@@ -21,6 +21,11 @@
   .details-container {
     margin-left: 180px; /* to push the container to the right of the image */
   }
+
+  h1.third-color{
+    padding:0.2em;
+    color: white;
+  }
   
   /* Style the account details section */
   h2 {
@@ -43,4 +48,21 @@
   p + p {
     margin-top: 10px;
   }
+  .rounded, .rounded:hover {
+    border: 1px solid #172d6e;
+    border-bottom: 1px solid #0e1d45;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    background-color: #393e46;
+    padding: 0.5em 0 0.5em 0;
+    margin: 0.3em;
+    width: 7em;
+    -webkit-box-shadow: inset 0 1px 0 0 #393e46, 0 1px 4px 0 #b3b3b3;
+    box-shadow: inset 0 1px 0 0 #393e46, 0 1px 4px 0 #b3b3b3;
+ }
+ .rounded:hover {
+    background-color: white;
+    color: black;
+ }
   
