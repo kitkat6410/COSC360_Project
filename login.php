@@ -53,7 +53,7 @@
                   <hr>
                   <p id="error-message"></p>
                   <?php
-                  if (isset($_GET['error']) && $_GET['error'] == 1) {
+                  if (isset($_GET['error'])) {
                      switch($_GET['error']){
                         case "InvalidLogin":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username and Password do not match\";</script>";

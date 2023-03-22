@@ -132,6 +132,12 @@
                         case "UploadError":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"There was an issue with uploading your chosen image. Please try again.\";</script>";
                            break;
+                        case "Large":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Your image file is too large.\";</script>";
+                           break;
+                        case "DoesNotExist":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"The File You are trying to use does not exist.\";</script>";
+                           break;
                         case "Unknown":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error occured.\";</script>";
                            break;

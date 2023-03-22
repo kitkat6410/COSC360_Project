@@ -1,5 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
+    $lifetime=3600;
+    session_set_cookie_params($lifetime);
     session_start();
 }
 require 'connectiondb.php';
@@ -25,8 +27,9 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
         }
     } catch (Exception $e) {
         error_log($e->getMessage());
-        header('Location: login.php?error=1');
-        exit();
+        echo $e;
+        // header('Location: login.php?error=1');
+        // exit();
     }
 } else {
     require 'connectiondb.php';
@@ -61,6 +64,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="create.html">Create a blog</a></li>
+            <li><a href="adminLogin.php">Admin</a></li>
             <li><a href="index.php">Logout</a></li>
         </ul>
     </nav>

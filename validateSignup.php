@@ -1,8 +1,7 @@
 <?php
 try {
     require 'connectiondb.php';
-    $name = $_POST['name'];
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
     $target_dir = "images/";
     $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["image"]["name"]));
     if (strlen($target_file) === 0) {
@@ -37,6 +36,12 @@ try {
             exit();
 
         }
+        // Check file size
+        if ($_FILES["image"]["size"] > 10000000) {
+            $uploadOk = 0;
+            header('Location: signup.php?error=Large');
+            exit();
+        }
 
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
@@ -51,9 +56,15 @@ try {
             }
         }
     }
-
+    else{
+        header('Location: signup.php?error=DoesNotExist');
+        exit();
+    }
+    // Sanitization
+    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $bdate = $_POST['birth'];
-    $user_input = $_POST['username'];
+    $user_input = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $pass_input = $_POST['password'];
 
     // validate user input

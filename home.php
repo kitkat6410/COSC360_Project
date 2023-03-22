@@ -21,20 +21,20 @@
             <p>Social Media Links</p>
         </div>
         <ul>
-            <li><a href="blogs.php">Browse Blogs</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="create.html">Create a blog</a></li>
-            <?php
+        <?php
             if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
-                echo $_SESSION['LoggedIn'];
                 header('Location: index.php');
                 exit;
             
-            } else { ?>
+            }?>
+            <li><a href="blogs.php">Browse Blogs</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="create.html">Create a blog</a></li>        
             <li><a href="profile.php">Account</a></li>
             <li><a href="index.php">Logout</a></li>
+            <li><a href="adminLogin.php">Admin</a></li>
 
-            <?php } ?>
+           
 
         </ul>
     </nav>
