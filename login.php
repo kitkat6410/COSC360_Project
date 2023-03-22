@@ -54,7 +54,16 @@
                   <p id="error-message"></p>
                   <?php
                   if (isset($_GET['error']) && $_GET['error'] == 1) {
-                     echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username and Password do not match\";</script>";
+                     switch($_GET['error']){
+                        case "InvalidLogin":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username and Password do not match\";</script>";
+                           break;
+                        case 1:
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error\";</script>";
+                           
+
+                     }
+                     
                   }
                   ?>
                </td>
@@ -74,7 +83,7 @@
             </tr>
             <tr>
                <td colspan="2" class="centered">
-                  <a href="signup.html">Don't have an account? Create one</a>
+                  <a href="signup.php">Don't have an account? Create one</a>
                </td>
             </tr>
          </table>

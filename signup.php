@@ -19,15 +19,14 @@
       </div>
       <ul>
          <li><a href="login.php">Back</a></li>
-         </li>
+  
       </ul>
    </nav>
 
 </head>
 
 <body>
-   <form method="post" action="validateSignup.php" name="signupForm" id="mainForm"
-      onsubmit="return validateForm()">
+   <form method="post" action="validateSignup.php" name="signupForm" id="mainForm" onsubmit="return validateForm()"  enctype="multipart/form-data">
       <fieldset>
          <legend>Create an account on Culinary Cloud</legend>
          <table>
@@ -48,9 +47,9 @@
             <tr>
                <td>
                   <div class="box">
-                     Select image to upload:
+                     Select image to upload:*
                      <p></p>
-                     <input type="file" name="image" id="fileToUpload">
+                     <input type="file" name="image" id="image">
                   </div>
                </td>
                <td>
@@ -99,13 +98,56 @@
             <tr>
                <td colspan="2">
                   <hr>
-                  <p id="error-message"></p>
+                  <p id="error-message"></p>  
+                  <?php
+                  // if (isset($_GET['error']) && $_GET['error'] == 1) {
+                  //    echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username already taken\";</script>";
+                  // }
+                  if (isset($_GET['error'])) {
+                     switch ($_GET['error']) {
+                        case "InvalidEmail":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Email\";</script>";
+                           break;
+                        case "InvalidUsername":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Username\";</script>";
+                           break;
+                        case "InvalidPassword":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Password\";</script>";
+                           break;
+                        case "InvalidBirthdate":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Birthdate\";</script>";
+                           break;
+                        case "DuplicateUsername":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username already taken. Please choose another\";</script>";
+                           break;
+                        case "NoImage":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Please select an image.\";</script>";
+                           break;
+                        case "NotAnImage":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"The file you chose is not an image. Please choose an image\";</script>";
+                           break;
+                        case "NotSupported":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"The image type you chose is not supported\";</script>";
+                           break;
+                        case "UploadError":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"There was an issue with uploading your chosen image. Please try again.\";</script>";
+                           break;
+                        case "Unknown":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error occured.\";</script>";
+                           break;
+                        default:
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error occured.\";</script>";
+
+
+                     }
+                  }
+                  ?>
                </td>
             </tr>
             <tr>
                <td colspan="2">
                   <div class="rectangle centered">
-                     <input type="submit" value="Submit" class="rounded"> <input type="reset" value="Reset"
+                     <input type="submit" value="Submit" name="submit" class="rounded"> <input type="reset" value="Reset"
                         class="rounded">
                   </div>
                </td>
@@ -115,12 +157,13 @@
    </form>
    <script>
       function isPasswordSecure(password) {
-         var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=.*[^\w\d\s:])([^\s]){8,}$/;
+         var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?!.*\s).{8,}$/;
          return regex.test(password);
       }
       function validateForm() {
          var name = document.forms["signupForm"]["name"].value;
          var email = document.forms["signupForm"]["email"].value;
+         var image = document.forms["signupForm"]["image"].value;
          var birth = document.forms["signupForm"]["birth"].value;
          var username = document.forms["signupForm"]["username"].value;
          var password = document.forms["signupForm"]["password"].value;
@@ -136,7 +179,10 @@
             document.getElementById("error-message").innerHTML = "Please enter your email address.";
             return false;
          }
-
+       if (image == "") {
+             document.getElementById("error-message").innerHTML = "Profile image is required.";
+            return false;
+       }
          if (birth == "") {
             document.getElementById("error-message").innerHTML = "Please enter your date of birth.";
             return false;
@@ -178,6 +224,7 @@
             document.getElementById("error-message").innerHTML = "Please agree to the terms and conditions";
             return false;
          }
+
 
       }
    </script>
