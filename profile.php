@@ -1,24 +1,20 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    $lifetime=3600;
-    session_set_cookie_params($lifetime);
     session_start();
 }
-require 'connectiondb.php';
 if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
     try {
         require 'connectiondb.php';
+
         $user_input = $_POST['username'];
         $pass_input = $_POST['password'];
-
-        // use prepared statement to retrieve hashed password from database
-        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Username = :username");
-        $stmt->execute(array(':username' => $user_input));
+        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Username = :username && Password = :password");
+        $stmt->execute(array(':username' => $user_input, ':password' => $pass_input));
         $row = $stmt->fetch();
-        $hashed_password = $row['Password'];
-        if (!$row || !password_verify($pass_input, $hashed_password)) {
-            header('Location: login.php?error=InvalidLogin');
-            exit();
+        if (!$row) {
+            // Invalid credentials, redirect back to login page with error message
+            header('Location: login.php?error=1');
+            exit;
         } else {
             // Valid credentials, set session variable and redirect to home page
             $_SESSION["LoggedIn"] = true;
@@ -26,17 +22,15 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             $_SESSION['pass_id'] = $row['Password'];
         }
     } catch (Exception $e) {
-        error_log($e->getMessage());
-        echo $e;
-        // header('Location: login.php?error=1');
-        // exit();
+        echo ($e);
     }
-} else {
+}
+else{
     require 'connectiondb.php';
     $user_input = $_SESSION['user_id'];
     $pass_input = $_SESSION['pass_id'];
     $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Username = :username && Password = :password");
-    $stmt->execute(array(':username' => $user_input, ':password' => $pass_input));
+    $stmt->execute(array(':username' => $user_input, ':password'=> $pass_input));
     $row = $stmt->fetch();
 }
 
@@ -64,7 +58,6 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="create.html">Create a blog</a></li>
-            <li><a href="adminLogin.php">Admin</a></li>
             <li><a href="index.php">Logout</a></li>
         </ul>
     </nav>
@@ -73,8 +66,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
 <body>
     <h1 class="third-color">Welcome <strong><?php echo $row['Name'] ?></strong></h1>
     <div class = "profile fourth-color">
-
-   <img src="<?php echo $row['ProfileImage']; ?>" alt="Profile Image">
+    <img src=<?php echo $row['ProfileImage'] ?> alt="Profile Image">
 
     <div class="details-container">
     <h2>Account Details</h2>
@@ -85,7 +77,9 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
 
     </div>
     </div>
-    
+    <div style="margin-top: 20px;">
+    <a href="edit.php"><h1 class="third-color">Edit Profile</h1></a>
+</div>
 
 </body>
 

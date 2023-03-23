@@ -27,6 +27,10 @@
     padding:0.2em;
     color: white;
   }
+
+  #subHead{
+    margin-top: 10em;
+  }
   
   /* Style the account details section */
   h2 {
