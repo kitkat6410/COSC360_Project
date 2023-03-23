@@ -1,15 +1,9 @@
 <?php
-// if (session_status() === PHP_SESSION_NONE) {
-    // $lifetime=3600;
-    // session_set_cookie_params($lifetime);
-    // session_start();
-// }
 require 'SessionValidation.php';
 if(!isset($_SESSION['last_activity'])){
     $_SESSION['last_activity'] = time();
 
 }
-echo $_SESSION['last_activity'];
 if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
     try {
         require 'connectiondb.php';
