@@ -15,13 +15,13 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
 
         $user_input = $_POST['username'];
         $pass_input = $_POST['password'];
-        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Username = :username && Password = :password");
-        $stmt->execute(array(':username' => $user_input, ':password' => $pass_input));
+        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Username = :username");
+        $stmt->execute(array(':username' => $user_input));
         $row = $stmt->fetch();
-        if (!$row) {
-            // Invalid credentials, redirect back to login page with error message
-            header('Location: login.php?error=1');
-            exit;
+        $hashed_password = $row['Password'];
+        if (!$row || !password_verify($pass_input, $hashed_password)) {
+            header('Location: login.php?error=InvalidLogin');
+            exit();
         } else {
             // Valid credentials, set session variable and redirect to home page
             $_SESSION["LoggedIn"] = true;
@@ -32,8 +32,8 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
     } catch (Exception $e) {
         error_log($e->getMessage());
         echo $e;
-        header('Location: login.php?error=1');
-        exit();
+        // header('Location: login.php?error=1');
+        // exit();
     }
 }
 else{
