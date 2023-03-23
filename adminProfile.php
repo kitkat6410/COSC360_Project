@@ -79,8 +79,12 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
         <ul>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="create.html">Create a blog</a></li>
+            <li><a href="create.php">Create a blog</a></li>
             <li><a href="index.php">Logout</a></li>
+            <?php
+            if (!isset($_SESSION['isLoggedAdmin'])) {
+            header('Location: adminLogin.php');
+            } ?>
         </ul>
     </nav>
 </head>
@@ -99,6 +103,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
     </div>
     <div class="fourth-color">
         <h2 id="action">Admin Actions:</h2>
+        
         <form method="GET" action="search.php">
   <input type="text" name="search" placeholder="Search...">
   <button type="submit">Search</button>

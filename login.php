@@ -7,8 +7,7 @@
    <link rel="stylesheet" href="css/reset.css" />
    <link rel="stylesheet" href="css/login.css" />
    <link rel="stylesheet" href="css/styles.css" />
-
-   <script type="text/javascript" src="script/lab5-1.js"></script>
+   <script src="script/login.js"></script>
 
    <nav>
       <div class="site-title">
@@ -90,26 +89,7 @@
       </fieldset>
    </form>
 
-   <script>
-      function validateForm() {
-         var username = document.forms["loginForm"]["username"].value;
-         var password = document.forms["loginForm"]["password"].value;
-         if (username == "" && password == "") {
-            document.getElementById("error-message").innerHTML = "Username and password must be filled out";
-            return false;
-         }
-         else if (username == "" || password == "") {
-        if (username == "") {
-            document.getElementById("error-message").innerHTML = "Username must be filled out";
-        } else {
-            document.getElementById("error-message").innerHTML = "Password must be filled out";
-        }
-        return false;
-    }
-  
-         
-      }
-   </script>
+
 </body>
 
 </html>

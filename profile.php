@@ -1,9 +1,4 @@
 <?php
-// if (session_status() === PHP_SESSION_NONE) {
-    // $lifetime=3600;
-    // session_set_cookie_params($lifetime);
-    // session_start();
-// }
 require 'SessionValidation.php';
 if(!isset($_SESSION['last_activity'])){
     $_SESSION['last_activity'] = time();
@@ -68,7 +63,7 @@ else{
         <ul>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="create.html">Create a blog</a></li>
+            <li><a href="create.php">Create a blog</a></li>
          <li><a href="index.php">Logout</a></li>
          <?php
             if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>

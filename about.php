@@ -3,7 +3,7 @@
 
 <head>
 <?php
-    require 'SessionValidation.php' ?>
+require 'SessionValidation.php' ?>
     <title>
         CulinaryCloud | About
     </title>
@@ -20,17 +20,23 @@
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="home.php">Home</a></li>
             <?php
-            if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {?>
-                <li><a href="login.php">Login</a></li>
+            if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) { ?>
+                    <li><a href="login.php">Login</a></li>
   
-           <?php }else{?>
-            <li><a href="create.php">Create a blog</a></li>     
-                <li><a href="profile.php">Account</a></li>
-                <li><a href="index.php">Logout</a></li>
-         <?php  }?>
+           <?php } else { ?>
+                <li><a href="create.php">Create a blog</a></li>  
+                <?php if (isset($_SESSION['isLoggedAdmin'])) {
+                    ?>
+                        <li><a href="adminProfile.php">Account</a></li>
+               <?php } else { ?>   
+                        <li><a href="profile.php">Account</a></li>
+
+                    <?php } ?>
+                    <li><a href="index.php">Logout</a></li>
+         <?php } ?>
          <?php
-            if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>
-            <li><a href="adminLogin.php">Admin Login</a></li>
+         if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>
+                <li><a href="adminLogin.php">Admin Login</a></li>
             <?php } ?>
     
         </ul>
