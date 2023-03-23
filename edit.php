@@ -5,8 +5,8 @@
    <meta charset="utf-8">
    <title>Edit Account</title>
    <link rel="stylesheet" href="css/reset.css" />
-   <link rel="stylesheet" href="css/login.css" />
    <link rel="stylesheet" href="css/styles.css" />
+   <link rel="stylesheet" href="css/login.css" />
 
    <script type="text/javascript" src="script/lab5-1.js"></script>
    <nav>
@@ -23,11 +23,14 @@
       </ul>
    </nav>
 
+   <?php
+   require 'SessionValidation.php' ?>
 </head>
 
 <body>
-<h1 class="fourth-color">Welcome <strong><?php echo $_SESSION['user_id'] ?></strong></h1>
-   <form method="post" action="profile.php" name="editForm" id="mainForm" onsubmit="return validateForm()"  enctype="multipart/form-data">
+<h1 class="third-color" style="padding: 0.2em; color: white;">Welcome <strong><?php echo $_SESSION['user_id'] ?></strong></h1>
+<h2></h2>
+   <form method="post" action="validateEdit.php" name="editForm" id="mainForm" onsubmit="return validateForm()"  enctype="multipart/form-data">
       <fieldset>
          <legend>Edit your account on Culinary Cloud</legend>
          <table>
@@ -49,7 +52,7 @@
             <tr>
                <td>
                   <div class="box">
-                     Select image to upload:*
+                     New image to display:*
                      <p></p>
                      <input type="file" name="image" id="image">
                   </div>
@@ -84,17 +87,6 @@
 
             <tr>
                <td colspan="2">
-                  <div class="rectangle" id="agree">
-                     <label>
-                        <input type="checkbox" name="agree" value="yes">
-                        I agree to the terms and conditions*
-                     </label>
-
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td colspan="2">
                   <hr>
                   <p id="error-message"></p>  
                   <?php
@@ -106,18 +98,14 @@
                         case "InvalidEmail":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Email\";</script>";
                            break;
-                        case "InvalidUsername":
-                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Username\";</script>";
-                           break;
+                        
                         case "InvalidPassword":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Password\";</script>";
                            break;
                         case "InvalidBirthdate":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Birthdate\";</script>";
                            break;
-                        case "DuplicateUsername":
-                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username already taken. Please choose another\";</script>";
-                           break;
+                        
                         case "NoImage":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Please select an image.\";</script>";
                            break;
@@ -165,15 +153,13 @@
          return regex.test(password);
       }
       function validateForm() {
-         var name = document.forms["signupForm"]["name"].value;
-         var email = document.forms["signupForm"]["email"].value;
-         var image = document.forms["signupForm"]["image"].value;
-         var birth = document.forms["signupForm"]["birth"].value;
-         var username = document.forms["signupForm"]["username"].value;
-         var password = document.forms["signupForm"]["password"].value;
-         var validatePassword = document.forms["signupForm"]["validatePassword"].value;
-         var agree = document.forms["signupForm"]["agree"].checked;
-
+         var name = document.forms["editForm"]["name"].value;
+         var email = document.forms["editForm"]["email"].value;
+         var image = document.forms["editForm"]["image"].value;
+         var birth = document.forms["editForm"]["birth"].value;
+         var password = document.forms["editForm"]["password"].value;
+         var validatePassword = document.forms["editForm"]["validatePassword"].value;
+         
          if (name == "") {
             document.getElementById("error-message").innerHTML = "Please enter your name.";
             return false;
@@ -196,12 +182,7 @@
          eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
          var userBirthDate = new Date(birth);
          if (userBirthDate > eighteenYearsAgo) {
-            document.getElementById("error-message").innerHTML = "You must be 18 or older to sign up.";
-            return false;
-         }
-
-         if (username == "") {
-            document.getElementById("error-message").innerHTML = "Please enter your preferred username.";
+            document.getElementById("error-message").innerHTML = "You must be 18 or older to own an account.";
             return false;
          }
 
@@ -223,12 +204,6 @@
             document.getElementById("error-message").innerHTML = "Passwords do not match.";
             return false;
          }
-
-         if (!agree) {
-            document.getElementById("error-message").innerHTML = "Please agree to the terms and conditions";
-            return false;
-         }
-
 
       }
    </script>
