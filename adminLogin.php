@@ -7,8 +7,9 @@
    <link rel="stylesheet" href="css/reset.css">
    <link rel="stylesheet" href="css/login.css">
    <link rel="stylesheet" href="css/styles.css">
+   <script src="script/adminLogin.js"></script>
 
-   <script type="text/javascript" src="script/lab5-1.js"></script>
+
 
    <nav>
       <div class="site-title">
@@ -60,6 +61,12 @@
                         case "InvalidLogin":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username, Password and/or Reference Number do not match.\";</script>";
                            break;
+                        case "unAuthorized":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unauthorized access\";</script>";
+                           break;
+                        case "notLoggedIn":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Please login before accessing this page\";</script>";
+                           break;
                         case 1:
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error\";</script>";
                         default:
@@ -88,27 +95,7 @@
          </table>
       </fieldset>
    </form>
-   <script>
-
-      function validateForm() {
-         var username = document.forms["adminForm"]["username"].value;
-         var password = document.forms["adminForm"]["password"].value;
-         var refnumber = document.forms["adminForm"]["refnumber"].value;
-         if (username == "") {
-            document.getElementById("error-message").innerHTML = "Please enter username";
-            return false;
-         }
-         if(password ==""){
-            document.getElementById("error-message").innerHTML = "Please enter password";
-            return false;
-         }
-         if(refnumber =="" || refnumber.length != 8){
-            document.getElementById("error-message").innerHTML = "Please enter a valid 8-digit reference number";
-            return false;
-         }
-
-      }
-   </script>
+  
 </body>
 
 </html>

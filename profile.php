@@ -9,6 +9,7 @@ if(!isset($_SESSION['last_activity'])){
     $_SESSION['last_activity'] = time();
 
 }
+echo $_SESSION['last_activity'];
 if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
     try {
         require 'connectiondb.php';
@@ -68,7 +69,7 @@ else{
         <ul>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="create.html">Create a blog</a></li>
+            <li><a href="create.php">Create a blog</a></li>
          <li><a href="index.php">Logout</a></li>
          <?php
             if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>

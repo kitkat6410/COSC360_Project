@@ -6,7 +6,6 @@
     session_start(); // start the session
     session_unset();
     session_destroy();
-    
 
     ?>
     <title>
@@ -16,6 +15,7 @@
     </link>
     <link rel="stylesheet" href="css/styles.css">
     </link>
+    <script src="script/home.js"></script>
     <nav>
         <div class="site-title">
             <a href="home.php">
@@ -163,7 +163,7 @@
         <p>&copy; Copyright 2023 CulinaryCloud</p>
 
     </footer>
-    <script>
+    <!-- <script>
         let slideIndex = 0;
         showSlides();
 
@@ -178,7 +178,7 @@
             slides[slideIndex - 1].style.display = "block";
             setTimeout(showSlides, 4000); // Change image every 2 seconds
         }
-    </script>
+    </script> -->
 </body>
 
 </html>

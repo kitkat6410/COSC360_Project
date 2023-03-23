@@ -21,8 +21,28 @@
         </div>
         
         <ul>
+            <?php
+        if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
+            header('Location: index.php');
+            exit;
+
+        } ?>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="create.php">Create a blog</a></li>
+            <li><a href="adminProfile.php">Account</a></li>
+            <li><a href="index.php">Logout</a></li>
+            <?php
+            if (!isset($_SESSION['isLoggedAdmin']) && $_SESSION['isAdmin'] != 1) {
+            header('Location: adminLogin.php?error=unAuthorized');
+            } 
+            else if(!isset($_SESSION['isLoggedAdmin'])){
+                header('Location: adminLogin.php?error=notLoggedIn');
+            }
+                ?>
+
+
+
         </ul>
     </nav>
 

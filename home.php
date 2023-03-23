@@ -10,6 +10,7 @@ require 'SessionValidation.php' ?>
     <link rel="stylesheet" href="css/reset.css">
     </link>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="script/home.js"></script>
     </link>
     <nav>
         <div class="site-title">
@@ -28,9 +29,16 @@ require 'SessionValidation.php' ?>
         } ?>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="create.php">Create a blog</a></li>
-            <li><a href="profile.php">Account</a></li>
-            <li><a href="index.php">Logout</a></li>
+            <li><a href="create.php">Create a blog</a></li>  
+                <?php if (isset($_SESSION['isLoggedAdmin'])) {
+                    ?>
+                        <li><a href="adminProfile.php">Account</a></li>
+               <?php } else { ?>   
+                        <li><a href="profile.php">Account</a></li>
+
+                    <?php } ?>
+                    <li><a href="index.php">Logout</a></li>
+
             <?php
             if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>
             <li><a href="adminLogin.php">Admin Login</a></li>
@@ -173,24 +181,7 @@ require 'SessionValidation.php' ?>
         <p>&copy; Copyright 2023 CulinaryCloud</p>
 
     </footer>
-    <script>
-    let slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {
-            slideIndex = 1
-        }
-        slides[slideIndex - 1].style.display = "block";
-        setTimeout(showSlides, 4000); // Change image every 2 seconds
-    }
-    </script>
+   
 </body>
 
 </html>
