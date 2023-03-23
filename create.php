@@ -26,7 +26,7 @@
 
 </head>
 <body>
-<form method="post" action="http://www.randyconnolly.com/tests/process.php" name="createBlog" id="mainForm" onsubmit="return validateForm()">
+<form method="post" action="createValidate.php" name="createBlog" id="mainForm" onsubmit="return validateForm()">
    <fieldset>
       <legend>Create Your Blog</legend>
       <table>
@@ -46,7 +46,7 @@
                   <div class="box">
                      Select image to upload:
                      <p></p>
-                     <input type="file" name="fileToUpload" id="fileToUpload">
+                     <input type="file" name="image" id="image">
                   </div>
                </td>
          </tr>
@@ -113,6 +113,7 @@
          <td colspan="2">
             <hr>
             <p id="error-message"></p>
+            <!-- TO-DO -->
          </td>
          </tr>
          <tr>

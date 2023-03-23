@@ -31,10 +31,10 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
         // exit();
     }
 }
-else{
-    require 'connectiondb.php';
-    $user_input = $_SESSION['user_id'];
-    $pass_input = $_SESSION['pass_id'];
+ else{
+   require 'connectiondb.php';  
+   $user_input = $_SESSION['user_id'];
+   $pass_input = $_SESSION['pass_id'];
     $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Username = :username && Password = :password");
     $stmt->execute(array(':username' => $user_input, ':password'=> $pass_input));
     $row = $stmt->fetch();
