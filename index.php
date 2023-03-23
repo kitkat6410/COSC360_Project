@@ -3,13 +3,12 @@
 
 <head>
     <?php
-session_start(); // start the session
-unset($_SESSION['LoggedIn']);
-unset($_SESSION['user_id']);
-unset($_SESSION['pass_id']);
-session_destroy(); // destroy all session data
+    session_start(); // start the session
+    session_unset();
+    session_destroy();
+    
 
-?>
+    ?>
     <title>
         CulinaryCloud | Home
     </title>
@@ -25,12 +24,11 @@ session_destroy(); // destroy all session data
            
             <p>Social Media Links</p>
         </div>
-        
         <ul>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="login.php">Login</a></li>
-            <li><a href="adminLogin.html">Admin</a></li>
+            <li><a href="adminLogin.php">Admin</a></li>
         </ul>
     </nav>
 

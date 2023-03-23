@@ -24,11 +24,11 @@
             <li><a href="about.php">About</a></li>
            <?php if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) { ?>
                     <li><a href="login.php">Login</a></li>
-                    <li><a href="adminLogin.html">Admin</a></li>
            <?php } else { ?>
                     <li><a href="profile.php">Account</a></li>
                     <li><a href="index.php">Logout</a></li>
          <?php } ?>
+         <li><a href="adminLogin.php">Admin</a></li>
         </ul>
     </nav>
 

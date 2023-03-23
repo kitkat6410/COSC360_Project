@@ -27,7 +27,7 @@
 </head>
 
 <body>
-   <form method="post" action="http://www.randyconnolly.com/tests/process.php" name="adminForm"
+   <form method="post" action="adminProfile.php" name="adminForm"
       onsubmit="return validateForm()">
       <fieldset>
          <legend>Administrator Login</legend>
@@ -54,6 +54,22 @@
                <td colspan="2">
                   <hr>
                   <p id="error-message"></p>
+                  <?php
+                  if (isset($_GET['error'])) {
+                     switch ($_GET['error']) {
+                        case "InvalidLogin":
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Username, Password and/or Reference Number do not match.\";</script>";
+                           break;
+                        case 1:
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error\";</script>";
+                        default:
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error\";</script>";
+
+
+                     }
+
+                  }
+                  ?>
                </td>
             </tr>
             <tr>
