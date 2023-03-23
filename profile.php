@@ -74,10 +74,9 @@ else{
     <p><strong>Email: </strong> <?php echo $row['Email'] ?></p>
     <p><strong>Birth Date: </strong><?php echo $row['BirthDate'] ?></p>
     <p><strong>Account Created: </strong><?php echo $row['AccountCreated'] ?></p>
-</div>
-</div>
 
-
+    </div>
+    </div>
     
 
 </body>
