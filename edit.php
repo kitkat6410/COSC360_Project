@@ -26,7 +26,7 @@
 </head>
 
 <body>
-<h1 class="third-color">Welcome <strong><?php echo $_SESSION['user_id'] ?></strong></h1>
+<h1 class="fourth-color">Welcome <strong><?php echo $_SESSION['user_id'] ?></strong></h1>
    <form method="post" action="profile.php" name="editForm" id="mainForm" onsubmit="return validateForm()"  enctype="multipart/form-data">
       <fieldset>
          <legend>Edit your account on Culinary Cloud</legend>
@@ -72,11 +72,7 @@
             <tr>
                <td colspan="2">
                   <p>
-                     <label for="username">Your preferred username:</label>*<br>
-                     <input type="text" name="username" size="90">
-                  </p>
-                  <p>
-                     <label for="password">Your password:</label>*<br />
+                     <label for="password">Change password:</label>*<br />
                      <input type="password" name="password" size="50">
                   </p>
                   <p>
