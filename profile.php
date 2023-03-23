@@ -1,8 +1,13 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    $lifetime=3600;
-    session_set_cookie_params($lifetime);
-    session_start();
+// if (session_status() === PHP_SESSION_NONE) {
+    // $lifetime=3600;
+    // session_set_cookie_params($lifetime);
+    // session_start();
+// }
+require 'SessionValidation.php';
+if(!isset($_SESSION['last_activity'])){
+    $_SESSION['last_activity'] = time();
+
 }
 require 'connectiondb.php';
 if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
@@ -24,12 +29,13 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             $_SESSION["LoggedIn"] = true;
             $_SESSION['user_id'] = $row['Username'];
             $_SESSION['pass_id'] = $row['Password'];
+            $_SESSION['isAdmin'] = $row['isAdmin'];
         }
     } catch (Exception $e) {
         error_log($e->getMessage());
         echo $e;
-        // header('Location: login.php?error=1');
-        // exit();
+        header('Location: login.php?error=1');
+        exit();
     }
 } else {
     require 'connectiondb.php';
@@ -64,8 +70,11 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="create.html">Create a blog</a></li>
-            <li><a href="adminLogin.php">Admin</a></li>
-            <li><a href="index.php">Logout</a></li>
+         <li><a href="index.php">Logout</a></li>
+         <?php
+            if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>
+            <li><a href="adminLogin.php">Admin Login</a></li>
+            <?php } ?>
         </ul>
     </nav>
 </head>

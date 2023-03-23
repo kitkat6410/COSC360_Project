@@ -2,6 +2,8 @@
 <html>
 
 <head>
+<?php
+    require 'SessionValidation.php' ?>
     <title>
         CulinaryCloud | Admin
     </title>

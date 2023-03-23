@@ -2,9 +2,8 @@
 <html>
 
 <head>
-<?php if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    } ?>
+<?php
+    require 'SessionValidation.php' ?>
     <title>
         CulinaryCloud | About
     </title>
@@ -25,10 +24,14 @@
                 <li><a href="login.php">Login</a></li>
   
            <?php }else{?>
+            <li><a href="create.php">Create a blog</a></li>     
                 <li><a href="profile.php">Account</a></li>
                 <li><a href="index.php">Logout</a></li>
          <?php  }?>
-         <li><a href="adminLogin.php">Admin</a></li>
+         <?php
+            if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>
+            <li><a href="adminLogin.php">Admin Login</a></li>
+            <?php } ?>
     
         </ul>
     </nav>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+   <?php
+   require 'SessionValidation.php' ?>
    <meta charset="utf-8">
    <title>Create your blog</title>
    <link rel="stylesheet" href="css/reset.css" />

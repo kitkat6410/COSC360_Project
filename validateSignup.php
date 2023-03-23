@@ -37,7 +37,7 @@ try {
 
         }
         // Check file size
-        if ($_FILES["image"]["size"] > 10000000) {
+        if ($_FILES["image"]["size"] > 10000000) { //10 mb
             $uploadOk = 0;
             header('Location: signup.php?error=Large');
             exit();
@@ -50,7 +50,6 @@ try {
             // if everything is ok, try to upload file
         } else {
             if (!(move_uploaded_file($_FILES["image"]["tmp_name"], $target_file))) {
-                echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
                 header('Location: signup.php?error="UploadError');
                 exit();
             }

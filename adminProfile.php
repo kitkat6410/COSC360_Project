@@ -1,30 +1,35 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    $lifetime=3600;
-    session_set_cookie_params($lifetime);
-    session_start();
+// if (session_status() === PHP_SESSION_NONE) {
+require 'SessionValidation.php';
+if(!isset($_SESSION['last_activity'])){
+    $_SESSION['last_activity'] = time();
+
 }
+
+// }
 require 'connectiondb.php';
-if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] != 1) {
+if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESSION['isLoggedAdmin'])) {
 
     try {
-        require 'connectiondb.php';
-        $user_input = $_POST['username'];
+
+        $user_input = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
         $pass_input = $_POST['password'];
-        $ref_input = $_POST['refnumber'];
+        $ref_input = filter_var($_POST['refnumber'], FILTER_SANITIZE_NUMBER_INT);
 
         // use prepared statement to retrieve hashed password from database
         $stmt2 = $pdo->prepare("SELECT * FROM admininfo WHERE Username = :username && Refnum = :refnum");
         $stmt2->execute(array(':username' => $user_input, ':refnum' => $ref_input));
         $row2 = $stmt2->fetch();
-        $hashed_password = $row2['Password'];
-        if (!$row2 || !password_verify($pass_input, $hashed_password)) {
+        if ($row2) {
+            $hashed_password = $row2['Password'];
+        }
+        if (!password_verify($pass_input, $hashed_password)) {
             header('Location: adminLogin.php?error=InvalidLogin');
             exit();
         } else {
             // Valid credentials, set session variable and redirect to home page
             $_SESSION["LoggedIn"] = true;
-            $_SESSION["isAdmin"] = true;
+            $_SESSION["isLoggedAdmin"] = true;
             $_SESSION['user_id'] = $row2['Username'];
             $_SESSION['pass_id'] = $row2['Password'];
             $_SESSION['ref_id'] = $row2['Refnum'];
@@ -41,7 +46,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
         exit();
     }
 } else {
-    require 'connectiondb.php';
+
     $user_input = $_SESSION['user_id'];
     $pass_input = $_SESSION['pass_id'];
     $ref_input = $_SESSION['ref_id'];
@@ -94,6 +99,11 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
     </div>
     <div class="fourth-color">
         <h2 id="action">Admin Actions:</h2>
+        <form method="GET" action="search.php">
+  <input type="text" name="search" placeholder="Search...">
+  <button type="submit">Search</button>
+</form>
+</div>
 
 </div>
 

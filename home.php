@@ -2,9 +2,8 @@
 <html>
 
 <head>
-    <?php if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    } ?>
+    <?php
+require 'SessionValidation.php' ?>
     <title>
         CulinaryCloud | Home
     </title>
@@ -21,20 +20,23 @@
             <p>Social Media Links</p>
         </div>
         <ul>
-        <?php
-            if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
-                header('Location: index.php');
-                exit;
-            
-            }?>
+            <?php
+        if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
+            header('Location: index.php');
+            exit;
+
+        } ?>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="create.html">Create a blog</a></li>        
+            <li><a href="create.php">Create a blog</a></li>
             <li><a href="profile.php">Account</a></li>
             <li><a href="index.php">Logout</a></li>
-            <li><a href="adminLogin.php">Admin</a></li>
+            <?php
+            if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>
+            <li><a href="adminLogin.php">Admin Login</a></li>
+            <?php } ?>
 
-           
+
 
         </ul>
     </nav>

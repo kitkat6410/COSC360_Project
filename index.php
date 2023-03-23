@@ -28,7 +28,6 @@
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="login.php">Login</a></li>
-            <li><a href="adminLogin.php">Admin</a></li>
         </ul>
     </nav>
 
