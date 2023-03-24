@@ -24,7 +24,6 @@ try {
             exit();
         }
     }
-    if (!file_exists($target_file)) {
 
 
         if (
@@ -37,7 +36,7 @@ try {
 
         }
         // Check file size
-        if ($_FILES["image"]["size"] > 10000000) { //10 mb
+        if ($_FILES["image"]["size"] > 10485760) { //10 mb
             $uploadOk = 0;
             header('Location: signup.php?error=Large');
             exit();
@@ -45,7 +44,7 @@ try {
 
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
-            header('Location: signup.php?error="UploadError');
+            header('Location: signup.php?error=UploadError');
             exit();
             // if everything is ok, try to upload file
         } else {
@@ -54,11 +53,7 @@ try {
                 exit();
             }
         }
-    }
-    else{
-        header('Location: signup.php?error=DoesNotExist');
-        exit();
-    }
+   
     // Sanitization
     $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -88,7 +83,6 @@ try {
     $stmt2->execute(array(':username' => $user_input));
     $row2 = $stmt2->fetch();
     if ($row2) {
-        echo "$user_input";
         header("Location: signup.php?error=DuplicateUsername");
         exit();
     }
@@ -98,9 +92,15 @@ try {
 
     // use prepared statements
     $input = "INSERT INTO userinfo (Name, Email, BirthDate, ProfileImage, Username, Password) 
-            VALUES (:name, :email, :bdate, :image, :username, :password)";
+    VALUES (:name, :email, :bdate, :image, :username, :password)";
     $stmt = $pdo->prepare($input);
-    $stmt->execute(array(':name' => $name, ':email' => $email, ':bdate' => $bdate, ':image' => $target_file, ':username' => $user_input, ':password' => $hashed_password));
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':bdate', $bdate);
+    $stmt->bindParam(':image', $target_file);
+    $stmt->bindParam(':username', $user_input);
+    $stmt->bindParam(':password', $hashed_password);
+    $stmt->execute();
     header("Location: login.php");
     exit();
 } catch (Exception $e) {
