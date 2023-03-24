@@ -46,12 +46,12 @@ try {
 
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
-            header('Location: edit.php?error="UploadError');
+            header('Location: edit.php?error=UploadError');
             exit();
             // if everything is ok, try to upload file
         } else {
             if (!(move_uploaded_file($_FILES["image"]["tmp_name"], $target_file))) {
-                header('Location: edit.php?error="UploadError');
+                header('Location: edit.php?error=UploadError');
                 exit();
             }
         }
@@ -85,9 +85,13 @@ try {
     // username
     $user_input = $_SESSION['user_id'];
     // use prepared statements
-    $input = "UPDATE userinfo SET Name = :name, Email = :email, BirthDate = :bdate, ProfileImage = :image, Password = :password WHERE username = :username";
+    $input = "UPDATE userinfo SET Name = :name, Email = :email, BirthDate = :bdate, ProfileImage = :image, Password = :password WHERE Username = :username";
     $stmt = $pdo->prepare($input);
     $stmt->execute(array(':name' => $name, ':email' => $email, ':bdate' => $bdate, ':image' => $target_file, ':password' => $hashed_password, ':username' => $user_input));
+    if($_SESSION['isAdmin']){
+        $stmt2 = $pdo->prepare("UPDATE admininfo SET Password = :password WHERE Username = :username");
+        $stmt2->execute(array(':password' => $hashed_password, ':username' => $user_input));
+    }
     header("Location: profile.php");
     exit();
 } catch (Exception $e) {

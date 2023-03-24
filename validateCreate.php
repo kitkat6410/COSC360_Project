@@ -16,59 +16,58 @@ $collaborate = isset($_POST['cc6']) ? 1 : 0;
 
 // Sanitize uploaded file name
 $target_dir = "images/";
-$target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename(filter_var($_FILES["thumbnail"]["name"], FILTER_SANITIZE_STRING)));
-if (strlen($target_file) === 0) {
-    $target_file = null;
+$target_file = $target_dir . uniqid('', true) . '.' . pathinfo($_FILES["thumbnail"]["name"], PATHINFO_EXTENSION);
+
+if (empty($_FILES['thumbnail'])) {
     header('Location: signup.php?error=NoImage');
     exit();
 }
 
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
 // Check if image file is an actual image or fake image
 if (isset($_POST["submit"])) {
     $check = getimagesize($_FILES["thumbnail"]["tmp_name"]);
-    if ($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
+    if ($check === false) {
         $uploadOk = 0;
         header('Location: signup.php?error=NotAnImage');
         exit();
     }
 }
 
+// Check file size
+if ($_FILES["thumbnail"]["size"] > 10485760) { //10 MB
+    $uploadOk = 0;
+    header('Location: signup.php?error=Large');
+    exit();
+}
 
-    if (
-        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif"
-    ) {
-        $uploadOk = 0;
-        header('Location: signup.php?error=NotSupported');
-        exit();
-
-    }
-    // Check file size
-    if ($_FILES["thumbnail"]["size"] > 10485760) { //10 MB
-        $uploadOk = 0;
-        header('Location: signup.php?error=Large');
-        exit();
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    header('Location: signup.php?error=UploadError');
+    exit();
+    // if everything is ok, try to upload file
+} else {
+    if (!(move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file))) {
         header('Location: signup.php?error=UploadError');
         exit();
-        // if everything is ok, try to upload file
-    } else {
-        if (!(move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file))) {
-            echo $target_file;
-             header('Location: signup.php?error=UploadError');
-             exit();
-        }
     }
-    $username = $_SESSION['user_id'];
-    // Check if the blog already exists
+}
+
+// Validate user ID
+if (!ctype_alnum($_SESSION['user_id'])) {
+    header('Location: signup.php?error=InvalidUsername');
+    exit();
+}
+
+// Check if the blog title and description are not empty
+if (empty($bTitle_input) || empty($desc)) {
+    header('Location: create.php?error=EmptyFields');
+    exit();
+}
+$username = $_SESSION['user_id'];
+// Check if the blog already exists
 $selectStmt = $pdo->prepare("SELECT * FROM bloginfo WHERE BlogName=:blogname AND Username=:username");
 $selectStmt->bindParam(':blogname', $bTitle_input);
 $selectStmt->bindParam(':username', $username);
@@ -77,7 +76,7 @@ $row = $selectStmt->fetch();
 
 if ($row) {
     header('Location: create.php?error=BlogExists');
-    
+
     exit();
 }
 // Insert sanitized input into database
@@ -101,9 +100,16 @@ try {
 
     // Upload sanitized file
     move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file);
-
-    header("Location: blogTemplate.php");
-    exit();
+    // set SESSION variables
+    $selectStmt2 = $pdo->prepare("SELECT BID FROM bloginfo WHERE BlogName=:blogname AND Username=:username");
+    $selectStmt2->bindParam(':blogname', $bTitle_input);
+    $selectStmt2->bindParam(':username', $username);
+    $selectStmt2->execute();
+    $row2 = $selectStmt->fetch();
+    $_SESSION['BID'] = $row2;
+    echo $_SESSION['BID'];
+    // header("Location: blogTemplate.php");
+    // exit();
 
 } catch (Exception $e) {
     error_log($e->getMessage());
