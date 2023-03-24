@@ -25,10 +25,9 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             $_SESSION['isAdmin'] = $row['isAdmin'];
         }
     } catch (Exception $e) {
-        error_log($e->getMessage());
-        echo $e;
-        // header('Location: login.php?error=1');
-        // exit();
+        error_log($e->getMessage());;
+        header('Location: login.php?error=1');
+        exit();
     }
 }
  else{

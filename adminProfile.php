@@ -67,7 +67,6 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
     </link>
     <link rel="stylesheet" href="css/profile.css">
     </link>
-
     <nav>
         <div class="site-title">
             <a href="home.php">

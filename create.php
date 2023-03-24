@@ -2,13 +2,16 @@
 <html>
 <head lang="en">
    <?php
-   require 'SessionValidation.php' ?>
+   require 'SessionValidation.php' ;
+   if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1){
+      header('Location: Login.php');
+   }
+   ?>
    <meta charset="utf-8">
    <title>Create your blog</title>
    <link rel="stylesheet" href="css/reset.css" />
    <link rel="stylesheet" href="css/login.css" />
    <link rel="stylesheet" href="css/styles.css" />
-   
    <script type="text/javascript" src="script/create.js"></script>
 
    <nav>
@@ -26,7 +29,7 @@
 
 </head>
 <body>
-<form method="post" action="createValidate.php" name="createBlog" id="mainForm" onsubmit="return validateForm()">
+<form method="post" action="validateCreate.php" name="createBlog" id="mainForm" onsubmit="return validateForm()" enctype="multipart/form-data" >
    <fieldset>
       <legend>Create Your Blog</legend>
       <table>
@@ -43,10 +46,10 @@
                </p>
                <tr>
                <td>
-                  <div class="box">
-                     Select image to upload:
+               <div class="box">
+                     Select thumbnail to upload:*
                      <p></p>
-                     <input type="file" name="image" id="image">
+                     <input type="file" name="thumbnail" id="thumbnail">
                   </div>
                </td>
          </tr>
@@ -90,14 +93,6 @@
                     <input type="checkbox" name="cc5" >Travel vlogs <br/>
                     <input type="checkbox" name="cc6" >Collaborate with other bloggers <br/>
                 </div>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2" >
-            <div class="rectangle">
-               <label style="color: white;">I want my blog to be public</label>
-               <input type="checkbox" name="accept">
-            </div>
             </td>
          </tr>
          <tr>

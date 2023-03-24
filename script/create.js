@@ -1,8 +1,7 @@
-
-    
-    function validateForm() {
+     function validateForm() {
        var title = document.forms["createBlog"]["title"].value;
        var desc = document.forms["createBlog"]["description"].value;
+       var thumbnail = document.forms["createBlog"]["thumbnail"].value;
        var cc1 = document.forms["createBlog"]["cc1"].checked;
        var cc2 = document.forms["createBlog"]["cc2"].checked;
        var cc3 = document.forms["createBlog"]["cc3"].checked;
@@ -20,9 +19,13 @@
           document.getElementById("error-message").innerHTML = "Please enter your blog description.";
           return false;
        }
+       if(thumbnail == ""){
+         document.getElementById("error-message").innerHTML = "Please enter your desired thumbnail.";
+         return false;
+       }
 
        if (!cc1 && !cc2 && !cc3 && !cc4 && !cc5 && !cc6) {
-          document.getElementById("error-message").innerHTML = "Please select a category.";
+          document.getElementById("error-message").innerHTML = "Please select at least one category.";
           return false;
        }
 
