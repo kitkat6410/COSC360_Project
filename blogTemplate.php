@@ -1,8 +1,8 @@
 <?php
 require 'connectiondb.php';
 require 'SessionValidation.php';
-$_SESSION['BID'] = 7;
-$bid = $pdo->quote($_SESSION['BID']);
+$bid = $_SESSION['BID'] = 1;
+echo $bid;
 $stmt = $pdo->prepare("SELECT * FROM bloginfo WHERE BID = $bid");
 $stmt->execute();
 $row = $stmt->fetch();
@@ -18,6 +18,13 @@ $stmt2->execute();
 <html>
 
 <head>
+<style>
+		body {
+			margin-top: 0;
+			background-image: url('<?php $row['thumbnail'] ?>');
+			background-size: 400px;
+		}
+	</style>
 
     <title>
         CulinaryCloud | MyBlog
@@ -63,12 +70,8 @@ $stmt2->execute();
         <?php
 
         while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            echo $row2['Author'], $row2['BlogTitle'], $row2['PID'], $row2['BID'], $row2['BlogSecondaryTitle'], $row2['DatePosted'], $row2['Image'], $row2['Content'];
             $date = date('Y-m-d\TH:i:sP', strtotime($row2['DatePosted']));
-            echo $date;
-
-            ?>e">
-           <?php print_r($_SESSION['response']); ?>
+            ?>
         <section id="myBlogContainer">
 
             <article>
@@ -78,11 +81,11 @@ $stmt2->execute();
 
                 <h2><?php echo $row2['BlogSecondaryTitle'] ?></h2>
 
-                <!-- <img class="baking-image" src=""> -->
-                <p><?php echo $row2['Image'] ?></p>
+        
+
                 <img class="baking-image" src="<?php echo $row2['Image'] ?>">
 
-                <p><?php echo $row2['Content'] ?></p>
+                <p><?php echo nl2br($row2['Content']) ?></p>
 
             </article>
         </section>

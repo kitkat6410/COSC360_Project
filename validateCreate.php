@@ -107,7 +107,7 @@ try {
     // set SESSION variables
     $selectStmt->execute();
     $row = $selectStmt->fetch();
-    // $_SESSION['BID'] = $row['BID'];
+    $_SESSION['BID'] = $row['BID'];
     if(!$row){
       header("Location: errorBID");
     }

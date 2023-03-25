@@ -44,7 +44,16 @@ if (!empty($errors)) {
 }
 // check for any errors
 
+// $selectStmt = $pdo->prepare("SELECT * FROM blogpost WHERE BlogTitle=:title AND Username=:username");
+// $selectStmt->bindParam(':title', $_POST['title']);
+// $selectStmt->bindParam(':username', $_SESSION['user_id']);
+// $selectStmt->execute();
+// $row = $selectStmt->fetch();
 
+// if ($row) {
+//     header('Location: blogTemplate.php?error=PostExists');
+//     exit();
+// }
     $target_dir = "images/";
     $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["image2"]["name"]));
     if (!(move_uploaded_file($_FILES["image2"]["tmp_name"], $target_file))) {
@@ -52,13 +61,14 @@ if (!empty($errors)) {
     }
     try{
     $input = "INSERT INTO blogpost (Author, BlogTitle, BID, BlogSecondaryTitle, Image, Content) VALUES (:author, :title, :bid, :secondtitle, :image, :content)";
+    $content = $pdo->quote($_POST['content']);
     $stmt = $pdo->prepare($input);
     $stmt->bindParam(':author', $_SESSION['user_id']);
     $stmt->bindParam(':title', $_POST['title']);
     $stmt->bindParam(':bid', $_SESSION['BID']);
     $stmt->bindParam(':secondtitle', $_POST['secondTitle']);
     $stmt->bindParam(':image', $target_file);
-    $stmt->bindParam(':content', $_POST['content']);
+    $stmt->bindParam(':content',  $content);
     $stmt->execute();
   
     $response = array(
