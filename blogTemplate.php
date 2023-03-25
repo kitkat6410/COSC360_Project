@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require 'connectiondb.php';
 require 'SessionValidation.php';
-$_SESSION['BID'] = 1;
+// $_SESSION['BID'] = 1;
 if (!isset($_SESSION['BID'])) {
     echo "Session error: Blog ID not found";
     exit();
@@ -12,8 +12,6 @@ if (!isset($_SESSION['BID'])) {
 try {
 
     $bid = $pdo->quote($_SESSION['BID']);
-
-    echo $bid;
     $stmt = $pdo->prepare("SELECT * FROM bloginfo WHERE BID = $bid");
     $stmt->execute();
     $row = $stmt->fetch();
