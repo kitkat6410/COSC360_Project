@@ -4,8 +4,12 @@ try {
 
     $target_dir = "images/";
     $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["image"]["name"]));
-    if (strlen($target_file) === 0) {
-        $target_file = null;
+    // if (strlen($target_file) === 0) {
+    //     $target_file = null;
+    //     header('Location: signup.php?error=NoImage');
+    //     exit();
+    // }
+    if (empty($_FILES['thumbnail'])) {
         header('Location: signup.php?error=NoImage');
         exit();
     }

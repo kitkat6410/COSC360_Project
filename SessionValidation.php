@@ -1,5 +1,5 @@
 <?php
-$inactive = 1800; // 30 minutes
+$inactive = 3600; // 1 hour
 ini_set('session.gc_maxlifetime', $inactive);
 session_start();
 

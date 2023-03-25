@@ -3,11 +3,11 @@
 
 <head lang="en">
     <?php
-   require 'SessionValidation.php';
-   if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
-      header('Location: Login.php');
-   }
-   ?>
+    require 'SessionValidation.php';
+    if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
+        header('Location: Login.php');
+    }
+    ?>
     <meta charset="utf-8">
     <title>Create your blog</title>
     <link rel="stylesheet" href="css/reset.css" />
@@ -113,12 +113,39 @@
                         <hr>
                         <p id="error-message"></p>
                         <?php
-            if (isset($_GET['error'])) {
-               switch ($_GET['error']) {
-                  case "BlogExists":
-                     echo "<script>document.getElementById(\"error-message\").innerHTML = \"You already have a blog with that name. Please choose another.\";</script>";
-               }
-            } ?>
+                        if (isset($_GET['error'])) {
+                            switch ($_GET['error']) {
+                                case "BlogExists":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"You already have a blog with that name. Please choose another.\";</script>";
+                                    break;
+                                case "NotAnImage":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"The file you chose is not an image. Please choose an image\";</script>";
+                                    break;
+                                case "NoImage":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"Please select an image.\";</script>";
+                                    break;
+                                case "InvalidUsername":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Username\";</script>";
+                                    break;
+                                case "Large":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"Your image file is too large.\";</script>";
+                                    break;
+                                case "UploadError":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"There was an issue with uploading your chosen image. Please try again.\";</script>";
+                                    break;
+                                case "EmptyFields":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"Fields were left empty.\";</script>";
+                                    break;
+                                case "Unknown":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error occured.\";</script>";
+                                    break;
+                                default:
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error occured.\";</script>";
+
+
+
+                            }
+                        } ?>
                     </td>
                 </tr>
                 <tr>

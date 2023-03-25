@@ -16,7 +16,12 @@ $collaborate = isset($_POST['cc6']) ? 1 : 0;
 
 // Sanitize uploaded file name
 $target_dir = "images/";
-$target_file = $target_dir . uniqid('', true) . '.' . pathinfo($_FILES["thumbnail"]["name"], PATHINFO_EXTENSION);
+$target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["thumbnail"]["name"]));
+// if (strlen($target_file) === 0) {
+//     $target_file = null;
+//     header('Location: signup.php?error=NoImage');
+//     exit();
+// }
 
 if (empty($_FILES['thumbnail'])) {
     header('Location: signup.php?error=NoImage');
@@ -76,7 +81,6 @@ $row = $selectStmt->fetch();
 
 if ($row) {
     header('Location: create.php?error=BlogExists');
-
     exit();
 }
 // Insert sanitized input into database
@@ -101,18 +105,18 @@ try {
     // Upload sanitized file
     move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file);
     // set SESSION variables
-    $selectStmt2 = $pdo->prepare("SELECT BID FROM bloginfo WHERE BlogName=:blogname AND Username=:username");
-    $selectStmt2->bindParam(':blogname', $bTitle_input);
-    $selectStmt2->bindParam(':username', $username);
-    $selectStmt2->execute();
-    $row2 = $selectStmt->fetch();
-    $_SESSION['BID'] = $row2;
-    echo $_SESSION['BID'];
-    // header("Location: blogTemplate.php");
-    // exit();
+    $selectStmt->execute();
+    $row = $selectStmt->fetch();
+    // $_SESSION['BID'] = $row['BID'];
+    if(!$row){
+      header("Location: errorBID");
+    }
+    $_SESSION['BID'] = $row['BID'];
+   header("Location: blogTemplate.php");
+   exit();
 
 } catch (Exception $e) {
     error_log($e->getMessage());
-    echo $e;
+    header('Location: create.php?error=Unknown');
 }
 ?>
