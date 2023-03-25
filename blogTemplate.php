@@ -1,41 +1,60 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require 'connectiondb.php';
 require 'SessionValidation.php';
-$bid = $_SESSION['BID'] = 1;
-echo $bid;
-$stmt = $pdo->prepare("SELECT * FROM bloginfo WHERE BID = $bid");
-$stmt->execute();
-$row = $stmt->fetch();
+$_SESSION['BID'] = 1;
+if (!isset($_SESSION['BID'])) {
+    echo "Session error: Blog ID not found";
+    exit();
+}
 
-$stmt2 = $pdo->prepare("SELECT * FROM blogpost WHERE BID = :bid ORDER BY DatePosted DESC");
-$stmt2->bindParam(':bid', $_SESSION['BID']);
-$stmt2->execute();
+try {
 
+    $bid = $pdo->quote($_SESSION['BID']);
 
+    echo $bid;
+    $stmt = $pdo->prepare("SELECT * FROM bloginfo WHERE BID = $bid");
+    $stmt->execute();
+    $row = $stmt->fetch();
+
+    if (!$row) {
+        echo "Database error: Blog not found";
+        exit();
+    }
+
+    $stmt2 = $pdo->prepare("SELECT * FROM blogpost WHERE BID = :bid ORDER BY DatePosted DESC");
+    $stmt2->bindParam(':bid', $_SESSION['BID']);
+    $stmt2->execute();
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-<style>
-		body {
-			margin-top: 0;
-			background-image: url('<?php $row['thumbnail'] ?>');
-			background-size: 400px;
-		}
-	</style>
+ 
 
     <title>
         CulinaryCloud | MyBlog
     </title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/login.css">
+    <!-- <link rel="stylesheet" href="css/login.css"> -->
     <link rel="stylesheet" href="css/myblog.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="script/jquery-3.6.4.min.js"></script>
     <script src="script/blogTemplate.js"></script>
+    <style>
+        body {
+            margin-top: 0;
+            background-image: url('<?php echo $row['Thumbnail'] ?>');
+            background-size: 400px;
+        }
+    </style>
 
 
     </link>
@@ -58,37 +77,35 @@ $stmt2->execute();
 
 <body>
     <header id="blogPage">
-        <h1 id=sugar><?php echo $row['BlogName'] ?></h1>
+        <h1 id=sugar><?php echo stripslashes($row['BlogName']) ?></h1>
         <div id="desc">
-            <p><?php echo $row['Description'] ?></p>
+            <p><?php echo stripslashes($row['Description']) ?></p>
             </p>
         </div>
     </header>
-    <!-- <section id='my-page'>
-</section> -->
     <section id="my-page">
         <?php
 
-        while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+        while ($row2 = $stmt2->fetch()) {
             $date = date('Y-m-d\TH:i:sP', strtotime($row2['DatePosted']));
             ?>
-        <section id="myBlogContainer">
+            <section id="myBlogContainer">
 
-            <article>
-                <time datetime="<?= $date ?>"><?= date('F j, Y \a\t g:i A T', strtotime($row2['DatePosted'])) ?></time>
-                <p>By: <?php echo $row2['Author'] ?></p>
-                <h1><?php echo $row2['BlogTitle'] ?></h1>
+                <article>
+                    <time datetime="<?= $date ?>"><?= date('F j, Y \a\t g:i A T', strtotime($row2['DatePosted'])) ?></time>
+                    <p>By: <?php echo $row2['Author'] ?></p>
+                    <h1><?php echo $row2['BlogTitle'] ?></h1>
 
-                <h2><?php echo $row2['BlogSecondaryTitle'] ?></h2>
+                    <h2><?php echo $row2['BlogSecondaryTitle'] ?></h2>
 
-        
 
-                <img class="baking-image" src="<?php echo $row2['Image'] ?>">
 
-                <p><?php echo nl2br($row2['Content']) ?></p>
+                    <img class="baking-image" src="<?php echo $row2['Image'] ?>">
 
-            </article>
-        </section>
+                    <p><?php echo nl2br($row2['Content']) ?></p>
+
+                </article>
+            </section>
         <?php } ?>
     </section>
     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['Username']) { ?>
@@ -168,6 +185,9 @@ $stmt2->execute();
                                 break;
                             case "EmptyFields":
                                 echo "<script>document.getElementById(\"error-message\").innerHTML = \"Fields were left empty.\";</script>";
+                                break;
+                            case "DuplicatePost":
+                                echo "<script>document.getElementById(\"error-message\").innerHTML = \"You already have a title with the same name. Please choose another.\";</script>";
                                 break;
                             case "Unknown":
                                 echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error occured.\";</script>";

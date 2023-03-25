@@ -9,7 +9,7 @@ try {
     //     header('Location: signup.php?error=NoImage');
     //     exit();
     // }
-    if (empty($_FILES['thumbnail'])) {
+    if (empty($_FILES['image'])) {
         header('Location: signup.php?error=NoImage');
         exit();
     }

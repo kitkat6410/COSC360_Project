@@ -6,12 +6,12 @@ nav {
 
 }
 
-body {
+/* body {
     margin-top: 0;
     background-image: url('../images/sugar.png');
     background-size: 400px;
 
-}
+} */
 
 header {
     color: rgb(80, 80, 80)
@@ -117,20 +117,83 @@ li {
     object-fit: contain; 
 } */
 
-.rounded, .rounded:hover {
-    border: 1px solid #172d6e;
-    border-bottom: 1px solid #0e1d45;
-    border-radius: 5px;
-    text-align: center;
-    color: white;
-    background-color: #393e46;
-    padding: 0.5em 0 0.5em 0;
-    margin: 0.3em;
-    width: 7em;
-    -webkit-box-shadow: inset 0 1px 0 0 #393e46, 0 1px 4px 0 #b3b3b3;
-    box-shadow: inset 0 1px 0 0 #393e46, 0 1px 4px 0 #b3b3b3;
- }
- .rounded:hover {
-    background-color: white;
-    color: black;
- }
+ #mainForm{
+    vertical-align: middle;
+   }
+
+   table {
+      border: collapse;
+      border-spacing: 0;
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   table tbody td{
+      /* border: 1pt solid #95BEF0;   */
+      line-height: 1.5em;
+      vertical-align: top;
+      padding: 0.5em 0.75em;
+   }
+   
+   legend {
+      background-color: #29a19c ;
+      margin: 0 auto;
+      width: 90%;
+      padding: 0.25em;
+      text-align: center;
+      font-weight: bold;
+      font-size: 100%;
+   }
+   fieldset {
+      margin: 1em auto;
+      background-color: #a3f7bf;
+      width: 60%;
+   }
+   form p {
+      margin-top: 0.5em;
+   }
+   
+   .box {
+      border: 1pt solid #29a19c;
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+   }
+   
+   .rectangle {
+      background-color: #29a19c;
+      padding: 0.5em;
+   }
+   .centered {
+      text-align: center;
+   }
+   
+   hr{
+    border: 1px solid #29a19c;
+   }
+   .rounded, .rounded:hover {
+      border: 1px solid #172d6e;
+      border-bottom: 1px solid #0e1d45;
+      border-radius: 5px;
+      text-align: center;
+      color: white;
+      background-color: #393e46;
+      padding: 0.5em 0 0.5em 0;
+      margin: 0.3em;
+      width: 7em;
+      -webkit-box-shadow: inset 0 1px 0 0 #393e46, 0 1px 4px 0 #b3b3b3;
+      box-shadow: inset 0 1px 0 0 #393e46, 0 1px 4px 0 #b3b3b3;
+   }
+   .rounded:hover {
+      background-color: white;
+      color: black;
+   }
+   #error-message {
+      color:#94001E;
+      text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 1px #000;
+   }
+   #agree{
+      color:white;
+   }
+   legend{
+      color:white;
+   }

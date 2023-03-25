@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require 'connectiondb.php';
 require 'SessionValidation.php';
 $errors = array(); // initialize an empty array to hold any validation errors
@@ -32,6 +34,26 @@ if (empty($_FILES['image2'])) {
         $errors[] = 'Image must be less than or equal to 10 MB.';
     }
  }
+ $target_dir = "images/";
+ $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["image2"]["name"]));
+ if (!(move_uploaded_file($_FILES["image2"]["tmp_name"], $target_file))) {
+     $errors[] = 'Error uploading image';
+ }
+ $title = htmlspecialchars($_POST['title']);
+ $stmtCheck = $pdo ->prepare("SELECT * FROM blogpost WHERE BlogTitle = :title AND Author = :username");
+ $stmtCheck->bindParam(':title', $title);
+ $stmtCheck->bindParam(':username', $_SESSION['user_id']);
+ try {
+    $stmtCheck->execute();
+    $row = $stmtCheck->fetch();
+    if($row){
+        $errors[] = 'Duplicate blog post';
+    }
+} catch (PDOException $e) {
+    // Handle the error here, e.g. log it or show an error message to the user
+    echo 'Error: ' . $e->getMessage();
+}
+
 if (!empty($errors)) {
     $response = array(
         'success' => false,
@@ -41,32 +63,21 @@ if (!empty($errors)) {
     header('Content-Type: application/json');
     echo json_encode($response);
     exit;
-}
-// check for any errors
-
-// $selectStmt = $pdo->prepare("SELECT * FROM blogpost WHERE BlogTitle=:title AND Username=:username");
-// $selectStmt->bindParam(':title', $_POST['title']);
-// $selectStmt->bindParam(':username', $_SESSION['user_id']);
-// $selectStmt->execute();
-// $row = $selectStmt->fetch();
-
-// if ($row) {
-//     header('Location: blogTemplate.php?error=PostExists');
-//     exit();
-// }
-    $target_dir = "images/";
-    $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["image2"]["name"]));
-    if (!(move_uploaded_file($_FILES["image2"]["tmp_name"], $target_file))) {
-        $errors[] = 'Error uploading image';
-    }
+}else{
     try{
+        $title = htmlspecialchars($_POST['title']);
+    $secondTitle = htmlspecialchars($_POST['secondTitle']);
+    $content = htmlspecialchars($_POST['content']);
+
+
+
+
     $input = "INSERT INTO blogpost (Author, BlogTitle, BID, BlogSecondaryTitle, Image, Content) VALUES (:author, :title, :bid, :secondtitle, :image, :content)";
-    $content = $pdo->quote($_POST['content']);
     $stmt = $pdo->prepare($input);
     $stmt->bindParam(':author', $_SESSION['user_id']);
-    $stmt->bindParam(':title', $_POST['title']);
+    $stmt->bindParam(':title', $title);
     $stmt->bindParam(':bid', $_SESSION['BID']);
-    $stmt->bindParam(':secondtitle', $_POST['secondTitle']);
+    $stmt->bindParam(':secondtitle', $secondTitle);
     $stmt->bindParam(':image', $target_file);
     $stmt->bindParam(':content',  $content);
     $stmt->execute();
@@ -80,6 +91,7 @@ if (!empty($errors)) {
     echo json_encode($response);
     exit;
     }catch(Exception $e){
-        echo  $e;
+        echo "$e";
+        exit();
     }
-    ?>
+} ?>

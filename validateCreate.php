@@ -3,10 +3,10 @@ require 'connectiondb.php';
 require 'SessionValidation.php';
 
 // Sanitize input values
-$bTitle_input = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
-$desc = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
-$continent = isset($_POST['continent']) && $_POST['continent'] != 'Choose continent' ? filter_var($_POST['continent'], FILTER_SANITIZE_STRING) : NULL;
-$cityCountry = filter_var($_POST['cityandcountry'], FILTER_SANITIZE_STRING);
+$bTitle_input = htmlspecialchars($_POST['title']);
+$desc =htmlspecialchars($_POST['description']);
+$continent = isset($_POST['continent']) && $_POST['continent'] != 'Choose continent' ? htmlspecialchars($_POST['continent']) : NULL;
+$cityCountry = htmlspecialchars($_POST['cityandcountry']);
 $recipe = isset($_POST['cc1']) ? 1 : 0;
 $challenge = isset($_POST['cc2']) ? 1 : 0;
 $business = isset($_POST['cc3']) ? 1 : 0;
@@ -107,13 +107,13 @@ try {
     // set SESSION variables
     $selectStmt->execute();
     $row = $selectStmt->fetch();
-    $_SESSION['BID'] = $row['BID'];
     if(!$row){
       header("Location: errorBID");
     }
     $_SESSION['BID'] = $row['BID'];
-   header("Location: blogTemplate.php");
-   exit();
+    echo $_SESSION['BID'];
+    header("Location: blogTemplate.php");
+    exit();
 
 } catch (Exception $e) {
     error_log($e->getMessage());
