@@ -126,6 +126,14 @@ try {
             
                 <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true) { ?>
                     <section id="comment-section">
+               <?php     $stmtComment = $pdo->prepare("SELECT * FROM comments WHERE BID = :bid AND PID = :pid") ;
+                        $stmtComment->bindParam(':bid', $_SESSION['BID']);
+                        $stmtComment->bindParam(':pid', $row2['PID']);
+                        $stmtComment->execute();
+                        while($rowComment = $stmtComment->fetch()){
+                            ?><?php echo "Hi" ?><?php
+                        }
+               ?>
                 <form method="post" action="process_comment.php">
 
                     <fieldset>
