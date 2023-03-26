@@ -25,6 +25,9 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             $_SESSION['user_id'] = $row['Username'];
             $_SESSION['pass_id'] = $row['Password'];
             $_SESSION['isAdmin'] = $row['isAdmin'];
+            $_SESSION['Name'] = $row['Name'];
+            $_SESSION['Email'] = $row['Email'];
+            $_SESSION['BirthDate'] = $row['BirthDate'];
         }
     } catch (Exception $e) {
         error_log($e->getMessage());

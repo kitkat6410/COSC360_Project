@@ -38,7 +38,7 @@ try {
 
         }
         // Check file size
-        if ($_FILES["image"]["size"] > 10000000) { //10 mb
+        if ($_FILES["image"]["size"] > 10485760) { //10 MB
             $uploadOk = 0;
             header('Location: edit.php?error=Large');
             exit();

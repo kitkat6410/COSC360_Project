@@ -7,8 +7,7 @@
    <link rel="stylesheet" href="css/reset.css" />
    <link rel="stylesheet" href="css/styles.css" />
    <link rel="stylesheet" href="css/login.css" />
-
-   <script type="text/javascript" src="script/lab5-1.js"></script>
+   <script type="text/javascript" src="script/edit.js"></script>
    <nav>
       <div class="site-title">
          <a href="home.php">
@@ -39,12 +38,12 @@
                <td colspan="2">
                   <p>
                      <label>Your new name:</label>*<br>
-                     <input type="text" name="name" size="90" pattern="[A-Za-z'-]+ [A-Za-z'-]+"
+                     <input type="text" name="name" size="90" value="<?php echo $_SESSION['Name'] ?>" pattern="[A-Za-z'-]+ [A-Za-z'-]+"
                         title="Please enter your full name (first and last name separated by a space)">
                   </p>
                   <p>
                      <label for="email">Your new email address:</label>*<br>
-                     <input type="email" name="email" size="90">
+                     <input type="email" name="email" value= "<?php echo $_SESSION['Email'] ?>" size="90">
                   </p>
                   <p></p>
                </td>
@@ -61,7 +60,7 @@
                   <div class="box">
                      <p>
                         <label for="birth">Date of Birth:</label>*<br>
-                        <input type="date" name="birth">
+                        <input type="date" name="birth" value = <?php echo $_SESSION['BirthDate'] ?>>
                      </p>
                   </div>
                </td>
@@ -147,66 +146,7 @@
          </table>
       </fieldset>
    </form>
-   <script>
-      function isPasswordSecure(password) {
-         var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?!.*\s).{8,}$/;
-         return regex.test(password);
-      }
-      function validateForm() {
-         var name = document.forms["editForm"]["name"].value;
-         var email = document.forms["editForm"]["email"].value;
-         var image = document.forms["editForm"]["image"].value;
-         var birth = document.forms["editForm"]["birth"].value;
-         var password = document.forms["editForm"]["password"].value;
-         var validatePassword = document.forms["editForm"]["validatePassword"].value;
-         
-         if (name == "") {
-            document.getElementById("error-message").innerHTML = "Please enter your name.";
-            return false;
-         }
 
-         if (email == "") {
-            document.getElementById("error-message").innerHTML = "Please enter your email address.";
-            return false;
-         }
-       if (image == "") {
-             document.getElementById("error-message").innerHTML = "Profile image is required.";
-            return false;
-       }
-         if (birth == "") {
-            document.getElementById("error-message").innerHTML = "Please enter your date of birth.";
-            return false;
-         }
-         // Check if the user is 18 or older
-         var eighteenYearsAgo = new Date();
-         eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
-         var userBirthDate = new Date(birth);
-         if (userBirthDate > eighteenYearsAgo) {
-            document.getElementById("error-message").innerHTML = "You must be 18 or older to own an account.";
-            return false;
-         }
-
-         if (password == "") {
-            document.getElementById("error-message").innerHTML = "Please enter your password";
-            return false;
-         }
-         if (!isPasswordSecure(password)) {
-            document.getElementById("error-message").innerHTML = "Please choose a password that is at least 8 characters long, contains at least one uppercase letter, at least one lowercase letter, at least one number, and at least one special character ";
-            return false;
-         }
-
-         if (validatePassword == "") {
-            document.getElementById("error-message").innerHTML = "Please confirm your password";
-            return false;
-         }
-
-         if (password != validatePassword) {
-            document.getElementById("error-message").innerHTML = "Passwords do not match.";
-            return false;
-         }
-
-      }
-   </script>
 </body>
 
 </html>

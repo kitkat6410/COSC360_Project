@@ -2,6 +2,7 @@
 <html>
 
 <head lang="en">
+<meta charset="UTF-8">
     <?php
     require 'SessionValidation.php';
     if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {

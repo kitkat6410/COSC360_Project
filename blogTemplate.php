@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require 'connectiondb.php';
 require 'SessionValidation.php';
-if(isset($_GET['bid'])){
+if (isset($_GET['bid'])) {
     $_SESSION['BID'] = $_GET['bid'];
 }
 if (!isset($_SESSION['BID'])) {
@@ -37,7 +37,8 @@ try {
 <html>
 
 <head>
- 
+    <meta charset="UTF-8">
+
 
     <title>
         CulinaryCloud | MyBlog
@@ -50,12 +51,12 @@ try {
     <script src="script/jquery-3.6.4.min.js"></script>
     <script src="script/blogTemplate.js"></script>
     <style>
-        body {
-            margin-top: 0;
-            background-image: url('<?php echo $row['Thumbnail'] ?>');
-            background-size: 25em;
+    body {
+        margin-top: 0;
+        background-image: url('<?php echo $row['Thumbnail'] ?>');
+        background-size: 25em;
 
-        }
+    }
     </style>
     <!-- <style>
   body {
@@ -90,10 +91,13 @@ try {
 
 <body>
     <header id="blogPage">
-        <h1 id=sugar><?php echo stripslashes($row['BlogName']) ?></h1>
+        <h1 id=sugar><?php echo ($row['BlogName']) ?></h1>
         <div id="desc">
-            <p><?php echo stripslashes($row['Description']) ?></p>
+            <p><?php echo ($row['Description']) ?></p>
             </p>
+            <?php   $date = date('Y-m-d\TH:i:sP', strtotime($row['BlogCreated'])); ?>
+            <p>Blog owner: <?php echo $row["Username"] ?> <br>
+                Blog created: <time datetime="<?= $date ?>"><?= date('F j, Y \a\t g:i A T', strtotime($row['BlogCreated'])) ?></time> </p>
         </div>
     </header>
     <section id="my-page">
@@ -102,23 +106,59 @@ try {
         while ($row2 = $stmt2->fetch()) {
             $date = date('Y-m-d\TH:i:sP', strtotime($row2['DatePosted']));
             ?>
-            <section id="myBlogContainer">
+        <section id="myBlogContainer">
 
-                <article>
-                    <time datetime="<?= $date ?>"><?= date('F j, Y \a\t g:i A T', strtotime($row2['DatePosted'])) ?></time>
-                    <p>By: <?php echo $row2['Author'] ?></p>
-                    <h1><?php echo $row2['BlogTitle'] ?></h1>
+            <article>
+                <time datetime="<?= $date ?>"><?= date('F j, Y \a\t g:i A T', strtotime($row2['DatePosted'])) ?></time>
+                <p>By: <?php echo $row2['Author'] ?></p>
+                <h1><?php echo $row2['BlogTitle'] ?></h1>
 
-                    <h2><?php echo $row2['BlogSecondaryTitle'] ?></h2>
+                <h2><?php echo $row2['BlogSecondaryTitle'] ?></h2>
 
 
 
-                    <img class="baking-image" src="<?php echo $row2['Image'] ?>">
+                <img class="baking-image" src="<?php echo $row2['Image'] ?>">
 
-                    <p><?php echo nl2br($row2['Content']) ?></p>
+                <p><?php echo nl2br($row2['Content']) ?></p>
 
-                </article>
-            </section>
+            </article>
+            <!-- comment section -->
+            
+                <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true) { ?>
+                    <section id="comment-section">
+                <form method="post" action="process_comment.php">
+
+                    <fieldset>
+                        <legend>Leave a comment</legend>
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <p>
+                                        <label for="name">Username:</label>
+                                        <input type="text" id="name" name="name"
+                                            value="<?php echo $_SESSION['user_id'] ?>"><br>
+                                    </p>
+                                    <p>
+                                        <label for="comment">Comment:</label>
+                                        <textarea id="comment" name="comment"></textarea><br>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="rectangle centered">
+                                        <input type="submit" value="Submit" class="rounded">
+                                        <input type="reset" value="Reset" class="rounded">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+                </section>
+                <?php } ?>
+        
+        </section>
         <?php } ?>
     </section>
     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['Username']) { ?>
@@ -133,7 +173,7 @@ try {
             <table>
 
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <p>
                             <label>Title of your blog post:</label>*<br />
                             <input type="text" name="title" size="90" class="required" />
@@ -146,6 +186,8 @@ try {
                             <label>Content:</label>*<br />
                             <textarea name="content" rows="5" cols="61" class="required"></textarea>
                         </p>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <div class="box">
@@ -176,6 +218,7 @@ try {
                         <p id="error-message"></p>
                     </td>
                     <?php
+                    // unused code, save for letter. Other error handling that directs back to this page
                     if (isset($_GET['error'])) {
                         switch ($_GET['error']) {
                             case "BlogExists":
@@ -217,8 +260,8 @@ try {
                 <tr>
                     <td colspan="2">
                         <div class="rectangle centered">
-                            <input type="submit" value="Submit" id="Submit" class="rounded"> <input type="reset" value="Reset"
-                                class="rounded">
+                            <input type="submit" value="Submit" id="Submit" class="rounded"> <input type="reset"
+                                value="Reset" class="rounded">
                         </div>
                     </td>
                 </tr>

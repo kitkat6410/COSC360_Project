@@ -2,6 +2,7 @@
 <html>
 
 <head lang="en">
+
    <meta charset="utf-8">
    <title>Admin Login</title>
    <link rel="stylesheet" href="css/reset.css">

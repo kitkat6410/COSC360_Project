@@ -3,10 +3,10 @@ require 'connectiondb.php';
 require 'SessionValidation.php';
 
 // Sanitize input values
-$bTitle_input = htmlspecialchars($_POST['title']);
-$desc =htmlspecialchars($_POST['description']);
-$continent = isset($_POST['continent']) && $_POST['continent'] != 'Choose continent' ? htmlspecialchars($_POST['continent']) : NULL;
-$cityCountry = htmlspecialchars($_POST['cityandcountry']);
+$bTitle_input = htmlspecialchars($_POST['title'], 'UTF-8');
+$desc =htmlspecialchars($_POST['description'], 'UTF-8');
+$continent = isset($_POST['continent']) && $_POST['continent'] != 'Choose continent' ? htmlspecialchars($_POST['continent'], 'UTF-8') : NULL;
+$cityCountry = htmlspecialchars($_POST['cityandcountry'], 'UTF-8');
 $recipe = isset($_POST['cc1']) ? 1 : 0;
 $challenge = isset($_POST['cc2']) ? 1 : 0;
 $business = isset($_POST['cc3']) ? 1 : 0;

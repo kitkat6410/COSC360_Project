@@ -60,6 +60,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
 <html>
 
 <head>
+<meta charset="UTF-8">
     <title>Admin Profile Page</title>
     <link rel="stylesheet" href="css/reset.css">
     </link>
