@@ -142,13 +142,20 @@ try {
                             <tr>
                                 <td colspan="2">
                                     <p>
-                                        <label for="name">Username:</label>
-                                        <input type="text" id="name" name="name"
-                                            value="<?php echo $_SESSION['user_id'] ?>"><br>
+                                        <label for="username">Username:</label>
+                                        <br>
+                                        <input type="text" id="username" name="username"
+                                            value="<?php echo $_SESSION['user_id'] ?>">
+                                    </p>
+                                    <p>
+                                        <label for="title">Title:</label>
+                                        <br>
+                                        <input type="text" id="title" name="title" size="15">
                                     </p>
                                     <p>
                                         <label for="comment">Comment:</label>
-                                        <textarea id="comment" name="comment"></textarea><br>
+                                        <br>
+                                        <input type="text" id="comment" name="comment" size="30">
                                     </p>
                                 </td>
                             </tr>
