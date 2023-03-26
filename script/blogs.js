@@ -35,6 +35,11 @@ function w3RemoveClass(element, name) {
     }
     element.className = arr1.join(" ");
 }
+function blogClicked(bid, event) {
+    event.preventDefault();
+    console.log(bid);
+    window.location.href = "blogTemplate.php?bid=" + bid;
+  }
 
 // Add active class to the current control button (highlight it)
 window.onload = function () {

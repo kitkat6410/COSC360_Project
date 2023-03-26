@@ -53,6 +53,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
     </link>
     <link rel="stylesheet" href="css/profile.css">
     </link>
+    <script src="script/profile.js"></script>
 
     <nav>
         <div class="site-title">
@@ -110,7 +111,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
                         $check = true;
                 }
                 if (!$check) {
-                    echo "<p>You have no blogs! <a href='create.php'>Create one</a></p>";
+                    echo "<p>You have no blogs! <a class='blog-link' href='create.php'>Create one</a></p>";
                 }
                 // foreach ($stmt2 as $row2) {
                 //     echo $row2['BlogName'];

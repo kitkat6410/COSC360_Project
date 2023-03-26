@@ -3,7 +3,8 @@
 
 <head>
     <?php
-require 'SessionValidation.php' ?>
+    require 'SessionValidation.php';
+    require 'connectiondb.php'; ?>
     <title>
         CulinaryCloud | Browse Blogs
     </title>
@@ -23,21 +24,21 @@ require 'SessionValidation.php' ?>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
             <?php if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) { ?>
-            <li><a href="login.php">Login</a></li>
+                <li><a href="login.php">Login</a></li>
             <?php } else { ?>
-                <li><a href="create.php">Create a blog</a></li>  
+                <li><a href="create.php">Create a blog</a></li>
                 <?php if (isset($_SESSION['isLoggedAdmin'])) {
                     ?>
-                        <li><a href="adminProfile.php">Account</a></li>
-               <?php } else { ?>   
-                        <li><a href="profile.php">Account</a></li>
+                    <li><a href="adminProfile.php">Account</a></li>
+                <?php } else { ?>
+                    <li><a href="profile.php">Account</a></li>
 
-                    <?php } ?>
-                    <li><a href="index.php">Logout</a></li>
-         <?php } ?>
+                <?php } ?>
+                <li><a href="index.php">Logout</a></li>
+            <?php } ?>
             <?php
             if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>
-            <li><a href="adminLogin.php">Admin Login</a></li>
+                <li><a href="adminLogin.php">Admin Login</a></li>
             <?php } ?>
         </ul>
     </nav>
@@ -66,22 +67,55 @@ require 'SessionValidation.php' ?>
             <button class="btn" onclick="filterSelection('Travel-Blogs')"> Travel Blogs</button>
             <button class="btn" onclick="filterSelection('Collaborate')"> Collaboration & Community</button>
         </div>
-        <div class="blogPrev filterDiv Recipes fourth-color">
+
+        <?php
+        try{
+        $input = "SELECT * FROM bloginfo";
+        $stmt = $pdo->prepare($input);
+        $stmt->execute();
+       
+  
+        }catch(Exception $e){
+        echo $e;
+        }
+        while($row=$stmt->fetch()){
+            $classes = "";
+            $first = true;
+            if($row['cc1'] == 1){
+                $classes .= "Recipes";
+
+            }
+            if($row['cc2'] == 1){
+                $classes .= "Food-Challenges";
+            }
+            if($row['cc3'] == 1){
+                $classes .="Business";
+            }
+            if($row['cc4'] == 1){
+                $classes .="Restaurant-Reviews";
+            }
+            if($row['cc5'] == 1){
+                $classes .= "Travel-Blogs";
+            }
+            if($row['cc6'] == 1){
+                $classes .= "Collaborate";
+            }
+        ?>
+        <div class=" blogPrev filterDiv <?php echo $classes ?> fourth-color ">
             <figure>
-                <img src="images/sugar.png" alt="" />
+                <img src="<?php echo $row['Thumbnail'] ?>" alt="Thumbnail" />
+    
             </figure>
             <div>
-                <h1>The Sugar Shack</h1>
-                <p>Welcome to The Sugar Shack, the ultimate destination for anyone with a sweet tooth! Here, we share
-                    delicious and easy-to-follow recipes for all your favorite sugary treats, from classic chocolate
-                    chip cookies to extravagant layer cakes. Join us on a journey through the world of confections, and
-                    indulge in the most mouthwatering desserts you've ever tasted!</p>
+                <h1><?php echo $row['BlogName'] ?></h1>
+                <p><?php echo $row['Description'] ?></p>
 
-                <a href="myblog.html" class="linkbutton">Read More</a>
+                <a href="blogTemplate.php" onclick="blogClicked('<?php echo $row['BID']; ?>', event); return false;" class="linkbutton">Read More</a>
 
             </div>
         </div>
-        <div class="blogPrev filterDiv Food-Challenges fourth-color">
+        <?php } ?>
+        <!-- <div class="blogPrev filterDiv Food-Challenges fourth-color">
             <figure>
                 <img src="images/food-daredevil.png" alt="" />
 
@@ -284,15 +318,15 @@ require 'SessionValidation.php' ?>
             </div>
         </div>
 
-    </section>
+    </section> -->
 
     <footer>
         <p>&copy; Copyright 2023 CulinaryCloud</p>
 
     </footer>
-<script>
-filterSelection("all");
-</script>
+    <script>
+    filterSelection("all");
+    </script>
 
 
 

@@ -53,9 +53,21 @@ try {
         body {
             margin-top: 0;
             background-image: url('<?php echo $row['Thumbnail'] ?>');
-            background-size: 400px;
+            background-size: 25em;
+
         }
     </style>
+    <!-- <style>
+  body {
+    margin-top: 0;
+    padding: 0;
+    background-image: url('<?php echo $row['Thumbnail'] ?>');
+    background-size: 25em;
+    /* background-position: center; */
+    background-repeat: repeat;
+  }
+</style> -->
+
 
 
     </link>
