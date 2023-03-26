@@ -24,7 +24,7 @@ $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_F
 // }
 
 if (empty($_FILES['thumbnail'])) {
-    header('Location: signup.php?error=NoImage');
+    header('Location: create.php?error=NoImage');
     exit();
 }
 
@@ -34,23 +34,30 @@ $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 // Check if image file is an actual image or fake image
 if (isset($_POST["submit"])) {
     $check = getimagesize($_FILES["thumbnail"]["tmp_name"]);
-    if ($check === false) {
+    if ($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
         $uploadOk = 0;
-        header('Location: signup.php?error=NotAnImage');
+        header('Location: create.php?error=NotAnImage');
         exit();
     }
 }
-
+$imageFileType = strtolower(pathinfo($_FILES['thumbnail']['name'], PATHINFO_EXTENSION));
+if ($imageFileType != 'jpg' && $imageFileType != 'jpeg' && $imageFileType != 'png' && $imageFileType != 'gif') {
+    header('Location: create.php?error=NotSupported');
+    exit();
+} 
 // Check file size
 if ($_FILES["thumbnail"]["size"] > 10485760) { //10 MB
     $uploadOk = 0;
-    header('Location: signup.php?error=Large');
+    header('Location: create.php?error=Large');
     exit();
 }
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    header('Location: signup.php?error=UploadError');
+    header('Location: create.php?error=UploadError');
     exit();
     // if everything is ok, try to upload file
 } else {
@@ -62,7 +69,7 @@ if ($uploadOk == 0) {
 
 // Validate user ID
 if (!ctype_alnum($_SESSION['user_id'])) {
-    header('Location: signup.php?error=InvalidUsername');
+    header('Location: create.php?error=InvalidUsername');
     exit();
 }
 
@@ -108,7 +115,7 @@ try {
     $selectStmt->execute();
     $row = $selectStmt->fetch();
     if(!$row){
-      header("Location: errorBID");
+      header("Location: create.php?error=errorBID");
     }
     $_SESSION['BID'] = $row['BID'];
     echo $_SESSION['BID'];
