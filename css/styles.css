@@ -110,7 +110,10 @@
  nav h2 {
    font-size: 1.5em;
  }
-
+ nav ul li a:hover {
+  /* color: #FF0000; change the color when hovered over */
+  font-weight: bold; /* make the text bold when hovered over */
+}
 
 
  nav p,

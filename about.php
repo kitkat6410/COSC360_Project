@@ -10,12 +10,16 @@ require 'SessionValidation.php' ?>
     </title>
     <link rel="stylesheet" href="css/reset.css"></link>
     <link rel="stylesheet" href="css/styles.css"></link>
-    <nav>
+   
+</head>
+
+<body>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
             </a>
-            <p>Social Media Links</p>
+            <p>About Page</p>
         </div>
         <ul>
             <li><a href="blogs.php">Browse Blogs</a></li>
@@ -42,9 +46,6 @@ require 'SessionValidation.php' ?>
     
         </ul>
     </nav>
-</head>
-
-<body>
     <header id="aboutPage" class="third-color">
         <h1 id="browse">About Us</h1>
     </header>
