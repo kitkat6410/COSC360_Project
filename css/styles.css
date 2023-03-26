@@ -110,7 +110,10 @@
  nav h2 {
    font-size: 1.5em;
  }
-
+ nav ul li a:hover {
+  /* color: #FF0000; change the color when hovered over */
+  font-weight: bold; /* make the text bold when hovered over */
+}
 
 
  nav p,
@@ -314,6 +317,8 @@
 
    height: 14.5em;
 
+   position: relative;
+
 
 
 
@@ -327,7 +332,7 @@
  .blogPrev p {
    padding-left: 0.8em;
    padding-right: 2em;
-   max-height: 140px;
+   max-height: 6em;
    overflow: hidden;
 
 
@@ -362,19 +367,32 @@
 
  }
 
- .linkbutton {
+ /* .linkbutton {
    display: block;
    float: right;
 
    margin-right: 2em;
-   margin-top: 0.2em;
+   // margin-top: 0.2em; 
+   margin-bottom:0.2em;
    padding: 0.5em;
    background-color: #393e46;
    color: white;
    text-align: center;
    text-decoration: none;
 
- }
+ } */
+
+ .linkbutton {
+  position: absolute;
+  bottom: 0;
+  right: 2em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  background-color: #393e46;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
 
  .filterDiv {
 

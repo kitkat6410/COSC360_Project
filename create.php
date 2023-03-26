@@ -2,6 +2,7 @@
 <html>
 
 <head lang="en">
+<meta charset="UTF-8">
     <?php
     require 'SessionValidation.php';
     if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
@@ -136,6 +137,9 @@
                                 case "EmptyFields":
                                     echo "<script>document.getElementById(\"error-message\").innerHTML = \"Fields were left empty.\";</script>";
                                     break;
+                                case "NotSupported":
+                                    echo "<script>document.getElementById(\"error-message\").innerHTML = \"The image type you chose is not supported\";</script>";
+                                    break;
                                 case "Unknown":
                                     echo "<script>document.getElementById(\"error-message\").innerHTML = \"Unknown error occured.\";</script>";
                                     break;
@@ -151,7 +155,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="rectangle centered">
-                            <input type="submit" value="Submit" class="rounded"> <input type="reset" value="Reset"
+                            <input type="submit" value="Submit" name="submit" class="rounded"> <input type="reset" value="Reset"
                                 class="rounded">
                         </div>
                     </td>
