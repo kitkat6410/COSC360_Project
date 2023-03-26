@@ -111,7 +111,7 @@
                 <h1><?php echo $row['BlogName'] ?></h1>
                 <p><?php echo $row['Description'] ?></p>
 
-                <a href="blogTemplate.php" onclick="blogClicked('<?php echo $row['BID']; ?>', event); return false;" class="linkbutton">Read More</a>
+                <a href="blogTemplate.php" onclick="blogClicked('<?php echo $row['BID']; ?>', event); return false;" class="linkbutton2">Read More</a>
 
             </div>
         </div>

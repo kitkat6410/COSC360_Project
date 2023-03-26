@@ -367,12 +367,12 @@
 
  }
 
- /* .linkbutton {
+ .linkbutton {
    display: block;
    float: right;
 
    margin-right: 2em;
-   // margin-top: 0.2em; 
+   /* // margin-top: 0.2em;  */
    margin-bottom:0.2em;
    padding: 0.5em;
    background-color: #393e46;
@@ -380,9 +380,9 @@
    text-align: center;
    text-decoration: none;
 
- } */
+ }
 
- .linkbutton {
+ .linkbutton2 {
   position: absolute;
   bottom: 0;
   right: 2em;
