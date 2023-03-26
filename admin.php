@@ -52,11 +52,11 @@
 
     <header id="aboutPage" class="third-color">
         <h1 id="browse" style="font-size: 3em; padding-bottom: 0.5em;">Quick Access Links:</h1>
-        <a href="#"><h1 id="browse">User Profiles</h1></a>
-        <a href="#"><h1 id="browse">Blog Requests</h1></a>
-        <a href="#"><h1 id="browse">Current Public Blogs</h1></a>
+        <a href="userProfile.php"><h1 id="browse">User Profiles</h1></a>
+        <a href="accRequest.php"><h1 id="browse">Account Requests</h1></a>
+        <a href="activeUser.php"><h1 id="browse">Active Users</h1></a>
+        <a href="blogs.php"><h1 id="browse">Current Public Blogs</h1></a>
         <a href="#"><h1 id="browse">Database</h1></a>
-        <a href="#"><h1 id="browse">Issues/Complaints</h1></a>
     </header>
 
     

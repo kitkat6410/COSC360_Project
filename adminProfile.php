@@ -100,14 +100,9 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
             <p><strong>Account Created: </strong><?php echo $row['AccountCreated'] ?></p>
         </div>
     </div>
-    <div class="fourth-color">
-        <h2 id="action">Admin Actions:</h2>
-        
-        <form method="GET" action="search.php">
-  <input type="text" name="search" placeholder="Search...">
-  <button type="submit">Search</button>
-</form>
-</div>
+    <div>
+    <a href="admin.php"><h1 class="third-color">Admin Info</h1></a>
+        </div>
 
 </div>
 
