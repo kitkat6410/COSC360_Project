@@ -12,7 +12,10 @@ if (empty($_POST['title'])) {
 }
 
 // validate the secondTitle
-if (strlen($_POST['secondTitle']) > 50) {
+if(empty($_POST['secondTitle'])){
+    $errors[] = 'Second title is required';
+}
+else if (strlen($_POST['secondTitle']) > 50) {
     $errors[] = 'Second title must be less than or equal to 50 characters.';
 }
 
@@ -86,7 +89,7 @@ if (!empty($errors)) {
         'success' => true,
         'message' => 'Form submitted successfully'
     );
-    $_SESSION['response'] = $response;
+    // $_SESSION['response'] = $response;
     header('Content-Type: application/json');
     echo json_encode($response);
     exit;

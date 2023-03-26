@@ -187,7 +187,7 @@ li {
       background-color: white;
       color: black;
    }
-   #error-message {
+   #error-message, #error-comment {
       color:#94001E;
       text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 1px #000;
    }

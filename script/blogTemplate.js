@@ -1,5 +1,4 @@
 function validateForm() {
-  console.log("hi1");
   var title = document.forms["createPost"]["title"].value;
   var secondTitle = document.forms["createPost"]["secondTitle"].value;
   var content = document.forms["createPost"]["content"].value;
@@ -28,6 +27,20 @@ function validateForm() {
   return true;
 }
 
+function validateComment() {
+  var title = document.forms["createComment"]["title"].value;
+  var comment = document.forms["createComment"]["comment"].value;
+  if (title == "") {
+    document.getElementById("error-comment").innerHTML = "Please enter comment title";
+    return false;
+  }
+  if (comment == "") {
+    document.getElementById("error-comment").innerHTML = "Please enter your comment";
+    return false;
+  }
+  return true;
+}
+
 $(document).ready(function () {
   document.getElementById("show-form").addEventListener("click", function () {
     var form = document.getElementById("my-form");
@@ -37,7 +50,7 @@ $(document).ready(function () {
       form.style.display = "none";
     }
   })
-  
+
   $('#my-form').on('submit', function (event) {
     if (!validateForm()) {
       return false;
@@ -76,7 +89,11 @@ $(document).ready(function () {
         console.log(xhr.responseText);
       }
     });
-  });
+  })
+
+
+
+
 });
 
 
