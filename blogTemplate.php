@@ -59,16 +59,6 @@ try {
 
     }
     </style>
-    <!-- <style>
-  body {
-    margin-top: 0;
-    padding: 0;
-    background-image: url('<?php echo $row['Thumbnail'] ?>');
-    background-size: 25em;
-    /* background-position: center; */
-    background-repeat: repeat;
-  }
-</style> -->
 
 
 
@@ -151,7 +141,8 @@ try {
                         <h3 class="title"><?php echo $rowComment['Title'] ?></h3>
                         <p class="content"><?php echo $rowComment['Content'] ?></p>
                     </div>
-                </div><?php
+                </div>
+                <?php
                         }
                         ?>
                                 <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
@@ -163,12 +154,7 @@ try {
                         <table>
                             <tr>
                                 <td colspan="2">
-                                    <!-- <p>
-                                        <label for="username">Username:</label>
-                                        <br>
-                                        <input type="text" id="username" name="username"
-                                            value="<?php echo $_SESSION['user_id'] ?>">
-                                    </p> -->
+                       
                                     <p>
                                         <label for="title">Title:</label>
                                         <br>
@@ -190,7 +176,7 @@ try {
                             <tr>
                                 <td colspan="2">
                                     <hr>
-                                    <p id="error-comment"></p>
+                                    <p id="error-comment-<?php echo $row2['PID'] ?>"></p>
                                 </td>
                             </tr>
                             <tr>
@@ -208,10 +194,11 @@ try {
             <!-- </section> -->
             <script>
             $("#comment-form-<?php echo $row2['PID'] ?>").on('submit', function(event) {
+                
+                // if (!validateComment()) {
+                //   return false;
+                //  }
                 event.preventDefault();
-                if (!validateComment()) {
-                  return false;
-                 }
 
                 var comment_data = new FormData(this);
                 $.ajax({
@@ -240,7 +227,9 @@ try {
                                 });
 
                             } else {
-                                document.getElementById("error-comment").innerHTML = response.errors;
+                           
+                                document.getElementById("error-comment-<?php echo $row2['PID'] ?>").innerHTML = response.errors;
+                        
                             }
 
                         },

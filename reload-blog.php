@@ -63,10 +63,11 @@ $stmt2->execute();
             <h3 class="title"><?php echo $rowComment['Title'] ?></h3>
             <p class="content"><?php echo $rowComment['Content'] ?></p>
         </div>
-    </div><?php
+    </div>
+    <?php
             }
             ?>
-                    <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true) { ?>
+                    <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
     <form id="comment-form-<?php echo $row2['PID'] ?>" method="post" action="validateComment.php"
         name="createComment" onsubmit="return validateComment()">
 
@@ -75,12 +76,7 @@ $stmt2->execute();
             <table>
                 <tr>
                     <td colspan="2">
-                        <!-- <p>
-                            <label for="username">Username:</label>
-                            <br>
-                            <input type="text" id="username" name="username"
-                                value="<?php echo $_SESSION['user_id'] ?>">
-                        </p> -->
+           
                         <p>
                             <label for="title">Title:</label>
                             <br>
@@ -102,7 +98,7 @@ $stmt2->execute();
                 <tr>
                     <td colspan="2">
                         <hr>
-                        <p id="error-comment"></p>
+                        <p id="error-comment-<?php echo $row2['PID'] ?>"></p>
                     </td>
                 </tr>
                 <tr>
@@ -120,10 +116,11 @@ $stmt2->execute();
 <!-- </section> -->
 <script>
 $("#comment-form-<?php echo $row2['PID'] ?>").on('submit', function(event) {
+    
+    // if (!validateComment()) {
+    //   return false;
+    //  }
     event.preventDefault();
-    if (!validateComment()) {
-      return false;
-     }
 
     var comment_data = new FormData(this);
     $.ajax({
@@ -152,7 +149,9 @@ $("#comment-form-<?php echo $row2['PID'] ?>").on('submit', function(event) {
                     });
 
                 } else {
-                    document.getElementById("error-comment").innerHTML = response.errors;
+               
+                    document.getElementById("error-comment-<?php echo $row2['PID'] ?>").innerHTML = response.errors;
+            
                 }
 
             },
