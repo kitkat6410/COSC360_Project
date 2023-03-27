@@ -57,8 +57,8 @@
         <a href="userProfile.php"><h1 id="browse">User Profiles</h1></a>
         <a href="accRequest.php"><h1 id="browse">Account Requests</h1></a>
         <a href="activeUser.php"><h1 id="browse">Active Users</h1></a>
-        <a href="blogs.php"><h1 id="browse">Current Public Blogs</h1></a>
-        <a href="#"><h1 id="browse">Database</h1></a>
+        <a href="#"><h1 id="browse">Edit/delete posts</h1></a>
+        <a href="#"><h1 id="browse">Edit/Delete Blogs</h1></a>
     </header>
 
     
