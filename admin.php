@@ -12,7 +12,12 @@
     </link>
     <link rel="stylesheet" href="css/styles.css">
     </link>
-    <nav>
+
+
+</head>
+
+<body>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -46,10 +51,6 @@
 
         </ul>
     </nav>
-
-</head>
-
-<body>
 
     <header id="aboutPage" class="third-color">
         <h1 id="browse" style="font-size: 3em; padding-bottom: 0.5em;">Quick Access Links:</h1>

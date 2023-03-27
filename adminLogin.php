@@ -13,7 +13,12 @@
 
 
 
-   <nav>
+ 
+
+</head>
+
+<body>
+<nav>
       <div class="site-title">
          <a href="home.php">
             <h1>Culinary Cloud</h1>
@@ -26,10 +31,6 @@
          </li>
       </ul>
    </nav>
-
-</head>
-
-<body>
    <form method="post" action="adminProfile.php" name="adminForm"
       onsubmit="return validateForm()">
       <fieldset>

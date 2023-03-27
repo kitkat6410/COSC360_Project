@@ -68,7 +68,11 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
     </link>
     <link rel="stylesheet" href="css/profile.css">
     </link>
-    <nav>
+
+</head>
+
+<body>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -87,9 +91,6 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
             } ?>
         </ul>
     </nav>
-</head>
-
-<body>
     <h1 class="third-color">Welcome <strong><?php echo $row['Name'] ?></strong></h1>
     <div class="profile fourth-color">
         <img src="<?php echo $row['ProfileImage']; ?>" alt="Profile Image">

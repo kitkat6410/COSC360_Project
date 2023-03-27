@@ -16,7 +16,10 @@
     <link rel="stylesheet" href="css/styles.css" />
     <script type="text/javascript" src="script/create.js"></script>
 
-    <nav>
+
+
+</head>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -29,8 +32,6 @@
             </li>
         </ul>
     </nav>
-
-</head>
 
 <body>
     <form method="post" action="validateCreate.php" name="createBlog" id="mainForm" onsubmit="return validateForm()"

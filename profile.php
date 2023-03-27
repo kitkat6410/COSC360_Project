@@ -28,6 +28,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             $_SESSION['Name'] = $row['Name'];
             $_SESSION['Email'] = $row['Email'];
             $_SESSION['BirthDate'] = $row['BirthDate'];
+            $_SESSION['Status'] = $row['Status'];
         }
     } catch (Exception $e) {
         error_log($e->getMessage());
@@ -58,7 +59,11 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
     </link>
     <script src="script/profile.js"></script>
 
-    <nav>
+  
+</head>
+
+<body>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -69,7 +74,9 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
         <ul>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="create.php">Create a blog</a></li>
+            <?php  if(isset($_SESSION['Status']) && $_SESSION['Status'] == 1){ ?>
+                <li><a href="create.php">Create a blog</a></li>  
+<?php } ?>
             <li><a href="index.php">Logout</a></li>
             <?php
             if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1 && !isset($_SESSION['isLoggedAdmin'])) { ?>
@@ -77,9 +84,6 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
             <?php } ?>
         </ul>
     </nav>
-</head>
-
-<body>
     <h1 class="third-color">Welcome <strong><?php echo $row['Name'] ?></strong></h1>
     <div class="profile fourth-color">
         <img src=<?php echo $row['ProfileImage'] ?> alt="Profile Image">
@@ -114,7 +118,11 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
                         $check = true;
                 }
                 if (!$check) {
+                    if(isset($_SESSION['Status']) && $_SESSION['Status'] == 1 ){
                     echo "<p>You have no blogs! <a class='blog-link' href='create.php'>Create one</a></p>";
+                    }else{
+                        echo "<p>Your account is not active. Please contact an admin for assistance</p>";
+                    }
                 }
                 // foreach ($stmt2 as $row2) {
                 //     echo $row2['BlogName'];

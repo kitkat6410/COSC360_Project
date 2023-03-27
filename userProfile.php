@@ -12,7 +12,12 @@ require 'SessionValidation.php' ?>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/profile.css">
 
-    <nav>
+  
+
+</head>
+
+<body>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -29,10 +34,6 @@ require 'SessionValidation.php' ?>
         </ul>
     </nav>
 
-
-</head>
-
-<body>
 
     
         <h1 class="third-color">User Profiles</h1>
@@ -118,17 +119,7 @@ else{
 ?>
 
     
-    <!-- <div class = "profile fourth-color">
-    <img src=<?php echo $row[6] ?> alt="Profile Image">
 
-    <div class="details-container">
-    <h2>Account Details</h2>
-    <p> <strong>Username: </strong> <?php echo $row[3] ?></p>
-    <p><strong>Email: </strong> <?php echo $row['Email'] ?></p>
-    <p><strong>Birth Date: </strong><?php echo $row['BirthDate'] ?></p>
-    <p><strong>Account Created: </strong><?php echo $row['AccountCreated'] ?></p>
-    </div>
-    </div> -->
     
     <footer>
         <p>&copy; Copyright 2023 CulinaryCloud</p>

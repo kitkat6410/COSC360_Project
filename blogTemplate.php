@@ -73,7 +73,12 @@ try {
 
 
     </link>
-    <nav>
+
+
+
+
+</head>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -85,11 +90,6 @@ try {
             <li><a href="blogs.php">Back to Browse Blogs</a></li>
         </ul>
     </nav>
-
-
-
-</head>
-
 <body>
     <header id="blogPage">
         <h1 id=sugar><?php echo ($row['BlogName']) ?></h1>
@@ -154,7 +154,7 @@ try {
                 </div><?php
                         }
                         ?>
-                                <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true) { ?>
+                                <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
                 <form id="comment-form-<?php echo $row2['PID'] ?>" method="post" action="validateComment.php"
                     name="createComment" onsubmit="return validateComment()">
 

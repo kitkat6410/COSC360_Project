@@ -8,7 +8,14 @@
    <link rel="stylesheet" href="css/styles.css" />
    <link rel="stylesheet" href="css/login.css" />
    <script type="text/javascript" src="script/edit.js"></script>
-   <nav>
+ 
+
+   <?php
+   require 'SessionValidation.php' ?>
+</head>
+
+<body>
+<nav>
       <div class="site-title">
          <a href="home.php">
             <h1>Culinary Cloud</h1>
@@ -21,12 +28,6 @@
   
       </ul>
    </nav>
-
-   <?php
-   require 'SessionValidation.php' ?>
-</head>
-
-<body>
 <h1 class="third-color" style="padding: 0.2em; color: white;">Welcome <strong><?php echo $_SESSION['user_id'] ?></strong></h1>
 <h2></h2>
    <form method="post" action="validateEdit.php" name="editForm" id="mainForm" onsubmit="return validateForm()"  enctype="multipart/form-data">

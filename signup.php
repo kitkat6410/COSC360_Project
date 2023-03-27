@@ -8,7 +8,12 @@
    <link rel="stylesheet" href="css/login.css" />
    <link rel="stylesheet" href="css/styles.css" />
    <script src="script/signup.js"></script>
-   <nav>
+  
+
+</head>
+
+<body>
+<nav>
       <div class="site-title">
          <a href="home.php">
             <h1>Culinary Cloud</h1>
@@ -21,10 +26,6 @@
   
       </ul>
    </nav>
-
-</head>
-
-<body>
    <form method="post" action="validateSignup.php" name="signupForm" id="mainForm" onsubmit="return validateForm()"  enctype="multipart/form-data">
       <fieldset>
          <legend>Create an account on Culinary Cloud</legend>

@@ -12,7 +12,13 @@ require 'SessionValidation.php' ?>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/profile.css">
 
-    <nav>
+ 
+
+
+</head>
+
+<body>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -28,11 +34,6 @@ require 'SessionValidation.php' ?>
             <?php } ?>
         </ul>
     </nav>
-
-
-</head>
-
-<body>
 
     
         <h1 class="third-color">Profile requests</h1>

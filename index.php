@@ -16,7 +16,12 @@
     <link rel="stylesheet" href="css/styles.css">
     </link>
     <script src="script/home.js"></script>
-    <nav>
+  
+
+</head>
+
+<body>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -30,10 +35,6 @@
             <li><a href="login.php">Login</a></li>
         </ul>
     </nav>
-
-</head>
-
-<body>
 
     <header class="third-color">
 

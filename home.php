@@ -12,7 +12,12 @@ require 'SessionValidation.php' ?>
     <link rel="stylesheet" href="css/styles.css">
     <script src="script/home.js"></script>
     </link>
-    <nav>
+
+
+</head>
+
+<body>
+<nav>
         <div class="site-title">
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
@@ -29,7 +34,9 @@ require 'SessionValidation.php' ?>
         } ?>
             <li><a href="blogs.php">Browse Blogs</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="create.php">Create a blog</a></li>  
+            <?php  if(isset($_SESSION['Status']) && $_SESSION['Status'] == 1){ ?>
+                <li><a href="create.php">Create a blog</a></li>  
+<?php } ?>
                 <?php if (isset($_SESSION['isLoggedAdmin'])) {
                     ?>
                         <li><a href="adminProfile.php">Account</a></li>
@@ -48,11 +55,6 @@ require 'SessionValidation.php' ?>
 
         </ul>
     </nav>
-
-</head>
-
-<body>
-
     <header class="third-color">
 
         <!-- Slideshow container -->

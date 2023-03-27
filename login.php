@@ -9,7 +9,12 @@
    <link rel="stylesheet" href="css/styles.css" />
    <script src="script/login.js"></script>
 
-   <nav>
+   
+
+</head>
+
+<body>
+<nav>
       <div class="site-title">
          <a href="home.php">
             <h1>Culinary Cloud</h1>
@@ -22,10 +27,6 @@
          </li>
       </ul>
    </nav>
-
-</head>
-
-<body>
    <form method="post" action="profile.php" name="loginForm"
       onsubmit="return validateForm()">
       <fieldset>
