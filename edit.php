@@ -98,7 +98,9 @@
                         case "InvalidEmail":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Email\";</script>";
                            break;
-                        
+                           case "InvalidName":
+                              echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Name\";</script>"; 
+                              break;
                         case "InvalidPassword":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Password\";</script>";
                            break;

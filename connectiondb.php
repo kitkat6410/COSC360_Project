@@ -1,10 +1,10 @@
 <?php
 try{
     // localhost connection string
-    $connString = "mysql:host=127.0.0.1;dbname=culinarycloud";
+    $connString = "mysql:host=127.0.0.1;dbname=culinarycloud;charset=utf8mb4";
     $user = "root";
     $pass = "";
-    // $connString = "mysql:host=cosc360.ok.ubc.ca;dbname=db_93648137";
+    // $connString = "mysql:host=cosc360.ok.ubc.ca;dbname=db_93648137;charset=utf8mb4";
     // $user = "93648137";
     // $pass = "93648137";
 

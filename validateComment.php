@@ -48,7 +48,9 @@ if (!empty($errors)) {
         echo json_encode($response);
         exit;
     } catch (Exception $e) {
-        echo $e;
+        error_log($e->getMessage());
+        header("Location: signup.php?error=Unknown");
+        exit();
     }
 }
 ?>

@@ -57,8 +57,10 @@ if(isset($_POST['search'])){
     try {
         
         $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Name LIKE :search1 OR Username LIKE :search2 OR Email LIKE :search3");
-
-        $stmt->execute(array(':search1' => $search, ':search2' => $search, ':search3' => $search));
+        $stmt->bindParam(':search1', $search);
+        $stmt->bindParam(':search2', $search);
+        $stmt->bindParam(':search3', $search);
+        $stmt->execute();
         
         while ($row = $stmt->fetch()) {
             

@@ -105,6 +105,9 @@
                         case "InvalidEmail":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Email\";</script>";
                            break;
+                           case "InvalidName":
+                              echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Name\";</script>"; 
+                              break;
                         case "InvalidUsername":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Username\";</script>";
                            break;

@@ -12,13 +12,18 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
 
     try {
 
-        $user_input = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+       // sanitzation of user input
+        $user_input = htmlspecialchars($_POST['username']);
+        // password will be hashed
         $pass_input = $_POST['password'];
-        $ref_input = filter_var($_POST['refnumber'], FILTER_SANITIZE_NUMBER_INT);
+        $ref_input = htmlspecialchars($_POST['refnumber']);
+        $ref_input = intval($ref_input);
 
         // use prepared statement to retrieve hashed password from database
         $stmt2 = $pdo->prepare("SELECT * FROM admininfo WHERE Username = :username && Refnum = :refnum");
-        $stmt2->execute(array(':username' => $user_input, ':refnum' => $ref_input));
+        $stmt2->bindParam(':username', $user_input);
+        $stmt2->bindParam(':refnum', $ref_input);
+        $stmt2->execute();
         $row2 = $stmt2->fetch();
         if ($row2) {
             $hashed_password = $row2['Password'];
@@ -37,7 +42,9 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
         }
 
         $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Username = :username && Password = :password");
-        $stmt->execute(array('username' => $user_input, ':password' => $hashed_password));
+        $stmt->bindParam(':username', $user_input);
+        $stmt->bindParam(':password', $hashed_password);
+        $stmt->execute();
         $row = $stmt->fetch();
 
     } catch (Exception $e) {
@@ -51,7 +58,9 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESS
     $pass_input = $_SESSION['pass_id'];
     $ref_input = $_SESSION['ref_id'];
     $stmt = $pdo->prepare("SELECT * FROM userinfo JOIN admininfo ON userinfo.Username = admininfo.Username WHERE admininfo.Username = :username && admininfo.Password = :password");
-    $stmt->execute(array(':username' => $user_input, ':password' => $pass_input));
+    $stmt->bindParam('username', $user_input);
+    $stmt->bindParam('password', $pass_input);
+    $stmt->execute();
     $row = $stmt->fetch();
 }
 

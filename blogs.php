@@ -33,7 +33,9 @@
             <?php if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) { ?>
                 <li><a href="login.php">Login</a></li>
             <?php } else { ?>
-                <li><a href="create.php">Create a blog</a></li>
+                <?php  if(isset($_SESSION['Status']) && $_SESSION['Status'] == 1){ ?>
+                <li><a href="create.php">Create a blog</a></li>  
+<?php } ?>
                 <?php if (isset($_SESSION['isLoggedAdmin'])) {
                     ?>
                     <li><a href="adminProfile.php">Account</a></li>

@@ -209,9 +209,9 @@ try {
             <script>
             $("#comment-form-<?php echo $row2['PID'] ?>").on('submit', function(event) {
                 event.preventDefault();
-                // if (!validateComment()) {
-                //   return false;
-                //  }
+                if (!validateComment()) {
+                  return false;
+                 }
 
                 var comment_data = new FormData(this);
                 $.ajax({

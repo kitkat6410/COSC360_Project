@@ -51,7 +51,7 @@ require 'SessionValidation.php' ?>
         require 'connectiondb.php';
         $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Status = 1 AND isAdmin = 0");
 
-        if ($result = $stmt->execute(array())) {
+        if ($result = $stmt->execute()) {
         
         while ($row = $stmt->fetch()) {
 

@@ -120,9 +120,12 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
                 if (!$check) {
                     if(isset($_SESSION['Status']) && $_SESSION['Status'] == 1 ){
                     echo "<p>You have no blogs! <a class='blog-link' href='create.php'>Create one</a></p>";
-                    }else{
-                        echo "<p>Your account is not active. Please contact an admin for assistance</p>";
                     }
+                   
+                }
+                if(!isset($_SESSION['Status']) || $_SESSION['Status'] == 0){
+                    echo "<p id = warning>Your account is not active. Please contact an admin for assistance</p>";
+
                 }
                 // foreach ($stmt2 as $row2) {
                 //     echo $row2['BlogName'];

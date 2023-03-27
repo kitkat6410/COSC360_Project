@@ -410,3 +410,13 @@
    display: block;
    margin: auto;
  }
+ a:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.site-title a:hover{
+
+  color:black;
+
+}

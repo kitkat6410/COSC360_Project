@@ -61,12 +61,16 @@ try {
         exit();
     }
     // Sanitization
-    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $name = htmlspecialchars($_POST['name']);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $bdate = $_POST['birth'];
     $pass_input = $_POST['password'];
 
     // validate user input
+    if($name > 90){
+        header('Location: signup.php?error=InvalidName');
+        exit();
+    }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         header('Location: signup.php?error=InvalidEmail');
         exit();
