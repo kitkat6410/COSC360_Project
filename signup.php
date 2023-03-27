@@ -109,7 +109,7 @@
                               echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Name\";</script>"; 
                               break;
                         case "InvalidUsername":
-                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Username\";</script>";
+                           echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Username. Must be 6 characters of more.\";</script>";
                            break;
                         case "InvalidPassword":
                            echo "<script>document.getElementById(\"error-message\").innerHTML = \"Invalid Password\";</script>";
