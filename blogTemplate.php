@@ -260,7 +260,7 @@ try {
         </section>
         <?php } ?>
     </section>
-    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['Username']) { ?>
+    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['Username'] && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
     <button class="rounded" id="show-form">New Post</button>
     <?php } ?>
     <form id="my-form" style="display: none;" method="post" action="validatePost.php" name="createPost"
