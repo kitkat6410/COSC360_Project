@@ -34,6 +34,17 @@ require 'SessionValidation.php' ?>
             <?php } ?>
         </ul>
     </nav>
+    <script>
+        function blogClicked(user, event) {
+        event.preventDefault();
+        console.log(user);
+        window.location.href = "enable.php?user=" + user;
+        }
+    </script>
+
+</head>
+
+<body>
 
     
         <h1 class="third-color">Profile requests</h1>
@@ -43,26 +54,26 @@ require 'SessionValidation.php' ?>
 
     try {
         require 'connectiondb.php';
-        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Status = 0");
+        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Status = 0 AND isAdmin = 0");
 
         if ($result = $stmt->execute(array())) {
 
         while ($row = $stmt->fetch()) {
-            $_SESSION['username'] = $row[3];
-
-            echo '<div class = "profile fourth-color">
-                 <img src="'.$row[6].'" alt="Profile Image">
+?>
+            
+                <div class = "profile fourth-color">
+                 <img src="<?php echo $row[6]; ?>" alt="Profile Image">
                  <div class="details-container">
                  <h2>Account Details</h2>
-                 <p> <strong>Name: </strong>'.$row[0].'</p>
-                 <p> <strong>Username: </strong>'.$row[3].'</p>
-                 <p><strong>Email: </strong>'.$row[1].'</p>
-                 <p><strong>Account Created: </strong>'.$row[5].'</p>
-                 <a href="enable.php" class="linkbutton">Enable User</a>
+                 <p> <strong>Name: </strong><?php echo $row[0]; ?></p>
+                 <p> <strong>Username: </strong><?php echo $row[3]; ?></p>
+                 <p><strong>Email: </strong><?php echo $row[1]; ?></p>
+                 <p><strong>Account Created: </strong><?php echo $row[5]; ?></p>
+                 <a href="enable.php" class="linkbutton" onclick="blogClicked('<?php echo $row[3]; ?>', event); return false;">Enable User</a>
                  </div>
-                 </div>';
+                 </div>
 
-
+<?php
         }
     }
         
@@ -75,18 +86,6 @@ require 'SessionValidation.php' ?>
 
 ?>
 
-    
-    <!-- <div class = "profile fourth-color">
-    <img src=<?php echo $row[6] ?> alt="Profile Image">
-
-    <div class="details-container">
-    <h2>Account Details</h2>
-    <p> <strong>Username: </strong> <?php echo $row[3] ?></p>
-    <p><strong>Email: </strong> <?php echo $row['Email'] ?></p>
-    <p><strong>Birth Date: </strong><?php echo $row['BirthDate'] ?></p>
-    <p><strong>Account Created: </strong><?php echo $row['AccountCreated'] ?></p>
-    </div>
-    </div> -->
     
     <footer>
         <p>&copy; Copyright 2023 CulinaryCloud</p>

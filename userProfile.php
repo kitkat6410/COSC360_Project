@@ -40,7 +40,7 @@ require 'SessionValidation.php' ?>
     
 
     <div class="fourth-color" style="margin-top: 30px;">
-        <h2 id="action">Search User:</h2>
+        <h2 id="action">Search User (by name, username or email): </h2>
         
         <form method="Post" action="userProfile.php">
             <input type="text" name="search" placeholder="Search...">
@@ -49,19 +49,19 @@ require 'SessionValidation.php' ?>
     </div>
 
 <?php
-if($_POST['search'] != ''){
+if(isset($_POST['search'])){
     $search = "%".$_POST['search']."%";
-    print($search);
+    
     // $search = $search 
     require 'connectiondb.php';
     try {
         
-        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Name LIKE :search");
+        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Name LIKE :search1 OR Username LIKE :search2 OR Email LIKE :search3");
 
-        $stmt->execute(array(':search' => $search));
+        $stmt->execute(array(':search1' => $search, ':search2' => $search, ':search3' => $search));
         
         while ($row = $stmt->fetch()) {
-            print_r($row);
+            
             echo '<div class = "profile fourth-color">
                  <img src="'.$row[6].'" alt="Profile Image">
                  <div class="details-container">
