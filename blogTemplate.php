@@ -73,8 +73,6 @@ try {
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
             </a>
-
-            <p>Social Media Links</p>
         </div>
         <ul>
             <li><a href="blogs.php">Back to Browse Blogs</a></li>

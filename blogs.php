@@ -25,7 +25,7 @@
             <a href="home.php">
                 <h1>Culinary Cloud</h1>
             </a>
-            <p>Social Media Links</p>
+            <p>Browse Blogs</p>
         </div>
         <ul>
             <li><a href="blogs.php">Browse Blogs</a></li>

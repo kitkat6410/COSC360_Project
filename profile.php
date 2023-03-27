@@ -69,7 +69,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
                 <h1>Culinary Cloud</h1>
             </a>
 
-            <p>Social Media Links</p>
+            <p>Profile Page</p>
         </div>
         <ul>
             <li><a href="blogs.php">Browse Blogs</a></li>
