@@ -28,7 +28,13 @@ require 'SessionValidation.php' ?>
             <?php } ?>
         </ul>
     </nav>
-
+    <script>
+        function blogClicked(user, event) {
+        event.preventDefault();
+        console.log(user);
+        window.location.href = "disable.php?user=" + user;
+        }
+    </script>
 
 </head>
 
@@ -42,25 +48,25 @@ require 'SessionValidation.php' ?>
 
     try {
         require 'connectiondb.php';
-        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Status = 1");
+        $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Status = 1 AND isAdmin = 0");
 
         if ($result = $stmt->execute(array())) {
         
         while ($row = $stmt->fetch()) {
-            $_SESSION['username'] = $row[3];
-            
-            echo '<div class = "profile fourth-color">
-                 <img src="'.$row[6].'" alt="Profile Image">
+
+?>
+            <div class = "profile fourth-color">
+                 <img src="<?php echo $row[6]; ?>" alt="Profile Image">
                  <div class="details-container">
                  <h2>Account Details</h2>
-                 <p> <strong>Name: </strong>'.$row[0].'</p>
-                 <p> <strong>Username: </strong>'.$row[3].'</p>
-                 <p><strong>Email: </strong>'.$row[1].'</p>
-                 <p><strong>Account Created: </strong>'.$row[5].'</p>
-                 <a href="disable.php" class="linkbutton">Disable User</a>
+                 <p> <strong>Name: </strong><?php echo $row[0]; ?></p>
+                 <p> <strong>Username: </strong><?php echo $row[3]; ?></p>
+                 <p><strong>Email: </strong><?php echo $row[1]; ?></p>
+                 <p><strong>Account Created: </strong><?php echo $row[5]; ?></p>
+                 <a href="disable.php" class="linkbutton" onclick="blogClicked('<?php echo $row[3]; ?>', event); return false;">Disable User</a>
                  </div>
-                 </div>';
-
+                 </div>
+<?php
 
         }
     }
