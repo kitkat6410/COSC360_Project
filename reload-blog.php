@@ -1,5 +1,5 @@
 <?php
-require 'connectiondb.php';
+include ('../connectiondb.php');
 require 'SessionValidation.php';
 $bid = $_SESSION['BID'];
 $stmt = $pdo->prepare("SELECT * FROM bloginfo WHERE BID = $bid");

@@ -1,6 +1,6 @@
 <?php
 try {
-    require 'connectiondb.php';
+    include ('../connectiondb.php');
 
     $target_dir = "images/";
     $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["image"]["name"]));

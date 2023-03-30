@@ -1,5 +1,5 @@
 <?php
-require 'connectiondb.php';
+include ('../connectiondb.php');
 require 'SessionValidation.php';
 
 // Sanitize input values

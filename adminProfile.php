@@ -7,7 +7,7 @@ if(!isset($_SESSION['last_activity'])){
 }
 
 // }
-require 'connectiondb.php';
+include ('../connectiondb.php');
 if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1 || !isset($_SESSION['isLoggedAdmin'])) {
 
     try {

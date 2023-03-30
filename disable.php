@@ -2,7 +2,7 @@
 //get username
 require 'SessionValidation.php';
 try{
-    require 'connectiondb.php';
+    include ('../connectiondb.php');
     if (isset($_GET['user'])) {
         $_SESSION['USER'] = $_GET['user'];
     }

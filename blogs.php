@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
     <?php
     require 'SessionValidation.php';
-    require 'connectiondb.php'; ?>
+    include ('../connectiondb.php'); ?>
     <title>
         CulinaryCloud | Browse Blogs
     </title>

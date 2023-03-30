@@ -3,7 +3,8 @@
 
 <head>
     <?php
-require 'SessionValidation.php' ?>
+require 'SessionValidation.php';
+include ('../connectiondb.php'); ?>
     <title>
         CulinaryCloud | User Profiles
     </title>
@@ -52,8 +53,7 @@ require 'SessionValidation.php' ?>
 if(isset($_POST['search'])){
     $search = "%".$_POST['search']."%";
     
-    // $search = $search 
-    require 'connectiondb.php';
+    // $search = $search  
     try {
         
         $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Name LIKE :search1 OR Username LIKE :search2 OR Email LIKE :search3");
@@ -87,7 +87,6 @@ if(isset($_POST['search'])){
 }
 else{
     try {
-        require 'connectiondb.php';
         $stmt = $pdo->prepare("SELECT * FROM userinfo");
 
         if ($result = $stmt->execute(array())) {
