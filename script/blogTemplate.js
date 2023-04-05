@@ -40,8 +40,80 @@ function validateComment() {
   }
   return true;
 }
+// setInterval(function() {
+//   console.log('Calling $.ajax');
+//   $.ajax({
+//     url: 'reload-blog.php',
+//     method: 'GET',
+//     dataType: 'html',
+//     cache: false,
+//     success: function (html) {
+//       $('#my-page').html(html);
+//     },
+//     error: function (xhr, status, error) {
+//       console.log(xhr.responseText);
+//       console.log(status);
+//       console.log(error);
+//     }
+//   });
+//   console.log('$.ajax called');
+// }, 5000);
+$(document).ready(function () {
+  var recentTyped = Date.now();
+  var focus = false;
+
+  setInterval(function() {
+
+    $('.my-input').on('keydown', function() {
+        recentTyped = Date.now();
+  
+    });
+    $('.my-input').on('blur', function() {
+        focus = false;
+        console.log(focus);
+    });
+    $('.my-input').on('focus', function() {
+        focus = true;
+        console.log(focus);
+    });
+  
+
+   
+      if (focus == false || Date.now() - recentTyped > 60000) {
+          $.ajax({
+              url: 'reload-blog.php',
+              type: 'POST',
+              data: {},
+              success: function(response) {
+                  if (response) {
+                      recentTyped = Date.now();
+                      focus = false;
+                      var newContent = $('<div>').html(response);
+                      var formsToPreserve = $('#my-page form');
+                      formsToPreserve.each(function() {
+                          var formToPreserve = $(this);
+                          newContent.find('#' + formToPreserve.attr('id'))
+                              .replaceWith(formToPreserve);
+                      });
+                      $('#my-page').empty().append(newContent.contents());
+                      formsToPreserve.each(function() {
+                          var formToPreserve = $(this);
+                          formToPreserve.insertAfter('#' + formToPreserve
+                              .attr('data-id'));
+                      });
+
+                  }
+              }
+          });
+      }
+  }, 2000);
+
+});
+
 
 $(document).ready(function () {
+ 
+console.log("hello");
   document.getElementById("show-form").addEventListener("click", function () {
     var form = document.getElementById("my-form");
     if (form.style.display === "none") {
@@ -50,6 +122,7 @@ $(document).ready(function () {
       form.style.display = "none";
     }
   })
+ 
 
   $('#my-form').on('submit', function (event) {
     if (!validateForm()) {
@@ -74,6 +147,7 @@ $(document).ready(function () {
             cache: false,
             success: function (html) {
               $('#my-page').html(html);
+           
             },
             error: function (xhr, status, error) {
               console.log(xhr.responseText);
@@ -90,6 +164,7 @@ $(document).ready(function () {
       }
     });
   })
+  
 
 
 

@@ -53,7 +53,6 @@ include ('../connectiondb.php'); ?>
 if(isset($_POST['search'])){
     $search = "%".$_POST['search']."%";
     
-    // $search = $search  
     try {
         
         $stmt = $pdo->prepare("SELECT * FROM userinfo WHERE Name LIKE :search1 OR Username LIKE :search2 OR Email LIKE :search3");
