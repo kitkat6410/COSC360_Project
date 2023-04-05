@@ -70,11 +70,11 @@ $(document).ready(function () {
     });
     $('.my-input').on('blur', function() {
         focus = false;
-        console.log(focus);
+
     });
     $('.my-input').on('focus', function() {
         focus = true;
-        console.log(focus);
+
     });
   
 

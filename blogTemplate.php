@@ -214,7 +214,7 @@ try {
                                 url: 'reload-blog.php',
                                 method: 'GET',
                                 dataType: 'html',
-                                cache: false,
+                                // cache: false,
                                 success: function(html) {
                                     $('#my-page').html(html);
                                 },

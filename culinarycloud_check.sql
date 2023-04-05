@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.10
--- https://www.phpmyadmin.net
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 28, 2023 at 12:17 AM
--- Server version: 5.5.68-MariaDB
--- PHP Version: 7.4.33
+-- Host: 127.0.0.1
+-- Generation Time: Apr 05, 2023 at 10:22 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,22 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_93648137`
+-- Database: `culinarycloud`
 --
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `admininfo`
+--
 DROP TABLE IF EXISTS `comments`;
 DROP TABLE IF EXISTS `blogpost`;
 DROP TABLE IF EXISTS `bloginfo`;
 DROP TABLE IF EXISTS `admininfo`;
 DROP TABLE IF EXISTS `userinfo`;
---
--- Table structure for table `admininfo`
---
 
-CREATE TABLE IF NOT EXISTS `admininfo` (
-  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `Password` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+CREATE TABLE `admininfo` (
+  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Refnum` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -50,22 +52,22 @@ INSERT INTO `admininfo` (`Username`, `Password`, `Refnum`) VALUES
 -- Table structure for table `bloginfo`
 --
 
-CREATE TABLE IF NOT EXISTS `bloginfo` (
-  `BlogName` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
+CREATE TABLE `bloginfo` (
+  `BlogName` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `BID` int(11) NOT NULL,
-  `BlogCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Description` varchar(2000) CHARACTER SET utf8mb4 NOT NULL,
-  `Continent` varchar(30) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `CityandCountry` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `cc1` tinyint(4) NOT NULL DEFAULT '0',
-  `cc2` tinyint(4) NOT NULL DEFAULT '0',
-  `cc3` tinyint(4) NOT NULL DEFAULT '0',
-  `cc4` tinyint(4) NOT NULL DEFAULT '0',
-  `cc5` tinyint(4) NOT NULL DEFAULT '0',
-  `cc6` tinyint(4) NOT NULL DEFAULT '0',
-  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `Thumbnail` varchar(100) CHARACTER SET utf8mb4 NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `BlogCreated` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Description` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Continent` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `CityandCountry` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `cc1` tinyint(4) NOT NULL DEFAULT 0,
+  `cc2` tinyint(4) NOT NULL DEFAULT 0,
+  `cc3` tinyint(4) NOT NULL DEFAULT 0,
+  `cc4` tinyint(4) NOT NULL DEFAULT 0,
+  `cc5` tinyint(4) NOT NULL DEFAULT 0,
+  `cc6` tinyint(4) NOT NULL DEFAULT 0,
+  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Thumbnail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bloginfo`
@@ -91,16 +93,16 @@ INSERT INTO `bloginfo` (`BlogName`, `BID`, `BlogCreated`, `Description`, `Contin
 -- Table structure for table `blogpost`
 --
 
-CREATE TABLE IF NOT EXISTS `blogpost` (
-  `Author` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `BlogTitle` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
+CREATE TABLE `blogpost` (
+  `Author` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `BlogTitle` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `PID` int(11) NOT NULL,
   `BID` int(11) NOT NULL,
-  `BlogSecondaryTitle` varchar(50) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  `DatePosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Image` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `Content` varchar(2200) CHARACTER SET utf8mb4 NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `BlogSecondaryTitle` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `DatePosted` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Content` varchar(2200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `blogpost`
@@ -125,33 +127,34 @@ INSERT INTO `blogpost` (`Author`, `BlogTitle`, `PID`, `BID`, `BlogSecondaryTitle
 -- Table structure for table `comments`
 --
 
-CREATE TABLE IF NOT EXISTS `comments` (
-  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `Title` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `Content` varchar(1000) CHARACTER SET utf8mb4 NOT NULL,
+CREATE TABLE `comments` (
+  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `BID` int(11) NOT NULL,
   `PID` int(11) NOT NULL,
-  `CommentPosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `CommentPosted` timestamp NOT NULL DEFAULT current_timestamp(),
+  `CID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPosted`) VALUES
-('Bojangles', 'Boring', 'I don''t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49'),
-('Bojangles', 'Ick', 'I like meat!', 4, 8, '2023-03-27 06:34:24'),
-('Bojangles', 'ImLazy', 'I''m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53'),
-('Bojangles', 'Meh', 'Vanilla is okay. I much prefer the rich chocolate cupcakes to this. C+', 1, 2, '2023-03-27 06:35:23'),
-('Bojangles', 'I NEED SPICY WINGS', 'I NEED THEM NOW', 2, 6, '2023-03-27 06:37:01'),
-('Bojangles', 'More Coming Soon!', 'Stay tuned for more!', 7, 9, '2023-03-27 06:45:01'),
-('fallon', 'Great Idea!', 'Tried it today and became an instant favourite!! Stay tuned for a new game on my show ;)', 2, 6, '2023-03-27 05:37:08'),
-('KyraJB', 'Awesome Work!', 'I''m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58'),
-('KyraJB', 'FOMO', 'Thank you for the wonderful tips! Now I really want to visit Tokyo.', 3, 7, '2023-03-26 20:26:29'),
-('KyraJB', 'TheSugarShack', 'Hope you enjoyed reading!', 1, 4, '2023-03-27 06:20:33'),
-('KyraJB', 'Yummy!', 'This is my favourite recipe!', 1, 1, '2023-03-27 06:20:48'),
-('Mrunal', 'Delicious!!', 'Just tried it, so yummy!!!', 1, 4, '2023-03-27 00:52:51'),
-('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17');
+INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPosted`, `CID`) VALUES
+('Bojangles', 'Boring', 'I don\'t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49', 1),
+('Bojangles', 'Ick', 'I like meat!', 4, 8, '2023-03-27 06:34:24', 2),
+('Bojangles', 'ImLazy', 'I\'m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53', 3),
+('Bojangles', 'Meh', 'Vanilla is okay. I much prefer the rich chocolate cupcakes to this. C+', 1, 2, '2023-03-27 06:35:23', 4),
+('Bojangles', 'I NEED SPICY WINGS', 'I NEED THEM NOW', 2, 6, '2023-03-27 06:37:01', 5),
+('Bojangles', 'More Coming Soon!', 'Stay tuned for more!', 7, 9, '2023-03-27 06:45:01', 6),
+('fallon', 'Great Idea!', 'Tried it today and became an instant favourite!! Stay tuned for a new game on my show ;)', 2, 6, '2023-03-27 05:37:08', 7),
+('KyraJB', 'Awesome Work!', 'I\'m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58', 8),
+('KyraJB', 'FOMO', 'Thank you for the wonderful tips! Now I really want to visit Tokyo.', 3, 7, '2023-03-26 20:26:29', 9),
+('KyraJB', 'TheSugarShack', 'Hope you enjoyed reading!', 1, 4, '2023-03-27 06:20:33', 10),
+('KyraJB', 'Yummy!', 'This is my favourite recipe!', 1, 1, '2023-03-27 06:20:48', 11),
+('Mrunal', 'Delicious!!', 'Just tried it, so yummy!!!', 1, 4, '2023-03-27 00:52:51', 12),
+('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17', 13);
 
 -- --------------------------------------------------------
 
@@ -159,17 +162,17 @@ INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPo
 -- Table structure for table `userinfo`
 --
 
-CREATE TABLE IF NOT EXISTS `userinfo` (
+CREATE TABLE `userinfo` (
   `Name` varchar(90) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `BirthDate` date NOT NULL,
   `Username` varchar(90) NOT NULL,
   `Password` varchar(200) NOT NULL,
-  `AccountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `AccountCreated` timestamp NOT NULL DEFAULT current_timestamp(),
   `ProfileImage` varchar(100) NOT NULL,
   `isAdmin` tinyint(1) NOT NULL,
-  `Status` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Status` tinyint(4) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `userinfo`
@@ -215,6 +218,7 @@ ALTER TABLE `blogpost`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`Username`,`CommentPosted`),
+  ADD UNIQUE KEY `CID` (`CID`),
   ADD KEY `BID` (`BID`,`PID`);
 
 --
@@ -231,12 +235,20 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `bloginfo`
 --
 ALTER TABLE `bloginfo`
-  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `blogpost`
 --
 ALTER TABLE `blogpost`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
 -- Constraints for dumped tables
 --
@@ -264,7 +276,8 @@ ALTER TABLE `blogpost`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`BID`, `PID`) REFERENCES `blogpost` (`BID`, `PID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`BID`,`PID`) REFERENCES `blogpost` (`BID`, `PID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

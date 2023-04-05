@@ -164,7 +164,7 @@ $("#comment-form-<?php echo $row2['PID'] ?>").on('submit', function(event) {
                         url: 'reload-blog.php',
                         method: 'GET',
                         dataType: 'html',
-                        cache: false,
+                        // cache: false,
                         success: function(html) {
                             $('#my-page').html(html);
                         },

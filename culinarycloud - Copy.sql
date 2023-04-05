@@ -131,27 +131,28 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `Content` varchar(1000) CHARACTER SET utf8mb4 NOT NULL,
   `BID` int(11) NOT NULL,
   `PID` int(11) NOT NULL,
-  `CommentPosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `CommentPosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPosted`) VALUES
-('Bojangles', 'Boring', 'I don''t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49'),
-('Bojangles', 'Ick', 'I like meat!', 4, 8, '2023-03-27 06:34:24'),
-('Bojangles', 'ImLazy', 'I''m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53'),
-('Bojangles', 'Meh', 'Vanilla is okay. I much prefer the rich chocolate cupcakes to this. C+', 1, 2, '2023-03-27 06:35:23'),
-('Bojangles', 'I NEED SPICY WINGS', 'I NEED THEM NOW', 2, 6, '2023-03-27 06:37:01'),
-('Bojangles', 'More Coming Soon!', 'Stay tuned for more!', 7, 9, '2023-03-27 06:45:01'),
-('fallon', 'Great Idea!', 'Tried it today and became an instant favourite!! Stay tuned for a new game on my show ;)', 2, 6, '2023-03-27 05:37:08'),
-('KyraJB', 'Awesome Work!', 'I''m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58'),
-('KyraJB', 'FOMO', 'Thank you for the wonderful tips! Now I really want to visit Tokyo.', 3, 7, '2023-03-26 20:26:29'),
-('KyraJB', 'TheSugarShack', 'Hope you enjoyed reading!', 1, 4, '2023-03-27 06:20:33'),
-('KyraJB', 'Yummy!', 'This is my favourite recipe!', 1, 1, '2023-03-27 06:20:48'),
-('Mrunal', 'Delicious!!', 'Just tried it, so yummy!!!', 1, 4, '2023-03-27 00:52:51'),
-('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17');
+INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPosted`, `CID`) VALUES
+('Bojangles', 'Boring', 'I don''t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49', 1),
+('Bojangles', 'Ick', 'I like meat!', 4, 8, '2023-03-27 06:34:24', 2),
+('Bojangles', 'ImLazy', 'I''m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53', 3),
+('Bojangles', 'Meh', 'Vanilla is okay. I much prefer the rich chocolate cupcakes to this. C+', 1, 2, '2023-03-27 06:35:23', 4),
+('Bojangles', 'I NEED SPICY WINGS', 'I NEED THEM NOW', 2, 6, '2023-03-27 06:37:01', 5),
+('Bojangles', 'More Coming Soon!', 'Stay tuned for more!', 7, 9, '2023-03-27 06:45:01', 6),
+('fallon', 'Great Idea!', 'Tried it today and became an instant favourite!! Stay tuned for a new game on my show ;)', 2, 6, '2023-03-27 05:37:08', 7),
+('KyraJB', 'Awesome Work!', 'I''m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58', 8),
+('KyraJB', 'FOMO', 'Thank you for the wonderful tips! Now I really want to visit Tokyo.', 3, 7, '2023-03-26 20:26:29', 9),
+('KyraJB', 'TheSugarShack', 'Hope you enjoyed reading!', 1, 4, '2023-03-27 06:20:33', 10),
+('KyraJB', 'Yummy!', 'This is my favourite recipe!', 1, 1, '2023-03-27 06:20:48', 11),
+('Mrunal', 'Delicious!!', 'Just tried it, so yummy!!!', 1, 4, '2023-03-27 00:52:51', 12),
+('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17', 13);
 
 -- --------------------------------------------------------
 
