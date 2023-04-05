@@ -1,4 +1,5 @@
 <?php
+//reply lol
 include('../connectiondb.php');
 require 'SessionValidation.php';
 if (isset($_GET['bid'])) {
