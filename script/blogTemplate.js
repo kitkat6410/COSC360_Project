@@ -40,28 +40,17 @@ function validateComment() {
   }
   return true;
 }
-// setInterval(function() {
-//   console.log('Calling $.ajax');
-//   $.ajax({
-//     url: 'reload-blog.php',
-//     method: 'GET',
-//     dataType: 'html',
-//     cache: false,
-//     success: function (html) {
-//       $('#my-page').html(html);
-//     },
-//     error: function (xhr, status, error) {
-//       console.log(xhr.responseText);
-//       console.log(status);
-//       console.log(error);
-//     }
-//   });
-//   console.log('$.ajax called');
-// }, 5000);
+
+// function validateReply(){
+//   var content = document.forms["createReply"]["reply-content"].value;
+//   if(content == ""){
+
+//   }
+// }
+
 $(document).ready(function () {
   var recentTyped = Date.now();
   var focus = false;
-
   setInterval(function() {
 
     $('.my-input').on('keydown', function() {
@@ -113,7 +102,6 @@ $(document).ready(function () {
 
 $(document).ready(function () {
  
-console.log("hello");
   document.getElementById("show-form").addEventListener("click", function () {
     var form = document.getElementById("my-form");
     if (form.style.display === "none") {
