@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 28, 2023 at 12:17 AM
+-- Generation Time: Apr 06, 2023 at 11:40 PM
 -- Server version: 5.5.68-MariaDB
 -- PHP Version: 7.4.33
 
@@ -21,7 +21,11 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
+DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `blogpost`;
+DROP TABLE IF EXISTS `bloginfo`;
+DROP TABLE IF EXISTS `admininfo`;
+DROP TABLE IF EXISTS `userinfo`;
 --
 -- Table structure for table `admininfo`
 --
@@ -123,31 +127,36 @@ INSERT INTO `blogpost` (`Author`, `BlogTitle`, `PID`, `BID`, `BlogSecondaryTitle
 
 CREATE TABLE IF NOT EXISTS `comments` (
   `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `Title` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `Title` varchar(100) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'Reply',
   `Content` varchar(1000) CHARACTER SET utf8mb4 NOT NULL,
   `BID` int(11) NOT NULL,
   `PID` int(11) NOT NULL,
-  `CommentPosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `CommentPosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ParentCommentID` int(11) DEFAULT NULL,
+  `CID` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPosted`) VALUES
-('Bojangles', 'Boring', 'I don''t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49'),
-('Bojangles', 'Ick', 'I like meat!', 4, 8, '2023-03-27 06:34:24'),
-('Bojangles', 'ImLazy', 'I''m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53'),
-('Bojangles', 'Meh', 'Vanilla is okay. I much prefer the rich chocolate cupcakes to this. C+', 1, 2, '2023-03-27 06:35:23'),
-('Bojangles', 'I NEED SPICY WINGS', 'I NEED THEM NOW', 2, 6, '2023-03-27 06:37:01'),
-('Bojangles', 'More Coming Soon!', 'Stay tuned for more!', 7, 9, '2023-03-27 06:45:01'),
-('fallon', 'Great Idea!', 'Tried it today and became an instant favourite!! Stay tuned for a new game on my show ;)', 2, 6, '2023-03-27 05:37:08'),
-('KyraJB', 'Awesome Work!', 'I''m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58'),
-('KyraJB', 'FOMO', 'Thank you for the wonderful tips! Now I really want to visit Tokyo.', 3, 7, '2023-03-26 20:26:29'),
-('KyraJB', 'TheSugarShack', 'Hope you enjoyed reading!', 1, 4, '2023-03-27 06:20:33'),
-('KyraJB', 'Yummy!', 'This is my favourite recipe!', 1, 1, '2023-03-27 06:20:48'),
-('Mrunal', 'Delicious!!', 'Just tried it, so yummy!!!', 1, 4, '2023-03-27 00:52:51'),
-('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17');
+INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPosted`, `ParentCommentID`, `CID`) VALUES
+('Bojangles', 'Boring', 'I don''t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49', NULL, 1),
+('Bojangles', 'Ick', 'I like meat!', 4, 8, '2023-03-27 06:34:24', NULL, 2),
+('Bojangles', 'ImLazy', 'I''m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53', NULL, 3),
+('Bojangles', 'Meh', 'Vanilla is okay. I much prefer the rich chocolate cupcakes to this. C+', 1, 2, '2023-03-27 06:35:23', NULL, 4),
+('Bojangles', 'I NEED SPICY WINGS', 'I NEED THEM NOW', 2, 6, '2023-03-27 06:37:01', NULL, 5),
+('Bojangles', 'More Coming Soon!', 'Stay tuned for more!', 7, 9, '2023-03-27 06:45:01', NULL, 6),
+('fallon', 'Great Idea!', 'Tried it today and became an instant favourite!! Stay tuned for a new game on my show ;)', 2, 6, '2023-03-27 05:37:08', NULL, 7),
+('KyraJB', 'Awesome Work!', 'I''m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58', NULL, 8),
+('KyraJB', 'FOMO', 'Thank you for the wonderful tips! Now I really want to visit Tokyo.', 3, 7, '2023-03-26 20:26:29', NULL, 9),
+('KyraJB', 'TheSugarShack', 'Hope you enjoyed reading!', 1, 4, '2023-03-27 06:20:33', 12, 10),
+('KyraJB', 'Yummy!', 'This is my favourite recipe!', 1, 1, '2023-03-27 06:20:48', NULL, 11),
+('KyraJB', 'Reply', 'That''s totally fair!', 1, 2, '2023-04-06 23:38:44', 4, 21),
+('Mrunal', 'Delicious!!', 'Just tried it, so yummy!!!', 1, 4, '2023-03-27 00:52:51', NULL, 12),
+('Mrunal', 'Reply', 'You''re welcome:))', 3, 7, '2023-04-06 23:32:09', 9, 14),
+('Mrunal', 'Reply', 'Yepp!', 1, 4, '2023-04-06 23:32:43', 12, 17),
+('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17', NULL, 13);
 
 -- --------------------------------------------------------
 
@@ -211,6 +220,7 @@ ALTER TABLE `blogpost`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`Username`,`CommentPosted`),
+  ADD UNIQUE KEY `CID` (`CID`),
   ADD KEY `BID` (`BID`,`PID`);
 
 --
@@ -233,6 +243,11 @@ ALTER TABLE `bloginfo`
 --
 ALTER TABLE `blogpost`
   MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
 --
 -- Constraints for dumped tables
 --
@@ -260,7 +275,7 @@ ALTER TABLE `blogpost`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`BID`, `PID`) REFERENCES `blogpost` (`BID`, `PID`);
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`BID`, `PID`) REFERENCES `blogpost` (`BID`, `PID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
