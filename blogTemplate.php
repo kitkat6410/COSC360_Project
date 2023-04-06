@@ -157,7 +157,7 @@ echo '<h3 class="title">' . $comment['Title'] . '</h3>';
 echo '<p class="content">' . $comment['Content'] . '</p>';
 
 // Output replies
-if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) {
+
 foreach ($comments as $reply) {
 ?>    
     
@@ -173,6 +173,7 @@ foreach ($comments as $reply) {
         echo '</div>';
         }
         }  // Add form for replying to the comment
+        if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) {
         echo '<div class="reply-form">';
         echo '<form id="reply-form-' . $comment["ID"] . '" name="createReply" action="validateReply.php" method="POST">';
         // echo '<input type="hidden" name="bid" value="' . $_SESSION['BID'] . '">';
