@@ -47,7 +47,6 @@ if (!empty($errors)) {
         exit;
     } catch (Exception $e) {
         error_log($e->getMessage());
-        header("Location: signup.php?error=Unknown");
         exit();
     }
 }
