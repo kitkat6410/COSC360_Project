@@ -41,12 +41,12 @@ function validateComment() {
   return true;
 }
 
-// function validateReply(){
-//   var content = document.forms["createReply"]["reply-content"].value;
-//   if(content == ""){
+function validateReply(){
+  var content = document.forms["createReply"]["reply-content"].value;
+  if(content == ""){
 
-//   }
-// }
+  }
+}
 
 $(document).ready(function () {
   var recentTyped = Date.now();
