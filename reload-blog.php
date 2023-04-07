@@ -34,7 +34,7 @@ $stmt2->execute();
 
 
 ?>
-     <?php
+  <?php
 
 while ($row2 = $stmt2->fetch()) {
     $date = date('Y-m-d\TH:i:sP', strtotime($row2['DatePosted']));
@@ -42,6 +42,11 @@ while ($row2 = $stmt2->fetch()) {
 <section id="myBlogContainer">
 
     <article>
+    <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
+    <button class = "rounded" onclick="alert('Not functional!')">Edit</button>
+    <button class="rounded red" onclick="if (confirm('Are you sure you want to delete?')) { deletePostClicked('<?php echo $row2['PID']; ?>', event); } return false;">Delete</button>
+    <br>
+    <?php } ?>
         <time datetime="<?= $date ?>"><?= date('F j, Y \a\t g:i A T', strtotime($row2['DatePosted'])) ?></time>
         <p>By: <?php echo $row2['Author'] ?></p>
         <h1><?php echo $row2['BlogTitle'] ?></h1>
@@ -100,7 +105,7 @@ echo '<h3 class="title">' . $comment['Title'] . '</h3>';
 echo '<p class="content">' . $comment['Content'] . '</p>';
 
 // Output replies
-
+//hi
 foreach ($comments as $reply) {
 ?>    
     
@@ -287,6 +292,23 @@ $("#comment-form-<?php echo $row2['PID'] ?>").on('submit', function(event) {
     );
 
 });
+    function deletePostClicked(pid, event) {
+        event.preventDefault();
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "deletePost.php?pid=" + pid, true);
+            xmlhttp.send();
+        
+    }
+
+    // Attach the event listener to all delete buttons
+    var deleteButtons = document.querySelectorAll('[id^="deleteButton_"]');
+    deleteButtons.forEach(function(button) {
+        var pid = button.id.split("_")[1];
+        button.addEventListener("click", function(event) {
+            deletePostClicked(pid, event);
+        });
+    });
 
 
 

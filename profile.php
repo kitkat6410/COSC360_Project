@@ -106,8 +106,6 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
                 $stmt2 = $pdo->prepare($input);
                 $stmt2->bindParam(':username', $_SESSION['user_id']);
                 $stmt2->execute();
-                // $row2 = $stmt2->fetch();
-                // print_r($row2);
                 $check = false;
 
                 while ($row2 = $stmt2->fetch()) {
@@ -127,11 +125,6 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
                     echo "<p id = warning>Your account is not active. Please contact an admin for assistance</p>";
 
                 }
-                // foreach ($stmt2 as $row2) {
-                //     echo $row2['BlogName'];
-                // }
-                
-                //echo "<p>You have no blogs! <a href='create.php'>Create one</a></p>";
                 
                 ?>
     </div>
@@ -144,11 +137,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
 
 </body>
 <script>
-function blogClicked(bid, event) {
-  event.preventDefault();
-  console.log(bid);
-  window.location.href = "blogTemplate.php?bid=" + bid;
-}
+
 </script>
 
 </html>

@@ -49,6 +49,7 @@ try {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="script/jquery-3.6.4.min.js"></script>
     <script src="script/blogTemplate.js"></script>
+    <script src="script/delete.js"></script>
     <style>
     body {
         margin-top: 0;
@@ -66,6 +67,9 @@ try {
 
 
 </head>
+
+
+<body>
 <nav>
     <div class="site-title">
         <a href="home.php">
@@ -73,12 +77,22 @@ try {
         </a>
     </div>
     <ul>
+    <?php if (isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { 
+    if (isset($_SESSION['isLoggedAdmin'])) { ?>
+        <li><a href="adminProfile.php">Account</a></li>
+    <?php } else { ?>   
+        <li><a href="profile.php">Account</a></li>
+    <?php }
+} ?>
         <li><a href="blogs.php">Back to Browse Blogs</a></li>
     </ul>
 </nav>
-
-<body>
     <header id="blogPage">
+    <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) {  ?>
+    <button class = "rounded" onclick="alert('Not functional!')">Edit</button>
+    <button class="rounded red" onclick="if (confirm('Are you sure you want to delete?')) { deleteBlogClicked('<?php echo $_SESSION['BID']; ?>', event);  } return false;">Delete</button>
+    <br>
+    <?php } ?>
         <h1 id=sugar><?php echo ($row['BlogName']) ?></h1>
         <div id="desc">
             <p><?php echo ($row['Description']) ?></p>
@@ -99,6 +113,11 @@ while ($row2 = $stmt2->fetch()) {
 <section id="myBlogContainer">
 
     <article>
+    <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
+    <button class = "rounded" onclick="alert('Not functional!')">Edit</button>
+    <button class="rounded red" onclick="if (confirm('Are you sure you want to delete?')) { deletePostClicked('<?php echo $row2['PID']; ?>', event); } return false;">Delete</button>
+    <br>
+    <?php } ?>
         <time datetime="<?= $date ?>"><?= date('F j, Y \a\t g:i A T', strtotime($row2['DatePosted'])) ?></time>
         <p>By: <?php echo $row2['Author'] ?></p>
         <h1><?php echo $row2['BlogTitle'] ?></h1>
@@ -157,7 +176,7 @@ echo '<h3 class="title">' . $comment['Title'] . '</h3>';
 echo '<p class="content">' . $comment['Content'] . '</p>';
 
 // Output replies
-
+//hi
 foreach ($comments as $reply) {
 ?>    
     
@@ -344,6 +363,23 @@ $("#comment-form-<?php echo $row2['PID'] ?>").on('submit', function(event) {
     );
 
 });
+    function deletePostClicked(pid, event) {
+        event.preventDefault();
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "deletePost.php?pid=" + pid, true);
+            xmlhttp.send();
+        
+    }
+
+    // Attach the event listener to all delete buttons
+    var deleteButtons = document.querySelectorAll('[id^="deleteButton_"]');
+    deleteButtons.forEach(function(button) {
+        var pid = button.id.split("_")[1];
+        button.addEventListener("click", function(event) {
+            deletePostClicked(pid, event);
+        });
+    });
 
 
 
@@ -409,7 +445,6 @@ $("#comment-form-<?php echo $row2['PID'] ?>").on('submit', function(event) {
                         <p id="error-message"></p>
                     </td>
                     <?php
-                    // unused code, save for letter. Other error handling that directs back to this page
                     if (isset($_GET['error'])) {
                         switch ($_GET['error']) {
                             case "BlogExists":

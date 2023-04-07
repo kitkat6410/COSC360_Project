@@ -14,7 +14,7 @@ nav {
 } */
 
 header {
-    color: rgb(80, 80, 80)
+    padding-left: 1em;
 }
 
 #myBlogContainer {
@@ -41,8 +41,6 @@ article {
 
 #desc {
     margin: 0;
-    /* background-color: #ffb3c6; */
-    padding-left:1em;
     padding-right:1em;
     padding-top:1em;
 }
@@ -196,4 +194,7 @@ li {
    }
    legend{
       color:white;
+   }
+   .red{
+    background-color: red;
    }

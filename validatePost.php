@@ -37,6 +37,16 @@ if (empty($_FILES['image2'])) {
         $errors[] = 'Image must be less than or equal to 10 MB.';
     }
  }
+ if (!empty($errors)) {
+    $response = array(
+        'success' => false,
+        'errors' => $errors
+    );
+    // $_SESSION['response'] = $response;
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
+}
  $target_dir = "images/";
  $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["image2"]["name"]));
  if (!(move_uploaded_file($_FILES["image2"]["tmp_name"], $target_file))) {
@@ -62,7 +72,7 @@ if (!empty($errors)) {
         'success' => false,
         'errors' => $errors
     );
-    $_SESSION['response'] = $response;
+    // $_SESSION['response'] = $response;
     header('Content-Type: application/json');
     echo json_encode($response);
     exit;
