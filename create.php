@@ -2,7 +2,7 @@
 <html>
 
 <head lang="en">
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <?php
     require 'SessionValidation.php';
     if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
@@ -20,18 +20,18 @@
 
 </head>
 <nav>
-        <div class="site-title">
-            <a href="home.php">
-                <h1>Culinary Cloud</h1>
-            </a>
+    <div class="site-title">
+        <a href="home.php">
+            <h1>Culinary Cloud</h1>
+        </a>
 
-            <p>Create New Blog Page</p>
-        </div>
-        <ul>
-            <li><a href="home.php">Back</a></li>
-            </li>
-        </ul>
-    </nav>
+        <p>Create New Blog Page</p>
+    </div>
+    <ul>
+        <li><a href="home.php">Back</a></li>
+        </li>
+    </ul>
+</nav>
 
 <body>
     <form method="post" action="validateCreate.php" name="createBlog" id="mainForm" onsubmit="return validateForm()"
@@ -43,7 +43,7 @@
                 <tr>
                     <td colspan="2">
                         <p>
-                            <label>Title of your blog:</label>*<br />
+                            <label>Title of your blog:</label>*<br>
                             <input type="text" name="title" size="90" class="required" />
                         </p>
                         <p>
@@ -62,7 +62,7 @@
                 <tr>
                     <td>
                         <p>
-                            <label>Continent</label><br />
+                            <label>Continent</label><br>
                             <select name="continent">
                                 <option>Choose continent</option>
                                 <option>Africa</option>
@@ -76,8 +76,17 @@
                         </p>
 
                         <p>
-                            <label>City, Country</label><br />
+                            <label>City, Country</label><br>
                             <input type="text" name="cityandcountry" size="40" />
+                        </p>
+                        <p>
+                            <label>Pick your first color</label><br>
+                            <input type="color" name="first_color" value="#a3f7bf">
+                        </p>
+                        <p>
+                        <label>Pick your second color</label><br>
+                
+                            <input type="color" name="second_color" value="#29a19c">
                         </p>
                     </td>
                 </tr>
@@ -156,8 +165,8 @@
                 <tr>
                     <td colspan="2">
                         <div class="rectangle centered">
-                            <input type="submit" value="Submit" name="submit" class="rounded"> <input type="reset" value="Reset"
-                                class="rounded">
+                            <input type="submit" value="Submit" name="submit" class="rounded"> <input type="reset"
+                                value="Reset" class="rounded">
                         </div>
                     </td>
                 </tr>

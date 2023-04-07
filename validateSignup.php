@@ -66,7 +66,7 @@ try {
     $pass_input = $_POST['password'];
 
     // validate user input
-    if($name > 90){
+    if(strlen($name) > 90){
         header('Location: signup.php?error=InvalidName');
         exit();
     }

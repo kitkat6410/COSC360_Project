@@ -56,7 +56,54 @@ try {
         background-image: url('<?php echo $row['Thumbnail'] ?>');
         background-size: 25em;
 
+
     }
+    /* article {
+    clear: left;
+    background: <?php echo $row['secondColor']?>;
+    color: rgb(30, 30, 30);
+
+    padding: 1em;
+
+    margin-top: 1em;
+}
+#blogPage {
+    background:<?php echo $row['firstColor'] ?>;
+}
+legend {
+      background-color: <?php echo $row['secondColor'] ?> ;
+      margin: 0 auto;
+      width: 90%;
+      padding: 0.25em;
+      text-align: center;
+      font-weight: bold;
+      font-size: 100%;
+   }
+   fieldset {
+      margin: 1em auto;
+      background-color: <?php echo $row['firstColor'] ?>;
+      width: 60%;
+   }
+   .box {
+      border: 1pt solid <?php echo $row['secondColor'] ?>;
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+   }
+   .rectangle {
+      background-color: <?php echo $row['secondColor'] ?> ;
+      padding: 0.5em;
+   }
+   hr{
+    border: 1px solid <?php echo $row['secondColor'] ?>  ;
+   }
+
+   .firstColor{
+    background:<?php echo $row['firstColor'] ?>;
+   }
+   .secondColor{
+    background: <?php echo $row['secondColor'] ?>
+   } */
+
     </style>
 
 
@@ -166,8 +213,8 @@ $comments[$rowComment['CID']] = $comment;
 // Output comments and replies
 foreach ($comments as $comment) {
 if ($comment['ParentID'] === null) { // Comment is not a reply
-echo '<div class="comment-container third-color">';
-echo '<div class="comments fourth-color">';
+echo '<div class="comment-container secondColor">';
+echo '<div class="comments firstColor">';
 echo '<div class="meta">';
 echo '<span class="username">' . $comment['Username'] . '</span>';
 echo '<span class="date"><time datetime="' . $comment['Date'] . '">' . $comment['Date'] . '</time></span>';

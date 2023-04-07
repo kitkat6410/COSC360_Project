@@ -13,6 +13,8 @@ $business = isset($_POST['cc3']) ? 1 : 0;
 $review = isset($_POST['cc4']) ? 1 : 0;
 $travel = isset($_POST['cc5']) ? 1 : 0;
 $collaborate = isset($_POST['cc6']) ? 1 : 0;
+$first = $_POST['first_color'];
+$second = $_POST['second_color'];
 
 // Sanitize uploaded file name
 $target_dir = "images/";
@@ -92,7 +94,7 @@ if ($row) {
 }
 // Insert sanitized input into database
 try {
-    $input = "INSERT INTO bloginfo (BlogName, Description, Continent, CityandCountry, cc1, cc2, cc3, cc4, cc5, cc6, Username, Thumbnail) VALUES (:blogname, :description, :continent, :cityandcountry, :cc1, :cc2, :cc3, :cc4, :cc5, :cc6, :username, :thumbnail)";
+    $input = "INSERT INTO bloginfo (BlogName, Description, Continent, CityandCountry, cc1, cc2, cc3, cc4, cc5, cc6, Username, Thumbnail, firstColor, secondColor) VALUES (:blogname, :description, :continent, :cityandcountry, :cc1, :cc2, :cc3, :cc4, :cc5, :cc6, :username, :thumbnail, :first, :second)";
     $stmt = $pdo->prepare($input);
 
     $stmt->bindParam(':blogname', $bTitle_input);
@@ -107,6 +109,8 @@ try {
     $stmt->bindParam(':cc6', $collaborate);
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':thumbnail', $target_file);
+    $stmt->bindParam(':first', $first);
+    $stmt->bindParam(':second', $second);
     $stmt->execute();
 
     // Upload sanitized file
