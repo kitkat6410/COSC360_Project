@@ -58,7 +58,7 @@ try {
 
 
     }
-    /* article {
+    article {
     clear: left;
     background: <?php echo $row['secondColor']?>;
     color: rgb(30, 30, 30);
@@ -102,7 +102,7 @@ legend {
    }
    .secondColor{
     background: <?php echo $row['secondColor'] ?>
-   } */
+   }
 
     </style>
 
@@ -134,7 +134,9 @@ legend {
         <li><a href="blogs.php">Back to Browse Blogs</a></li>
     </ul>
 </nav>
+<section id="my-page">
     <header id="blogPage">
+   
     <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) {  ?>
     <button class = "rounded" onclick="alert('Not functional!')">Edit</button>
     <button class="rounded red" onclick="if (confirm('Are you sure you want to delete?')) { deleteBlogClicked('<?php echo $_SESSION['BID']; ?>', event);  } return false;">Delete</button>
@@ -151,7 +153,7 @@ legend {
             </p>
         </div>
     </header>
-    <section id="my-page">
+
     <?php
 
 while ($row2 = $stmt2->fetch()) {
