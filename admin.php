@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <?php
-    require 'SessionValidation.php' ?>
+    require 'SessionValidation.php';
+    include ('../connectiondb.php');
+    ?>
     <title>
         CulinaryCloud | Admin
     </title>
@@ -57,36 +59,186 @@
         <a href="userProfile.php"><h1 id="browse">User Profiles</h1></a>
         <a href="accRequest.php"><h1 id="browse">Account Requests</h1></a>
         <a href="activeUser.php"><h1 id="browse">Active Users</h1></a>
-        <a href="#"><h1 id="browse">Edit/delete posts</h1></a>
-        <a href="#"><h1 id="browse">Edit/Delete Blogs</h1></a>
+        
     </header>
 
     
-    <section class="fourth-color">
+    <section id="aboutPage" class="fourth-color">
         <h1 id="browse" style="font-size: 3em; color: black;">Website Information:</h1>
-        <div style="width: 100%; padding: 2em;">
-            <h1>Number of active users: 72</h1>
-            <h1>Number of public blogs: 107</h1>
-            <h1>Number of site visits in the past week: 143</h1>
-            <h1>Most popular category: Business and Marketing</h1>
+        <?php
+        try{
+            $stmt1 = $pdo->prepare("SELECT COUNT(*) AS count FROM userinfo WHERE Status=1");
+            $stmt1->execute(); // Execute the prepared statement
+            $result1 = $stmt1->fetch(); // Fetch the result as an associative array
 
-            <h1 id="browse" style="font-size: 3em; color: black; padding-top: 0.5em;">Visual Summary:</h1>
-            <figure style="padding: 2em;">
-                <img src="images/stat2.png" height="350px">
-            </figure>
-            <figure style="padding: 2em;">
-                <img src="images/stat3.png" height="350px">
-            </figure>
-            <figure style="display: block; padding: 2em; margin: auto;">
-                <img src="images/stat1.png" height="350px">
-            </figure>
-        </div>
+            if ($result1 !== false) {
+                $count = $result1['count'];
+            } else {
+                echo "Error: Failed to fetch result.";
+            }
+
+            $stmt2 = $pdo->prepare("SELECT COUNT(*) AS count FROM bloginfo");
+            $stmt2->execute(); // Execute the prepared statement
+            $result2 = $stmt2->fetch();
+
+            if ($result2 !== false) {
+                $count2 = $result2['count'];
+            } else {
+                echo "Error: Failed to fetch result2.";
+            }
         
+        }catch (Exception $e) {
+            error_log($e->getMessage());;
+            header('Location: admin.php?error=1');
+            exit();
+        }
+        echo '<div style="padding: 2em;">
+            <h1>Number of active users (including admins): '.$count.'</h1>
+            <h1>Number of public blogs: '.$count2.'</h1>';
+
+            try{
+                $stmt1 = $pdo->prepare("SELECT COUNT(*) AS count FROM bloginfo WHERE cc1=1");
+                $stmt1->execute(); // Execute the prepared statement
+                $result1 = $stmt1->fetch(); // Fetch the result as an associative array
+                $num1 = $result1['count'];
+    
+                $stmt2 = $pdo->prepare("SELECT COUNT(*) AS count FROM bloginfo WHERE cc2=1");
+                $stmt2->execute(); // Execute the prepared statement
+                $result2 = $stmt2->fetch();
+                $num2 = $result2['count'];
+
+                $stmt3 = $pdo->prepare("SELECT COUNT(*) AS count FROM bloginfo WHERE cc3=1");
+                $stmt3->execute(); // Execute the prepared statement
+                $result3 = $stmt3->fetch();
+                $num3 = $result3['count'];
+
+                $stmt4 = $pdo->prepare("SELECT COUNT(*) AS count FROM bloginfo WHERE cc4=1");
+                $stmt4->execute(); // Execute the prepared statement
+                $result4 = $stmt4->fetch();
+                $num4 = $result4['count'];
+
+                $stmt5 = $pdo->prepare("SELECT COUNT(*) AS count FROM bloginfo WHERE cc5=1");
+                $stmt5->execute(); // Execute the prepared statement
+                $result5 = $stmt5->fetch();
+                $num5 = $result5['count'];
+
+                $stmt6 = $pdo->prepare("SELECT COUNT(*) AS count FROM bloginfo WHERE cc6=1");
+                $stmt6->execute(); // Execute the prepared statement
+                $result6 = $stmt6->fetch();
+                $num6 = $result6['count'];
+
+                $array = array(
+                    'num1' => $num1,
+                    'num2' => $num2,
+                    'num3' => $num3,
+                    'num4' => $num4,
+                    'num5' => $num5,
+                    'num6' => $num6
+                );
+                $maxKey = array_search(max($array), $array);
+                if($maxKey == 'num1'){
+                    $cat = 'Recipes';
+                }else if($maxKey == 'num2'){
+                    $cat = 'Food challenges';
+                }else if($maxKey == 'num3'){
+                    $cat = 'Business/marketing';
+                }else if($maxKey == 'num4'){
+                    $cat = 'Restaurant reviews';
+                }else if($maxKey == 'num5'){
+                    $cat = 'Travel vlogs';
+                }else if($maxKey == 'num6'){
+                    $cat = 'Collaborate';
+                }
+
+            }catch (Exception $e) {
+                error_log($e->getMessage());;
+                header('Location: admin.php?error=1');
+                exit();
+            }
+
+        echo '<h1>Most popular category: '.$cat.'</h1>
+            <h1 id="browse" style="font-size: 3em; color: black; padding-top: 0.5em;">Visual Summary:</h1>
+            <h1>Number of blogs per category.</h1>';
+
+            
+            echo "<div>
+                    <canvas id='myChart'></canvas>
+                    </div>
+                    <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+
+                    <script>
+                        const ctx = document.getElementById('myChart');
+
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                            labels: ['Recipes', 'Food challenges', 'Business/marketing', 'Restaurant reviews', 'Travel vlogs', 'Collaborate'],
+                            datasets: [{
+                                label: '# of Blogs',
+                                data: [".$num1.", ".$num2.", ".$num3.", ".$num4.", ".$num5.", ".$num6."],
+                                borderWidth: 1,
+                                backgroundColor: [
+                                    'rgb(255, 205, 86)'
+                                  ]
+                            }]
+                            },
+                            options: {
+                            scales: {
+                                y: {
+                                beginAtZero: true
+                                }
+                            }
+                            }
+                        });
+                    </script>
+                    
+                </div>
+                
+                <div>
+                    <canvas id='myPolarAreaChart'></canvas>
+                    </div>
+                    <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+                    <script>
+                        // Get the canvas element
+                        const ctx = document.getElementById('myPolarAreaChart');
+                        
+                        // Data for the chart
+                        var data = {
+                            labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+                            datasets: [{
+                                data: [10, 20, 30, 40, 50],
+                                backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 205, 86, 1)', 'rgba(54, 162, 235, 1)', 'rgba(153, 102, 255, 1)'],
+                                borderWidth: 1
+                            }]
+                        };
+                        
+                        // Configuration for the chart
+                        options: {
+                            scale: {
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    stepSize: 20
+                                }
+                            }
+                        };
+                        
+                        // Create the polar area chart
+                        new Chart(ctx, {
+                            type: 'polarArea',
+                            data: data,
+                            options: options
+                        });
+                    </script>
+                    </div>
+                  ";
+        ?>
 
     </section>
     <section id="categories"class=second-color>
 
-        <h1>Information regarding specific categories:</h1>
+        <h1>Specific categories:</h1>
         <figure id="first">
             <img src="images/recipe.jpg">
             <figcaption>
