@@ -133,6 +133,24 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
                 
                 ?>
     </div>
+    <div class = "fourth-color">
+        <h2>Comment History:</h2>
+        <?php
+        $input = "SELECT * FROM comments JOIN bloginfo ON comments.BID = bloginfo.BID WHERE comments.Username = :username ORDER BY comments.CommentPosted DESC";
+        $stmt3 = $pdo ->prepare($input);
+        $stmt3->bindParam(':username', $_SESSION['user_id']);
+        $stmt3->execute();
+        while($row3 = $stmt3->fetch()){
+            $date = date('Y-m-d\TH:i:sP', strtotime($row3['CommentPosted']));
+            echo "<p>You posted a comment in " . $row3['BlogName'] . " on " . "<time datetime=\"$date\">" . date('F j, Y \a\t g:i A T', strtotime($row3['CommentPosted'])) . "</time>.</p>";
+        }
+                
+            
+
+        ?>
+
+
+            </div>
     <div style="margin-top: 15px;">
         <a href="../editProfile.php">
             <h1 class="third-color">Edit Profile</h1>
