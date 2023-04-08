@@ -27,11 +27,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `admininfo`
 --
 
-DROP TABLE IF EXISTS `comments`
-DROP TABLE IF EXISTS `blogpost`
-DROP TABLE IF EXISTS `bloginfo`
-DROP TABLE IF EXISTS `admininfo`
-DROP TABLE IF EXISTS `userinfo`
+DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `blogpost`;
+DROP TABLE IF EXISTS `bloginfo`;
+DROP TABLE IF EXISTS `admininfo`;
+DROP TABLE IF EXISTS `userinfo`;
 
 CREATE TABLE `admininfo` (
   `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,

@@ -54,56 +54,56 @@ function validateReply(){
   }
 }
 
-// $(document).ready(function () {
-//   var recentTyped = Date.now();
-//   var focus = false;
-//   setInterval(function() {
+$(document).ready(function () {
+  var recentTyped = Date.now();
+  var focus = false;
+  setInterval(function() {
 
-//     $('.my-input').on('keydown', function() {
-//         recentTyped = Date.now();
+    $('.my-input').on('keydown', function() {
+        recentTyped = Date.now();
   
-//     });
-//     $('.my-input').on('blur', function() {
-//         focus = false;
+    });
+    $('.my-input').on('blur', function() {
+        focus = false;
 
-//     });
-//     $('.my-input').on('focus', function() {
-//         focus = true;
+    });
+    $('.my-input').on('focus', function() {
+        focus = true;
 
-//     });
+    });
   
 
 
-//       if (focus == false || Date.now() - recentTyped > 60000) {
-//           $.ajax({
-//               url: 'reload-blog.php',
-//               type: 'POST',
-//               data: {},
-//               success: function(response) {
-//                   if (response) {
-//                       recentTyped = Date.now();
-//                       focus = false;
-//                       var newContent = $('<div>').html(response);
-//                       var formsToPreserve = $('#my-page form');
-//                       formsToPreserve.each(function() {
-//                           var formToPreserve = $(this);
-//                           newContent.find('#' + formToPreserve.attr('id'))
-//                               .replaceWith(formToPreserve);
-//                       });
-//                       $('#my-page').empty().append(newContent.contents());
-//                       formsToPreserve.each(function() {
-//                           var formToPreserve = $(this);
-//                           formToPreserve.insertAfter('#' + formToPreserve
-//                               .attr('data-id'));
-//                       });
+      if (focus == false || Date.now() - recentTyped > 60000) {
+          $.ajax({
+              url: 'reload-blog.php',
+              type: 'POST',
+              data: {},
+              success: function(response) {
+                  if (response) {
+                      recentTyped = Date.now();
+                      focus = false;
+                      var newContent = $('<div>').html(response);
+                      var formsToPreserve = $('#my-page form');
+                      formsToPreserve.each(function() {
+                          var formToPreserve = $(this);
+                          newContent.find('#' + formToPreserve.attr('id'))
+                              .replaceWith(formToPreserve);
+                      });
+                      $('#my-page').empty().append(newContent.contents());
+                      formsToPreserve.each(function() {
+                          var formToPreserve = $(this);
+                          formToPreserve.insertAfter('#' + formToPreserve
+                              .attr('data-id'));
+                      });
 
-//                   }
-//               }
-//           });
-//       }
-//   }, 1000);
+                  }
+              }
+          });
+      }
+  }, 1000);
 
-// });
+});
 
 
 
