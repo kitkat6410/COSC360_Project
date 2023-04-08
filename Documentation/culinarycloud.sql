@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.10
--- https://www.phpmyadmin.net
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 06, 2023 at 11:40 PM
--- Server version: 5.5.68-MariaDB
--- PHP Version: 7.4.33
+-- Host: 127.0.0.1
+-- Generation Time: Apr 08, 2023 at 06:05 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,22 +18,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_93648137`
+-- Database: `culinarycloud`
 --
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `admininfo`
+--
+
 DROP TABLE IF EXISTS `comments`;
 DROP TABLE IF EXISTS `blogpost`;
 DROP TABLE IF EXISTS `bloginfo`;
 DROP TABLE IF EXISTS `admininfo`;
 DROP TABLE IF EXISTS `userinfo`;
---
--- Table structure for table `admininfo`
---
 
-CREATE TABLE IF NOT EXISTS `admininfo` (
-  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `Password` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+CREATE TABLE `admininfo` (
+  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Refnum` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -50,40 +53,42 @@ INSERT INTO `admininfo` (`Username`, `Password`, `Refnum`) VALUES
 -- Table structure for table `bloginfo`
 --
 
-CREATE TABLE IF NOT EXISTS `bloginfo` (
-  `BlogName` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
+CREATE TABLE `bloginfo` (
+  `BlogName` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `BID` int(11) NOT NULL,
-  `BlogCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Description` varchar(2000) CHARACTER SET utf8mb4 NOT NULL,
-  `Continent` varchar(30) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `CityandCountry` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `cc1` tinyint(4) NOT NULL DEFAULT '0',
-  `cc2` tinyint(4) NOT NULL DEFAULT '0',
-  `cc3` tinyint(4) NOT NULL DEFAULT '0',
-  `cc4` tinyint(4) NOT NULL DEFAULT '0',
-  `cc5` tinyint(4) NOT NULL DEFAULT '0',
-  `cc6` tinyint(4) NOT NULL DEFAULT '0',
-  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `Thumbnail` varchar(100) CHARACTER SET utf8mb4 NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `BlogCreated` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Description` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Continent` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `CityandCountry` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `cc1` tinyint(4) NOT NULL DEFAULT 0,
+  `cc2` tinyint(4) NOT NULL DEFAULT 0,
+  `cc3` tinyint(4) NOT NULL DEFAULT 0,
+  `cc4` tinyint(4) NOT NULL DEFAULT 0,
+  `cc5` tinyint(4) NOT NULL DEFAULT 0,
+  `cc6` tinyint(4) NOT NULL DEFAULT 0,
+  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Thumbnail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `firstColor` varchar(7) NOT NULL DEFAULT '#a3f7bf',
+  `secondColor` varchar(7) NOT NULL DEFAULT '#29a19c'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bloginfo`
 --
 
-INSERT INTO `bloginfo` (`BlogName`, `BID`, `BlogCreated`, `Description`, `Continent`, `CityandCountry`, `cc1`, `cc2`, `cc3`, `cc4`, `cc5`, `cc6`, `Username`, `Thumbnail`) VALUES
-('The Sugar Shack', 1, '2023-03-25 22:37:09', 'Welcome to The Sugar Shack, the ultimate destination for anyone with a sweet tooth! Here, we share delicious and easy-to-follow recipes for all your favorite sugary treats, from classic chocolate chip cookies to extravagant layer cakes. Join us on a journey through the world of confections, and indulge in the most mouthwatering desserts you&#039;ve ever tasted!', 'North America', 'Kelowna, Canada', 1, 0, 0, 0, 0, 0, 'KyraJB', 'images/641f77953b8a2.sugar.png'),
-('Food Daredevil', 2, '2023-03-26 04:26:37', 'Welcome to Food Daredevil, the ultimate destination for food lovers and thrill-seekers! Join me on my culinary adventures as I take on the most outrageous food challenges and push my taste buds to the limit. From giant burgers to spicy wings to bizarre culinary creations, I fearlessly try it all and report back with humor, honesty, and a healthy dose of sarcasm. Whether you&#039;re a foodie looking for a good laugh or a fellow daredevil looking for inspiration, this is the blog for you. Let&#039;s eat!', 'Europe', '', 0, 1, 0, 0, 0, 0, 'Mrunal', 'images/641fc97d292a6.food-daredevil.png'),
-('Dining Destinations', 3, '2023-03-26 04:29:18', 'Welcome to Dining Destinations, where we take you on a journey to explore the world&#039;s best culinary experiences. From the busy streets of Tokyo to the tranquil vineyards of Tuscany, we travel the globe to discover hidden gems and popular hotspots that are worth a visit. Our team of food critics and writers provide honest, unbiased reviews and recommendations, giving you an inside look at the food, atmosphere, and service of each restaurant we visit. Join us as we explore new cultures, cuisines, and flavors, and uncover the best dining destinations around the world.', 'Europe', '', 0, 0, 0, 1, 1, 0, 'Mrunal', 'images/641fca1e3b0b4.dining-destinations.png'),
-('Vegan Foodie Friends', 4, '2023-03-26 04:54:43', 'Welcome to Vegan Foodie Friends, where we celebrate the joy of plant-based eating with food challenges and collaborations. Our mission is to explore the delicious world of vegan cuisine and share our experiences with you. From hearty comfort food to creative gourmet dishes, we&#039;re always on the lookout for new and exciting flavors to try. But we don&#039;t just eat - we also collaborate with other bloggers and chefs to share their unique perspectives and recipes. Join our community of vegan foodie friends and discover the endless possibilities of plant-based eating!', 'North America', '', 0, 1, 0, 0, 0, 1, 'TestUser', 'images/641fd013a56d8.vegan-foodie-friends.png'),
-('Recipe Revolt', 5, '2023-03-26 04:57:28', 'Welcome to Recipe Revolt, where we take on food challenges and share our favorite recipes with you. Our team of culinary enthusiasts are always looking for new and exciting food challenges to take on, whether it&#039;s a spicy noodle challenge or a massive burger challenge. We document our experiences and share tips and tricks on how to tackle these challenges. But we don&#039;t just stop there - we also share our favorite recipes that we&#039;ve perfected in our own kitchens. From appetizers to desserts, we&#039;ve got you covered. Join us in the Recipe Rumble and discover the thrill of culinary conquests!', 'North America', '', 1, 1, 0, 0, 0, 0, 'TestUser', 'images/641fd0b8abcfb.recipe-revolt.jpg'),
-('Food for All', 6, '2023-03-26 05:11:07', 'Welcome to Food for All, where we believe that everyone deserves access to delicious, healthy food. Our mission is to collaborate with our local community and food banks to provide nutritious meals for those in need. Through our blog, we share recipes, tips, and tricks for cooking on a budget and reducing food waste. We also feature stories of individuals and organizations making a difference in the fight against hunger. Join us in our journey towards a world where no one goes hungry, and everyone has access to good food. Together, we can create a community where food is for all.', 'South America', '', 0, 0, 0, 0, 0, 1, 'FoodForAll', 'images/641fd3eb66d14.food-for-all.jpg'),
-('Northern Nibbles', 7, '2023-03-26 05:17:46', 'Welcome to Northern Nibbles, where we share the best of Canadian cuisine. Our blog is dedicated to bringing you authentic Canadian recipes, from classic dishes like poutine and maple-glazed salmon, to modern twists on traditional favorites. We believe that food is an essential part of Canadian culture, and we are passionate about sharing it with the world. Our recipes are made with fresh, locally-sourced ingredients, and we love to showcase the diverse flavors and culinary traditions of our country. Whether you&#039;re a seasoned home cook or just getting started, our blog has something for everyone. Join us on a culinary journey across Canada with Northern Nibbles.', 'North America', 'Vancouver, Canada', 1, 0, 0, 0, 0, 0, 'Bojangles', 'images/641fd57a17964.northern-nibbles.png'),
-('Simple Eats', 8, '2023-03-26 05:35:51', 'Welcome to Simple Eats, where we believe that cooking delicious meals should be easy and accessible to everyone. Our blog is dedicated to sharing simple, easy-to-follow recipes that are perfect for beginners. We know that starting out in the kitchen can be intimidating, so we&#039;re here to help yo build your confidence and master the basics. From quick weeknight dinners to weekend brunches, we&#039;ve got you covered with recipes that are both delicious and stress-free. Our focus is on using fresh, whole ingredients that are easy to find and affordable. Join us on a journey towards effortless cooking and simple eats that the whole family will love.', 'Asia', '', 1, 0, 0, 0, 0, 0, 'TestUser2', 'images/641fd9b6f2bc5.simple-eats.png'),
-('The Hungry Traveler', 9, '2023-03-26 05:40:34', 'Welcome to The Hungry Traveler, where we believe that food is the best way to explore the world. Our blog is dedicated to sharing our adventures in culinary exploration, as we travel the globe in search of delicious and authentic dishes. From street food in Southeast Asia to haute cuisine in Europe, we&#039;re always on the lookout for the next great culinary discovery. But we&#039;re not just about the food – we&#039;re passionate about the stories and people behind the dishes. We love to connect with locals, chefs, and food enthusiasts to learn about the history and culture of each destination. Join us on a journey towards flavor-filled travels, as we satisfy our wanderlust and our appetites, one bite at a time.', 'North America', '', 0, 0, 0, 0, 1, 0, 'KyraJB', 'images/641fdad2504f0.the-hungry-traveler.png'),
-('The Chef&#039;s Table', 10, '2023-03-26 05:43:14', 'Welcome to The Chef&#039;s Table, a blog dedicated to the art and science of cuisine. Our blog is inspired by the tradition of the chef&#039;s table – a place where culinary masters gather to craft and enjoy their creations. Through our blog, we aim to share that same level of culinary excellence with our readers, bringing you inside the world of our kitchen and beyond. From farm to table, we share our passion for fresh, seasonal ingredients and innovative cooking techniques. Our chefs will share their tips and tricks, while our sommeliers and mixologists will guide you through the world of wine and spirits. But we&#039;re not just about the food and drink – we&#039;re dedicated to creating a complete dining experience. Join us at The Chef&#039;s Table as we explore the world of gastronomy and savor the finer things in life.', 'Asia', '', 0, 0, 1, 0, 0, 0, 'TestUser2', 'images/641fdb720b378.chef-table.png'),
-('Savory Secrets', 11, '2023-03-26 06:06:57', 'Welcome to Savory Secrets, your go-to source for tantalizing recipes and culinary inspiration. Our blog is dedicated to sharing the savory secrets of the world&#039;s most talented chefs, home cooks, and food enthusiasts. We believe that cooking is an art form, and we&#039;re passionate about helping our readers create dishes that are as delicious as they are beautiful. At Savory Secrets, you&#039;ll find a wealth of recipes, cooking tips, and culinary hacks that will elevate your kitchen skills to the next level. Whether you&#039;re an experienced chef or a novice cook, our blog has something to offer. From mouthwatering appetizers to decadent desserts, our recipes are sure to impress. We&#039;re also committed to providing a diverse range of recipes that cater to different dietary needs and preferences, including vegetarian, vegan, gluten-free, and more.', 'Asia', '', 1, 0, 1, 0, 0, 0, 'TestUser2', 'images/641fe10137d96.savory-secrets.png'),
-('Television food', 12, '2023-03-27 05:53:22', 'All I shall say is this: The BEST television food satisfaction you will find anywhere.', 'North America', 'New York, USA', 0, 1, 1, 0, 0, 0, 'fallon', 'images/64212f5298d29.Screenshot_2023-03-26_224125.png');
+INSERT INTO `bloginfo` (`BlogName`, `BID`, `BlogCreated`, `Description`, `Continent`, `CityandCountry`, `cc1`, `cc2`, `cc3`, `cc4`, `cc5`, `cc6`, `Username`, `Thumbnail`, `firstColor`, `secondColor`) VALUES
+('The Sugar Shack', 1, '2023-03-25 22:37:09', 'Welcome to The Sugar Shack, the ultimate destination for anyone with a sweet tooth! Here, we share delicious and easy-to-follow recipes for all your favorite sugary treats, from classic chocolate chip cookies to extravagant layer cakes. Join us on a journey through the world of confections, and indulge in the most mouthwatering desserts you&#039;ve ever tasted!', 'North America', 'Kelowna, Canada', 1, 0, 0, 0, 0, 0, 'KyraJB', 'images/641f77953b8a2.sugar.png', '#ffb3c6', '#fb6f92'),
+('Food Daredevil', 2, '2023-03-26 04:26:37', 'Welcome to Food Daredevil, the ultimate destination for food lovers and thrill-seekers! Join me on my culinary adventures as I take on the most outrageous food challenges and push my taste buds to the limit. From giant burgers to spicy wings to bizarre culinary creations, I fearlessly try it all and report back with humor, honesty, and a healthy dose of sarcasm. Whether you&#039;re a foodie looking for a good laugh or a fellow daredevil looking for inspiration, this is the blog for you. Let&#039;s eat!', 'Europe', '', 0, 1, 0, 0, 0, 0, 'Mrunal', 'images/6430e7f5b4d0a.food-daredevil.png', '#e8a84b', '#991914'),
+('Dining Destinations', 3, '2023-03-26 04:29:18', 'Welcome to Dining Destinations, where we take you on a journey to explore the world&#039;s best culinary experiences. From the busy streets of Tokyo to the tranquil vineyards of Tuscany, we travel the globe to discover hidden gems and popular hotspots that are worth a visit. Our team of food critics and writers provide honest, unbiased reviews and recommendations, giving you an inside look at the food, atmosphere, and service of each restaurant we visit. Join us as we explore new cultures, cuisines, and flavors, and uncover the best dining destinations around the world.', 'Europe', '', 0, 0, 0, 1, 1, 0, 'Mrunal', 'images/641fca1e3b0b4.dining-destinations.png', '#a3f7bf', '#29a19c'),
+('Vegan Foodie Friends', 4, '2023-03-26 04:54:43', 'Welcome to Vegan Foodie Friends, where we celebrate the joy of plant-based eating with food challenges and collaborations. Our mission is to explore the delicious world of vegan cuisine and share our experiences with you. From hearty comfort food to creative gourmet dishes, we&#039;re always on the lookout for new and exciting flavors to try. But we don&#039;t just eat - we also collaborate with other bloggers and chefs to share their unique perspectives and recipes. Join our community of vegan foodie friends and discover the endless possibilities of plant-based eating!', 'North America', '', 0, 1, 0, 0, 0, 1, 'TestUser', 'images/641fd013a56d8.vegan-foodie-friends.png', '#a3f7bf', '#29a19c'),
+('Recipe Revolt', 5, '2023-03-26 04:57:28', 'Welcome to Recipe Revolt, where we take on food challenges and share our favorite recipes with you. Our team of culinary enthusiasts are always looking for new and exciting food challenges to take on, whether it&#039;s a spicy noodle challenge or a massive burger challenge. We document our experiences and share tips and tricks on how to tackle these challenges. But we don&#039;t just stop there - we also share our favorite recipes that we&#039;ve perfected in our own kitchens. From appetizers to desserts, we&#039;ve got you covered. Join us in the Recipe Rumble and discover the thrill of culinary conquests!', 'North America', '', 1, 1, 0, 0, 0, 0, 'TestUser', 'images/641fd0b8abcfb.recipe-revolt.jpg', '#a3f7bf', '#29a19c'),
+('Food for All', 6, '2023-03-26 05:11:07', 'Welcome to Food for All, where we believe that everyone deserves access to delicious, healthy food. Our mission is to collaborate with our local community and food banks to provide nutritious meals for those in need. Through our blog, we share recipes, tips, and tricks for cooking on a budget and reducing food waste. We also feature stories of individuals and organizations making a difference in the fight against hunger. Join us in our journey towards a world where no one goes hungry, and everyone has access to good food. Together, we can create a community where food is for all.', 'South America', '', 0, 0, 0, 0, 0, 1, 'FoodForAll', 'images/641fd3eb66d14.food-for-all.jpg', '#a3f7bf', '#29a19c'),
+('Northern Nibbles', 7, '2023-03-26 05:17:46', 'Welcome to Northern Nibbles, where we share the best of Canadian cuisine. Our blog is dedicated to bringing you authentic Canadian recipes, from classic dishes like poutine and maple-glazed salmon, to modern twists on traditional favorites. We believe that food is an essential part of Canadian culture, and we are passionate about sharing it with the world. Our recipes are made with fresh, locally-sourced ingredients, and we love to showcase the diverse flavors and culinary traditions of our country. Whether you&#039;re a seasoned home cook or just getting started, our blog has something for everyone. Join us on a culinary journey across Canada with Northern Nibbles.', 'North America', 'Vancouver, Canada', 1, 0, 0, 0, 0, 0, 'Bojangles', 'images/641fd57a17964.northern-nibbles.png', '#B10912', '#09B1A8'),
+('Simple Eats', 8, '2023-03-26 05:35:51', 'Welcome to Simple Eats, where we believe that cooking delicious meals should be easy and accessible to everyone. Our blog is dedicated to sharing simple, easy-to-follow recipes that are perfect for beginners. We know that starting out in the kitchen can be intimidating, so we&#039;re here to help yo build your confidence and master the basics. From quick weeknight dinners to weekend brunches, we&#039;ve got you covered with recipes that are both delicious and stress-free. Our focus is on using fresh, whole ingredients that are easy to find and affordable. Join us on a journey towards effortless cooking and simple eats that the whole family will love.', 'Asia', '', 1, 0, 0, 0, 0, 0, 'TestUser2', 'images/641fd9b6f2bc5.simple-eats.png', '#a3f7bf', '#29a19c'),
+('The Hungry Traveler', 9, '2023-03-26 05:40:34', 'Welcome to The Hungry Traveler, where we believe that food is the best way to explore the world. Our blog is dedicated to sharing our adventures in culinary exploration, as we travel the globe in search of delicious and authentic dishes. From street food in Southeast Asia to haute cuisine in Europe, we&#039;re always on the lookout for the next great culinary discovery. But we&#039;re not just about the food – we&#039;re passionate about the stories and people behind the dishes. We love to connect with locals, chefs, and food enthusiasts to learn about the history and culture of each destination. Join us on a journey towards flavor-filled travels, as we satisfy our wanderlust and our appetites, one bite at a time.', 'North America', '', 0, 0, 0, 0, 1, 0, 'KyraJB', 'images/641fdad2504f0.the-hungry-traveler.png', '#a3f7bf', '#29a19c'),
+('The Chef&#039;s Table', 10, '2023-03-26 05:43:14', 'Welcome to The Chef&#039;s Table, a blog dedicated to the art and science of cuisine. Our blog is inspired by the tradition of the chef&#039;s table – a place where culinary masters gather to craft and enjoy their creations. Through our blog, we aim to share that same level of culinary excellence with our readers, bringing you inside the world of our kitchen and beyond. From farm to table, we share our passion for fresh, seasonal ingredients and innovative cooking techniques. Our chefs will share their tips and tricks, while our sommeliers and mixologists will guide you through the world of wine and spirits. But we&#039;re not just about the food and drink – we&#039;re dedicated to creating a complete dining experience. Join us at The Chef&#039;s Table as we explore the world of gastronomy and savor the finer things in life.', 'Asia', '', 0, 0, 1, 0, 0, 0, 'TestUser2', 'images/641fdb720b378.chef-table.png', '#a3f7bf', '#29a19c'),
+('Savory Secrets', 11, '2023-03-26 06:06:57', 'Welcome to Savory Secrets, your go-to source for tantalizing recipes and culinary inspiration. Our blog is dedicated to sharing the savory secrets of the world&#039;s most talented chefs, home cooks, and food enthusiasts. We believe that cooking is an art form, and we&#039;re passionate about helping our readers create dishes that are as delicious as they are beautiful. At Savory Secrets, you&#039;ll find a wealth of recipes, cooking tips, and culinary hacks that will elevate your kitchen skills to the next level. Whether you&#039;re an experienced chef or a novice cook, our blog has something to offer. From mouthwatering appetizers to decadent desserts, our recipes are sure to impress. We&#039;re also committed to providing a diverse range of recipes that cater to different dietary needs and preferences, including vegetarian, vegan, gluten-free, and more.', 'Asia', '', 1, 0, 1, 0, 0, 0, 'TestUser2', 'images/641fe10137d96.savory-secrets.png', '#a3f7bf', '#29a19c'),
+('Television food', 12, '2023-03-27 05:53:22', 'All I shall say is this: The BEST television food satisfaction you will find anywhere.', 'North America', 'New York, USA', 0, 1, 1, 0, 0, 0, 'fallon', 'images/64212f5298d29.Screenshot_2023-03-26_224125.png', '#a3f7bf', '#29a19c');
 
 -- --------------------------------------------------------
 
@@ -91,16 +96,16 @@ INSERT INTO `bloginfo` (`BlogName`, `BID`, `BlogCreated`, `Description`, `Contin
 -- Table structure for table `blogpost`
 --
 
-CREATE TABLE IF NOT EXISTS `blogpost` (
-  `Author` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `BlogTitle` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
+CREATE TABLE `blogpost` (
+  `Author` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `BlogTitle` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `PID` int(11) NOT NULL,
   `BID` int(11) NOT NULL,
-  `BlogSecondaryTitle` varchar(50) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  `DatePosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Image` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `Content` varchar(2200) CHARACTER SET utf8mb4 NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `BlogSecondaryTitle` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `DatePosted` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Content` varchar(2200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `blogpost`
@@ -125,36 +130,36 @@ INSERT INTO `blogpost` (`Author`, `BlogTitle`, `PID`, `BID`, `BlogSecondaryTitle
 -- Table structure for table `comments`
 --
 
-CREATE TABLE IF NOT EXISTS `comments` (
-  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
-  `Title` varchar(100) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'Reply',
-  `Content` varchar(1000) CHARACTER SET utf8mb4 NOT NULL,
+CREATE TABLE `comments` (
+  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Reply',
+  `Content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `BID` int(11) NOT NULL,
   `PID` int(11) NOT NULL,
-  `CommentPosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CommentPosted` timestamp NOT NULL DEFAULT current_timestamp(),
   `ParentCommentID` int(11) DEFAULT NULL,
   `CID` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPosted`, `ParentCommentID`, `CID`) VALUES
-('Bojangles', 'Boring', 'I don''t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49', NULL, 1),
+('Bojangles', 'Boring', 'I don\'t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49', NULL, 1),
 ('Bojangles', 'Ick', 'I like meat!', 4, 8, '2023-03-27 06:34:24', NULL, 2),
-('Bojangles', 'ImLazy', 'I''m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53', NULL, 3),
+('Bojangles', 'ImLazy', 'I\'m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53', NULL, 3),
 ('Bojangles', 'Meh', 'Vanilla is okay. I much prefer the rich chocolate cupcakes to this. C+', 1, 2, '2023-03-27 06:35:23', NULL, 4),
 ('Bojangles', 'I NEED SPICY WINGS', 'I NEED THEM NOW', 2, 6, '2023-03-27 06:37:01', NULL, 5),
 ('Bojangles', 'More Coming Soon!', 'Stay tuned for more!', 7, 9, '2023-03-27 06:45:01', NULL, 6),
 ('fallon', 'Great Idea!', 'Tried it today and became an instant favourite!! Stay tuned for a new game on my show ;)', 2, 6, '2023-03-27 05:37:08', NULL, 7),
-('KyraJB', 'Awesome Work!', 'I''m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58', NULL, 8),
+('KyraJB', 'Awesome Work!', 'I\'m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58', NULL, 8),
 ('KyraJB', 'FOMO', 'Thank you for the wonderful tips! Now I really want to visit Tokyo.', 3, 7, '2023-03-26 20:26:29', NULL, 9),
 ('KyraJB', 'TheSugarShack', 'Hope you enjoyed reading!', 1, 4, '2023-03-27 06:20:33', 12, 10),
 ('KyraJB', 'Yummy!', 'This is my favourite recipe!', 1, 1, '2023-03-27 06:20:48', NULL, 11),
-('KyraJB', 'Reply', 'That''s totally fair!', 1, 2, '2023-04-06 23:38:44', 4, 21),
+('KyraJB', 'Reply', 'That\'s totally fair!', 1, 2, '2023-04-06 23:38:44', 4, 21),
 ('Mrunal', 'Delicious!!', 'Just tried it, so yummy!!!', 1, 4, '2023-03-27 00:52:51', NULL, 12),
-('Mrunal', 'Reply', 'You''re welcome:))', 3, 7, '2023-04-06 23:32:09', 9, 14),
+('Mrunal', 'Reply', 'You\'re welcome:))', 3, 7, '2023-04-06 23:32:09', 9, 14),
 ('Mrunal', 'Reply', 'Yepp!', 1, 4, '2023-04-06 23:32:43', 12, 17),
 ('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17', NULL, 13);
 
@@ -164,17 +169,17 @@ INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPo
 -- Table structure for table `userinfo`
 --
 
-CREATE TABLE IF NOT EXISTS `userinfo` (
+CREATE TABLE `userinfo` (
   `Name` varchar(90) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `BirthDate` date NOT NULL,
   `Username` varchar(90) NOT NULL,
   `Password` varchar(200) NOT NULL,
-  `AccountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `AccountCreated` timestamp NOT NULL DEFAULT current_timestamp(),
   `ProfileImage` varchar(100) NOT NULL,
   `isAdmin` tinyint(1) NOT NULL,
-  `Status` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Status` tinyint(4) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `userinfo`
@@ -237,17 +242,20 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `bloginfo`
 --
 ALTER TABLE `bloginfo`
-  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `blogpost`
 --
 ALTER TABLE `blogpost`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
 --
 -- Constraints for dumped tables
 --
@@ -275,7 +283,8 @@ ALTER TABLE `blogpost`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`BID`, `PID`) REFERENCES `blogpost` (`BID`, `PID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`BID`,`PID`) REFERENCES `blogpost` (`BID`, `PID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

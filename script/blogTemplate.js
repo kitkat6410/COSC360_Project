@@ -1,3 +1,9 @@
+function deleteBlogClicked(bid) {
+  if (confirm('Are you sure you want to delete?')) {
+      window.location.href = "deleteBlog.php?bid=" + bid;
+  }
+}
+// function editBlogC
 function validateForm() {
   var title = document.forms["createPost"]["title"].value;
   var secondTitle = document.forms["createPost"]["secondTitle"].value;
@@ -67,7 +73,7 @@ $(document).ready(function () {
     });
   
 
-   
+
       if (focus == false || Date.now() - recentTyped > 60000) {
           $.ajax({
               url: 'reload-blog.php',
@@ -98,6 +104,7 @@ $(document).ready(function () {
   }, 1000);
 
 });
+
 
 
 $(document).ready(function () {

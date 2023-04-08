@@ -25,6 +25,10 @@ header {
     width: 58em;
 }
 
+section{
+    width:100%;
+}
+
 h1 {
 
     text-align: center;

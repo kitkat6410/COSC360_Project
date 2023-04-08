@@ -25,13 +25,14 @@
             <h1>Culinary Cloud</h1>
         </a>
 
-        <p>Create New Blog Page</p>
-    </div>
-    <ul>
-        <li><a href="home.php">Back</a></li>
-        </li>
-    </ul>
-</nav>
+            <p>Create New Blog Page</p>
+        </div>
+        <ul>
+            <li><a href="home.php">Back</a></li>
+
+        </ul>
+    </nav>
+
 
 <body>
     <form method="post" action="validateCreate.php" name="createBlog" id="mainForm" onsubmit="return validateForm()"

@@ -1,4 +1,5 @@
 function blogClicked(bid, event) {
   event.preventDefault();
-  window.location.href = "blogTemplate.php?bid=" + bid;
+  console.log(bid);
+  window.location.href = "../blogTemplate.php?bid=" + bid;
 }
