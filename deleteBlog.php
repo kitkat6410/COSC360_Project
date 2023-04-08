@@ -13,11 +13,11 @@ if (isset($_SESSION['BID'])) {
         $row = $stmt->fetch();    
         // this if statement added to avoid people from being able to put in the url themselves
         if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { 
-        $stmt = $pdo->prepare("DELETE FROM bloginfo WHERE BID =:bid");
+        $stmt = $pdo->prepare("DELETE FROM bloginfo WHERE BID = :bid");
         $stmt->bindParam(':bid', $bid);
         $stmt->execute();
         $numRows = $stmt->rowCount();
-        if($numRows > 0){
+        if($numRows == 1){
         // Set a success message
         $message = "Blog successfully deleted.";
         }else{

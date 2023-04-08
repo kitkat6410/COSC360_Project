@@ -279,7 +279,6 @@ ALTER TABLE `bloginfo`
 -- Constraints for table `blogpost`
 --
 ALTER TABLE `blogpost`
-  ADD CONSTRAINT `blogpost_ibfk_1` FOREIGN KEY (`Author`) REFERENCES `bloginfo` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `blogpost_ibfk_2` FOREIGN KEY (`BID`) REFERENCES `bloginfo` (`BID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
