@@ -192,47 +192,7 @@
                         });
                     </script>
                     
-                </div>
-                
-                <div>
-                    <canvas id='myPolarAreaChart'></canvas>
-                    </div>
-                    <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
-                    <script>
-                        // Get the canvas element
-                        const ctx = document.getElementById('myPolarAreaChart');
-                        
-                        // Data for the chart
-                        var data = {
-                            labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
-                            datasets: [{
-                                data: [10, 20, 30, 40, 50],
-                                backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-                                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 205, 86, 1)', 'rgba(54, 162, 235, 1)', 'rgba(153, 102, 255, 1)'],
-                                borderWidth: 1
-                            }]
-                        };
-                        
-                        // Configuration for the chart
-                        options: {
-                            scale: {
-                                ticks: {
-                                    beginAtZero: true,
-                                    max: 100,
-                                    stepSize: 20
-                                }
-                            }
-                        };
-                        
-                        // Create the polar area chart
-                        new Chart(ctx, {
-                            type: 'polarArea',
-                            data: data,
-                            options: options
-                        });
-                    </script>
-                    </div>
-                  ";
+                </div>";
         ?>
 
     </section>
