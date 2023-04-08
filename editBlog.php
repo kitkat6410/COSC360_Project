@@ -117,6 +117,15 @@ $op7 = ($row['Continent'] == 'Antartica') ? 'selected' : '';
                             <label>City, Country</label><br />
                             <input type="text" name="cityandcountry" value='<?php echo $row['CityandCountry']; ?>' size="40" />
                         </p>
+                        <p>
+                            <label>Pick your first color</label><br>
+                            <input type="color" name="first_color" value="#a3f7bf">
+                        </p>
+                        <p>
+                        <label>Pick your second color</label><br>
+                
+                            <input type="color" name="second_color" value="#29a19c">
+                        </p>
                     </td>
                 </tr>
                 <tr>

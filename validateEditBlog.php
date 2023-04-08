@@ -14,6 +14,8 @@ $business = isset($_POST['cc3']) ? 1 : 0;
 $review = isset($_POST['cc4']) ? 1 : 0;
 $travel = isset($_POST['cc5']) ? 1 : 0;
 $collaborate = isset($_POST['cc6']) ? 1 : 0;
+$first = $_POST['first_color'];
+$second = $_POST['second_color'];
 
 // Sanitize uploaded file name
 $target_dir = "images/";
@@ -79,10 +81,9 @@ $username = $_SESSION['user_id'];
 
 // Insert sanitized input into database
 try {
-    // $input = "INSERT INTO bloginfo (BlogName, Description, Continent, CityandCountry, cc1, cc2, cc3, cc4, cc5, cc6, Username, Thumbnail) VALUES (:blogname, :description, :continent, :cityandcountry, :cc1, :cc2, :cc3, :cc4, :cc5, :cc6, :username, :thumbnail)";
-    $input = "UPDATE bloginfo SET Description = :description, Continent = :continent, CityandCountry = :cityandcountry, cc1 = :cc1, cc2 = :cc2, cc3 = :cc3, cc4 = :cc4, cc5 = :cc5, cc6 = :cc6, Thumbnail = :thumbnail WHERE BID = :bid";
+    $input = "UPDATE bloginfo SET Description = :description, Continent = :continent, CityandCountry = :cityandcountry, cc1 = :cc1, cc2 = :cc2, cc3 = :cc3, cc4 = :cc4, cc5 = :cc5, cc6 = :cc6, Thumbnail = :thumbnail, firstColor = :first, secondColor = :second WHERE BID = :bid";
     $stmt = $pdo->prepare($input);
-    // $stmt->bindParam(':blogname', $bTitle_input);
+   
     $stmt->bindParam(':description', $desc);
     $stmt->bindParam(':continent', $continent);
     $stmt->bindParam(':cityandcountry', $cityCountry);
@@ -92,8 +93,9 @@ try {
     $stmt->bindParam(':cc4', $review);
     $stmt->bindParam(':cc5', $travel);
     $stmt->bindParam(':cc6', $collaborate);
-    // $stmt->bindParam(':username', $username);
     $stmt->bindParam(':thumbnail', $target_file);
+    $stmt->bindParam(':first', $first);
+    $stmt->bindParam(':second', $second);
     $stmt->bindParam(':bid', $_SESSION['BID']);
     $stmt->execute();
 
