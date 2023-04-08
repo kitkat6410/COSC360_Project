@@ -13,7 +13,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
         }
     }
     // session_unset();     // unset $_SESSION variable for this page
-    print_r($_SESSION);
+// session_destroy();
 
 }
 ?>

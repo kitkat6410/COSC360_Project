@@ -30,7 +30,7 @@
    </nav>
 <h1 class="third-color" style="padding: 0.2em; color: white;">Welcome <strong><?php echo $_SESSION['user_id'] ?></strong></h1>
 <h2></h2>
-   <form method="post" action="validateEdit.php" name="editForm" id="mainForm" onsubmit="return validateForm()"  enctype="multipart/form-data">
+   <form method="post" action="validateEditProfile.php" name="editForm" id="mainForm" onsubmit="return validateForm()"  enctype="multipart/form-data">
       <fieldset>
          <legend>Edit your account on Culinary Cloud</legend>
          <table>
@@ -61,7 +61,7 @@
                   <div class="box">
                      <p>
                         <label for="birth">Date of Birth:</label>*<br>
-                        <input type="date" name="birth" value = <?php echo $_SESSION['BirthDate'] ?>>
+                        <input type="date" name="birth" value = '<?php echo $_SESSION['BirthDate'] ?>'>
                      </p>
                   </div>
                </td>

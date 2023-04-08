@@ -7,7 +7,7 @@ try {
     $target_file = $target_dir . uniqid() . '.' . str_replace(' ', '_', basename($_FILES["image"]["name"]));
     if (strlen($target_file) === 0) {
         $target_file = null;
-        header('Location: edit.php?error=NoImage');
+        header('Location: editProfile.php?error=NoImage');
         exit();
     }
 
@@ -21,7 +21,7 @@ try {
             $uploadOk = 1;
         } else {
             $uploadOk = 0;
-            header('Location: edit.php?error=NotAnImage');
+            header('Location: editProfile.php?error=NotAnImage');
             exit();
         }
     }
@@ -67,20 +67,21 @@ try {
     $pass_input = $_POST['password'];
 
     // validate user input
-    if($name > 90){
-        header('Location: signup.php?error=InvalidName');
+    if(strlen($name) > 90){
+        echo '<script>console.log("Invalid name: ' . $name . '")</script>';
+        header('Location: editProfile.php?error=InvalidName');
         exit();
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header('Location: signup.php?error=InvalidEmail');
+        header('Location: editProfile.php?error=InvalidEmail');
         exit();
     }
     if (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?!.*\s).{8,}$/', $pass_input)) {
-        header('Location: signup.php?error=InvalidPassword');
+        header('Location: editProfile.php?error=InvalidPassword');
         exit();
     }
     if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $bdate)) {
-        header('Location: signup.php?error=InvalidBirthdate');
+        header('Location: editProfile.php?error=InvalidBirthdate');
         exit();
     }
     // hash user password
@@ -96,12 +97,14 @@ try {
         $stmt2 = $pdo->prepare("UPDATE admininfo SET Password = :password WHERE Username = :username");
         $stmt2->execute(array(':password' => $hashed_password, ':username' => $user_input));
     }
-    header("Location: profile.php");
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
     exit();
 } catch (Exception $e) {
     // log the error and redirect to the signup page
     error_log($e->getMessage());
-    header("Location: edit.php?error=Unknown");
+    header("Location: editProfile.php?error=Unknown");
     exit();
 }
 ?>

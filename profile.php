@@ -129,7 +129,7 @@ if (!isset($_SESSION['LoggedIn']) || $_SESSION['LoggedIn'] != 1) {
                 ?>
     </div>
     <div style="margin-top: 15px;">
-        <a href="edit.php">
+        <a href="editProfile.php">
             <h1 class="third-color">Edit Profile</h1>
         </a>
     </div>

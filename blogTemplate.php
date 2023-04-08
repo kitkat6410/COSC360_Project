@@ -6,7 +6,8 @@ if (isset($_GET['bid'])) {
     $_SESSION['BID'] = $_GET['bid'];
 }
 if (!isset($_SESSION['BID'])) {
-    echo "Session error: Blog ID not found";
+    echo "<script>setTimeout(function(){ window.location.href = 'blogs.php'; }, 2000);</script>";
+    echo "Session error: Blog ID not found. Redirecting...";
     exit();
 }
 
@@ -49,7 +50,6 @@ try {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="script/jquery-3.6.4.min.js"></script>
     <script src="script/blogTemplate.js"></script>
-    <script src="script/delete.js"></script>
     <style>
     body {
         margin-top: 0;
@@ -138,8 +138,8 @@ legend {
     <header id="blogPage">
    
     <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) {  ?>
-    <button class = "rounded" onclick="alert('Not functional!')">Edit</button>
-    <button class="rounded red" onclick="if (confirm('Are you sure you want to delete?')) { deleteBlogClicked('<?php echo $_SESSION['BID']; ?>', event);  } return false;">Delete</button>
+    <button class = "rounded" onclick="location.href='editBlog.php'">Edit</button>
+    <button class="rounded red" onclick="deleteBlogClicked('<?php echo $_SESSION['BID']; ?>')">Delete</button>
     <br>
     <?php } ?>
         <h1 id=sugar><?php echo ($row['BlogName']) ?></h1>
@@ -163,7 +163,7 @@ while ($row2 = $stmt2->fetch()) {
 
     <article>
     <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
-    <button class = "rounded" onclick="alert('Not functional!')">Edit</button>
+        <button class="rounded" onclick="location.href='editPost.php?pid=<?php echo $row2['PID']; ?>'">Edit</button>
     <button class="rounded red" onclick="if (confirm('Are you sure you want to delete?')) { deletePostClicked('<?php echo $row2['PID']; ?>', event); } return false;">Delete</button>
     <br>
     <?php } ?>
@@ -313,7 +313,7 @@ $.ajax({
 
 
 <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
-<p id="<?php echo $row2['PID'] ?>"></p>
+
 <form id="comment-form-<?php echo $row2['PID'] ?>" method="post" action="validateComment.php"
     name="createComment" onsubmit="return validateComment()">
 

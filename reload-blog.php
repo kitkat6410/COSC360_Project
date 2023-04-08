@@ -34,10 +34,10 @@ $stmt2->execute();
 
 
 ?>
-    <header id="blogPage">
-  <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) {  ?>
-    <button class = "rounded" onclick="alert('Not functional!')">Edit</button>
-    <button class="rounded red" onclick="if (confirm('Are you sure you want to delete?')) { deleteBlogClicked('<?php echo $_SESSION['BID']; ?>', event);  } return false;">Delete</button>
+   <header id="blogPage">
+    <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) {  ?>
+    <button class = "rounded" onclick="location.href='editBlog.php'">Edit</button>
+    <button class="rounded red" onclick="deleteBlogClicked('<?php echo $_SESSION['BID']; ?>')">Delete</button>
     <br>
     <?php } ?>
         <h1 id=sugar><?php echo ($row['BlogName']) ?></h1>
@@ -61,7 +61,7 @@ while ($row2 = $stmt2->fetch()) {
 
     <article>
     <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $row['Username'] || (isset($_SESSION['isLoggedAdmin']) && $_SESSION['isLoggedAdmin'] == 1)) && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
-    <button class = "rounded" onclick="alert('Not functional!')">Edit</button>
+        <button class="rounded" onclick="location.href='editPost.php?pid=<?php echo $row2['PID']; ?>'">Edit</button>
     <button class="rounded red" onclick="if (confirm('Are you sure you want to delete?')) { deletePostClicked('<?php echo $row2['PID']; ?>', event); } return false;">Delete</button>
     <br>
     <?php } ?>
@@ -211,7 +211,7 @@ $.ajax({
 
 
 <?php if (isset($_SESSION["LoggedIn"]) && $_SESSION['LoggedIn'] == true && isset($_SESSION['Status']) && $_SESSION['Status'] == 1) { ?>
-<p id="<?php echo $row2['PID'] ?>"></p>
+
 <form id="comment-form-<?php echo $row2['PID'] ?>" method="post" action="validateComment.php"
     name="createComment" onsubmit="return validateComment()">
 

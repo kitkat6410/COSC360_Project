@@ -1,3 +1,9 @@
+function deleteBlogClicked(bid) {
+  if (confirm('Are you sure you want to delete?')) {
+      window.location.href = "deleteBlog.php?bid=" + bid;
+  }
+}
+// function editBlogC
 function validateForm() {
   var title = document.forms["createPost"]["title"].value;
   var secondTitle = document.forms["createPost"]["secondTitle"].value;
@@ -48,26 +54,26 @@ function validateReply(){
   }
 }
 
-$(document).ready(function () {
-  var recentTyped = Date.now();
-  var focus = false;
-  setInterval(function() {
+// $(document).ready(function () {
+//   var recentTyped = Date.now();
+//   var focus = false;
+//   setInterval(function() {
 
-    $('.my-input').on('keydown', function() {
-        recentTyped = Date.now();
+//     $('.my-input').on('keydown', function() {
+//         recentTyped = Date.now();
   
-    });
-    $('.my-input').on('blur', function() {
-        focus = false;
+//     });
+//     $('.my-input').on('blur', function() {
+//         focus = false;
 
-    });
-    $('.my-input').on('focus', function() {
-        focus = true;
+//     });
+//     $('.my-input').on('focus', function() {
+//         focus = true;
 
-    });
+//     });
   
 
-   
+
       if (focus == false || Date.now() - recentTyped > 60000) {
           $.ajax({
               url: 'reload-blog.php',
@@ -98,6 +104,7 @@ $(document).ready(function () {
   }, 1000);
 
 });
+
 
 
 $(document).ready(function () {
