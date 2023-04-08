@@ -24,7 +24,7 @@
          <p>Edit Account Page</p>
       </div>
       <ul>
-         <li><a href="profile.php">Back</a></li>
+         <li><a href="query/profile.php">Back</a></li>
   
       </ul>
    </nav>

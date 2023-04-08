@@ -27,7 +27,7 @@
          </li>
       </ul>
    </nav>
-   <form method="post" action="profile.php" name="loginForm"
+   <form method="post" action="query/profile.php" name="loginForm"
       onsubmit="return validateForm()">
       <fieldset>
          <legend>Login to your account on Culinary Cloud</legend>

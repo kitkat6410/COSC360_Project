@@ -40,7 +40,7 @@
                     ?>
                     <li><a href="adminProfile.php">Account</a></li>
                 <?php } else { ?>
-                    <li><a href="profile.php">Account</a></li>
+                    <li><a href="query/profile.php">Account</a></li>
 
                 <?php } ?>
                 <li><a href="index.php">Logout</a></li>
