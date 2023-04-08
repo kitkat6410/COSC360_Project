@@ -1,15 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- version 4.4.15.10
+-- https://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 08, 2023 at 06:05 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Host: localhost
+-- Generation Time: Apr 08, 2023 at 06:34 AM
+-- Server version: 5.5.68-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
+DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `blogpost`;
+DROP TABLE IF EXISTS `bloginfo`;
+DROP TABLE IF EXISTS `admininfo`;
+DROP TABLE IF EXISTS `userinfo`;
+
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,7 +23,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `culinarycloud`
+-- Database: `db_93648137`
 --
 
 -- --------------------------------------------------------
@@ -27,15 +32,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `admininfo`
 --
 
-DROP TABLE IF EXISTS `comments`;
-DROP TABLE IF EXISTS `blogpost`;
-DROP TABLE IF EXISTS `bloginfo`;
-DROP TABLE IF EXISTS `admininfo`;
-DROP TABLE IF EXISTS `userinfo`;
-
-CREATE TABLE `admininfo` (
-  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+CREATE TABLE IF NOT EXISTS `admininfo` (
+  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
+  `Password` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `Refnum` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -53,24 +52,24 @@ INSERT INTO `admininfo` (`Username`, `Password`, `Refnum`) VALUES
 -- Table structure for table `bloginfo`
 --
 
-CREATE TABLE `bloginfo` (
-  `BlogName` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+CREATE TABLE IF NOT EXISTS `bloginfo` (
+  `BlogName` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
   `BID` int(11) NOT NULL,
-  `BlogCreated` timestamp NOT NULL DEFAULT current_timestamp(),
-  `Description` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Continent` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CityandCountry` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `cc1` tinyint(4) NOT NULL DEFAULT 0,
-  `cc2` tinyint(4) NOT NULL DEFAULT 0,
-  `cc3` tinyint(4) NOT NULL DEFAULT 0,
-  `cc4` tinyint(4) NOT NULL DEFAULT 0,
-  `cc5` tinyint(4) NOT NULL DEFAULT 0,
-  `cc6` tinyint(4) NOT NULL DEFAULT 0,
-  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Thumbnail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `firstColor` varchar(7) NOT NULL DEFAULT '#a3f7bf',
-  `secondColor` varchar(7) NOT NULL DEFAULT '#29a19c'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `BlogCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Description` varchar(2000) CHARACTER SET utf8mb4 NOT NULL,
+  `Continent` varchar(30) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `CityandCountry` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `cc1` tinyint(4) NOT NULL DEFAULT '0',
+  `cc2` tinyint(4) NOT NULL DEFAULT '0',
+  `cc3` tinyint(4) NOT NULL DEFAULT '0',
+  `cc4` tinyint(4) NOT NULL DEFAULT '0',
+  `cc5` tinyint(4) NOT NULL DEFAULT '0',
+  `cc6` tinyint(4) NOT NULL DEFAULT '0',
+  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
+  `Thumbnail` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `firstColor` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#a3f7bf',
+  `secondColor` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#29a19c'
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bloginfo`
@@ -88,7 +87,8 @@ INSERT INTO `bloginfo` (`BlogName`, `BID`, `BlogCreated`, `Description`, `Contin
 ('The Hungry Traveler', 9, '2023-03-26 05:40:34', 'Welcome to The Hungry Traveler, where we believe that food is the best way to explore the world. Our blog is dedicated to sharing our adventures in culinary exploration, as we travel the globe in search of delicious and authentic dishes. From street food in Southeast Asia to haute cuisine in Europe, we&#039;re always on the lookout for the next great culinary discovery. But we&#039;re not just about the food – we&#039;re passionate about the stories and people behind the dishes. We love to connect with locals, chefs, and food enthusiasts to learn about the history and culture of each destination. Join us on a journey towards flavor-filled travels, as we satisfy our wanderlust and our appetites, one bite at a time.', 'North America', '', 0, 0, 0, 0, 1, 0, 'KyraJB', 'images/641fdad2504f0.the-hungry-traveler.png', '#a3f7bf', '#29a19c'),
 ('The Chef&#039;s Table', 10, '2023-03-26 05:43:14', 'Welcome to The Chef&#039;s Table, a blog dedicated to the art and science of cuisine. Our blog is inspired by the tradition of the chef&#039;s table – a place where culinary masters gather to craft and enjoy their creations. Through our blog, we aim to share that same level of culinary excellence with our readers, bringing you inside the world of our kitchen and beyond. From farm to table, we share our passion for fresh, seasonal ingredients and innovative cooking techniques. Our chefs will share their tips and tricks, while our sommeliers and mixologists will guide you through the world of wine and spirits. But we&#039;re not just about the food and drink – we&#039;re dedicated to creating a complete dining experience. Join us at The Chef&#039;s Table as we explore the world of gastronomy and savor the finer things in life.', 'Asia', '', 0, 0, 1, 0, 0, 0, 'TestUser2', 'images/641fdb720b378.chef-table.png', '#a3f7bf', '#29a19c'),
 ('Savory Secrets', 11, '2023-03-26 06:06:57', 'Welcome to Savory Secrets, your go-to source for tantalizing recipes and culinary inspiration. Our blog is dedicated to sharing the savory secrets of the world&#039;s most talented chefs, home cooks, and food enthusiasts. We believe that cooking is an art form, and we&#039;re passionate about helping our readers create dishes that are as delicious as they are beautiful. At Savory Secrets, you&#039;ll find a wealth of recipes, cooking tips, and culinary hacks that will elevate your kitchen skills to the next level. Whether you&#039;re an experienced chef or a novice cook, our blog has something to offer. From mouthwatering appetizers to decadent desserts, our recipes are sure to impress. We&#039;re also committed to providing a diverse range of recipes that cater to different dietary needs and preferences, including vegetarian, vegan, gluten-free, and more.', 'Asia', '', 1, 0, 1, 0, 0, 0, 'TestUser2', 'images/641fe10137d96.savory-secrets.png', '#a3f7bf', '#29a19c'),
-('Television food', 12, '2023-03-27 05:53:22', 'All I shall say is this: The BEST television food satisfaction you will find anywhere.', 'North America', 'New York, USA', 0, 1, 1, 0, 0, 0, 'fallon', 'images/64212f5298d29.Screenshot_2023-03-26_224125.png', '#a3f7bf', '#29a19c');
+('Television food', 12, '2023-03-27 05:53:22', 'All I shall say is this: The BEST television food satisfaction you will find anywhere.', 'North America', 'New York, USA', 0, 1, 1, 0, 0, 0, 'fallon', 'images/64212f5298d29.Screenshot_2023-03-26_224125.png', '#a3f7bf', '#29a19c'),
+('This is my cool blog.', 13, '2023-04-08 05:48:52', 'Here I will tell you about some of my recipes and adventures with friends.', 'North America', 'Penticton, Canada', 1, 0, 0, 0, 0, 1, 'TestUser3', 'images/643104c967dba.friend.jpeg', '#a3f7bf', '#29a19c');
 
 -- --------------------------------------------------------
 
@@ -96,16 +96,16 @@ INSERT INTO `bloginfo` (`BlogName`, `BID`, `BlogCreated`, `Description`, `Contin
 -- Table structure for table `blogpost`
 --
 
-CREATE TABLE `blogpost` (
-  `Author` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `BlogTitle` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+CREATE TABLE IF NOT EXISTS `blogpost` (
+  `Author` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
+  `BlogTitle` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
   `PID` int(11) NOT NULL,
   `BID` int(11) NOT NULL,
-  `BlogSecondaryTitle` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `DatePosted` timestamp NOT NULL DEFAULT current_timestamp(),
-  `Image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Content` varchar(2200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `BlogSecondaryTitle` varchar(50) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `DatePosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Image` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `Content` varchar(2200) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `blogpost`
@@ -122,7 +122,8 @@ INSERT INTO `blogpost` (`Author`, `BlogTitle`, `PID`, `BID`, `BlogSecondaryTitle
 ('TestUser', '5 Easy and Delicious Vegan Breakfast Ideas', 8, 4, 'Fuel Your Day', '2023-03-26 19:03:09', 'images/642096ed7c44a.vegan-breakfast.jpg', 'As a vegan, breakfast can sometimes feel like a challenge. But fear not - there are plenty of delicious and nutritious plant-based options to start your day off right! In this post, we&#039;ll share 5 easy and tasty vegan breakfast ideas that you can enjoy any day of the week.\r\n\r\nOvernight Oats\r\nOvernight oats are a convenient and tasty breakfast option that you can prepare the night before. Simply mix together rolled oats, plant-based milk, and your favorite toppings (such as fruit, nuts, or seeds) and let it sit in the fridge overnight. In the morning, you&#039;ll have a creamy and satisfying breakfast that&#039;s perfect for busy mornings.\r\n\r\nTofu Scramble\r\nIf you&#039;re missing scrambled eggs, try making a tofu scramble instead. Crumble up some firm tofu and cook it with your favorite veggies and spices for a savory and protein-packed breakfast. Serve it with some toast or avocado for a filling meal.\r\n\r\nSmoothie Bowl\r\nSmoothie bowls are a fun and creative way to enjoy a nutritious breakfast. Simply blend together your favorite fruits and veggies with some plant-based milk and pour it into a bowl. Top it with some granola, nuts, or seeds for some crunch and texture.\r\n\r\nBreakfast Burrito\r\nWho doesn&#039;t love a breakfast burrito? Simply fill a tortilla with some scrambled tofu, beans, veggies, and salsa for a hearty and flavorful breakfast. You can even make a big batch and freeze them for an easy grab-and-go breakfast during the week.\r\n\r\nVegan Pancakes\r\nPancakes are a classic breakfast food, and they can easily be made vegan. Simply substitute eggs with a flax egg or applesauce, and use plant-based milk instead of dairy milk. Top them with some fruit, maple syrup, or nut butter for a delicious and indulgent breakfast.\r\n\r\nWe hope these vegan breakfast ideas inspire you to start your day off with some plant-based goodness. What are some of your favorite vegan breakfasts? Let us know in the comments below!'),
 ('Bojangles', 'Explore the Flavors of Canada: A Culinary Journey with Northern Nibbles', 9, 7, 'A Culinary Journey with Northern Nibbles', '2023-03-26 20:51:02', 'images/6420b036a83e5.canada2.jpg', 'Welcome to Northern Nibbles, your go-to blog for discovering the best of Canadian cuisine. From coast to coast, Canada is home to a diverse range of culinary traditions and flavors, and we are here to showcase them all.\r\nAt Northern Nibbles, we are passionate about sharing authentic Canadian recipes that highlight the unique ingredients and flavors of each region. Whether you&#039;re looking for classic comfort food or a modern twist on a traditional dish, we&#039;ve got you covered.\r\n\r\nOne dish that is synonymous with Canadian cuisine is poutine. This deliciously indulgent dish features crispy fries, savory gravy, and gooey cheese curds. It&#039;s a favorite among Canadians and visitors alike, and for good reason. Our recipe for classic poutine is sure to satisfy your cravings and transport you to the streets of Montreal.\r\n\r\nAnother Canadian staple is maple-glazed salmon. Canada is known for its fresh and sustainable seafood, and this dish is a perfect showcase of the country&#039;s bountiful waters. Our recipe features a sweet and savory glaze made with pure Canadian maple syrup, soy sauce, and ginger. It&#039;s a simple yet elegant dish that will impress any dinner guest.\r\n\r\nBut Canadian cuisine is not just about comfort food and seafood. Our country is home to a rich and diverse culinary landscape, shaped by the many cultures that call Canada home. From Quebec&#039;s French-inspired cuisine to the spicy flavors of the Caribbean, there&#039;s something for everyone in Canada.\r\n\r\nSo, whether you&#039;re a seasoned home cook or just starting out, join us on a culinary journey across Canada with Northern Nibbles. From hearty stews to decadent desserts, we&#039;ve got everything you need to explore the flavors of Canada. Stay tuned for more delicious recipes and culinary adventures!'),
 ('Mrunal', 'India', 10, 3, 'My home revisited', '2023-03-27 00:59:36', 'images/6420ea78527c5.Screenshot_2023-03-26_175908.png', 'Indian cuisine dates back over 5000 years. Each region has its own traditions, religions and culture that influence its food. Hindus tend to be vegetarian and Muslims tend to have meat dishes, although pork is forbidden. Indian food has been influenced by Mongolian, Persian and Chinese cuisine, among others. '),
-('fallon', 'GordonGram', 11, 12, 'Our first legendary guest: Gordon Ramsay', '2023-03-27 05:59:21', 'images/642130b93d455.Screenshot_2023-03-26_225850.png', 'Gordon James Ramsay is a British chef, restaurateur, television personality and writer. His restaurant group, Gordon Ramsay Restaurants, was founded in 1997 and has been awarded 17 Michelin stars overall; it currently holds a total of seven. His signature restaurant, Restaurant Gordon Ramsay in Chelsea, London, has held three Michelin stars since 2001. After rising to fame on the British television miniseries Boiling Point in 1999, Ramsay became one of the best-known and most influential chefs in the world.\r\n\r\nTune in on Friday, April 1st, 9pm to see the culinary ninja in action.');
+('fallon', 'GordonGram', 11, 12, 'Our first legendary guest: Gordon Ramsay', '2023-03-27 05:59:21', 'images/642130b93d455.Screenshot_2023-03-26_225850.png', 'Gordon James Ramsay is a British chef, restaurateur, television personality and writer. His restaurant group, Gordon Ramsay Restaurants, was founded in 1997 and has been awarded 17 Michelin stars overall; it currently holds a total of seven. His signature restaurant, Restaurant Gordon Ramsay in Chelsea, London, has held three Michelin stars since 2001. After rising to fame on the British television miniseries Boiling Point in 1999, Ramsay became one of the best-known and most influential chefs in the world.\r\n\r\nTune in on Friday, April 1st, 9pm to see the culinary ninja in action.'),
+('TestUser3', 'Granola and its friends', 12, 13, 'Let''s talk about granola and its friends!', '2023-04-08 05:52:06', 'images/643103a71cf4f.granola.jpg', 'Granola is a type of breakfast cereal that typically contains oats, nuts, seeds, and dried fruit. It''s known for being a healthy and filling option for breakfast, but did you know that granola can also have some pretty great friends?\r\n\r\nLet''s start with yogurt. Yogurt and granola go together like peanut butter and jelly. The creamy texture of the yogurt pairs perfectly with the crunchy texture of the granola. Not to mention, yogurt is also a great source of protein and calcium, making it a healthy and delicious addition to your breakfast routine.\r\n\r\nNext up, we have fresh fruit. Whether it''s sliced bananas, berries, or chopped apples, adding fresh fruit to your granola can give it an extra burst of flavor and nutrition. Plus, the natural sweetness of the fruit can help satisfy your sweet tooth without adding any extra sugar.\r\n\r\nAnother friend of granola is nut butter. Whether you prefer almond butter, peanut butter, or cashew butter, adding a dollop of your favorite nut butter to your granola can take it to the next level. Not only does it add some extra protein and healthy fats, but it also adds a delicious nutty flavor.\r\n\r\nLastly, let''s talk about milk. Whether you prefer dairy milk, almond milk, soy milk, or oat milk, pouring a splash of your favorite milk over your granola can make it even more satisfying. Plus, it''s a great way to get some extra calcium and vitamin D in your diet.\r\n\r\nSo there you have it - granola and its friends. Whether you enjoy it with yogurt, fresh fruit, nut butter, or milk, granola is a delicious and healthy breakfast option that can be customized to fit your personal preferences.');
 
 -- --------------------------------------------------------
 
@@ -130,38 +131,42 @@ INSERT INTO `blogpost` (`Author`, `BlogTitle`, `PID`, `BID`, `BlogSecondaryTitle
 -- Table structure for table `comments`
 --
 
-CREATE TABLE `comments` (
-  `Username` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Reply',
-  `Content` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+CREATE TABLE IF NOT EXISTS `comments` (
+  `Username` varchar(90) CHARACTER SET utf8mb4 NOT NULL,
+  `Title` varchar(100) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'Reply',
+  `Content` varchar(1000) CHARACTER SET utf8mb4 NOT NULL,
   `BID` int(11) NOT NULL,
   `PID` int(11) NOT NULL,
-  `CommentPosted` timestamp NOT NULL DEFAULT current_timestamp(),
+  `CommentPosted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ParentCommentID` int(11) DEFAULT NULL,
   `CID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPosted`, `ParentCommentID`, `CID`) VALUES
-('Bojangles', 'Boring', 'I don\'t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49', NULL, 1),
+('Bojangles', 'Boring', 'I don''t like Gordon Ramsay boo', 12, 11, '2023-03-27 06:33:49', NULL, 1),
 ('Bojangles', 'Ick', 'I like meat!', 4, 8, '2023-03-27 06:34:24', NULL, 2),
-('Bojangles', 'ImLazy', 'I\'m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53', NULL, 3),
+('Bojangles', 'ImLazy', 'I''m too lazy to cook but these look great!', 1, 4, '2023-03-27 06:34:53', NULL, 3),
 ('Bojangles', 'Meh', 'Vanilla is okay. I much prefer the rich chocolate cupcakes to this. C+', 1, 2, '2023-03-27 06:35:23', NULL, 4),
 ('Bojangles', 'I NEED SPICY WINGS', 'I NEED THEM NOW', 2, 6, '2023-03-27 06:37:01', NULL, 5),
 ('Bojangles', 'More Coming Soon!', 'Stay tuned for more!', 7, 9, '2023-03-27 06:45:01', NULL, 6),
 ('fallon', 'Great Idea!', 'Tried it today and became an instant favourite!! Stay tuned for a new game on my show ;)', 2, 6, '2023-03-27 05:37:08', NULL, 7),
-('KyraJB', 'Awesome Work!', 'I\'m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58', NULL, 8),
+('KyraJB', 'Awesome Work!', 'I''m so proud of you! Keep going!', 7, 5, '2023-03-26 08:10:58', NULL, 8),
 ('KyraJB', 'FOMO', 'Thank you for the wonderful tips! Now I really want to visit Tokyo.', 3, 7, '2023-03-26 20:26:29', NULL, 9),
 ('KyraJB', 'TheSugarShack', 'Hope you enjoyed reading!', 1, 4, '2023-03-27 06:20:33', 12, 10),
 ('KyraJB', 'Yummy!', 'This is my favourite recipe!', 1, 1, '2023-03-27 06:20:48', NULL, 11),
-('KyraJB', 'Reply', 'That\'s totally fair!', 1, 2, '2023-04-06 23:38:44', 4, 21),
+('KyraJB', 'Reply', 'That''s totally fair!', 1, 2, '2023-04-06 23:38:44', 4, 21),
 ('Mrunal', 'Delicious!!', 'Just tried it, so yummy!!!', 1, 4, '2023-03-27 00:52:51', NULL, 12),
-('Mrunal', 'Reply', 'You\'re welcome:))', 3, 7, '2023-04-06 23:32:09', 9, 14),
+('Mrunal', 'Reply', 'You''re welcome:))', 3, 7, '2023-04-06 23:32:09', 9, 14),
 ('Mrunal', 'Reply', 'Yepp!', 1, 4, '2023-04-06 23:32:43', 12, 17),
-('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17', NULL, 13);
+('TestUser', 'Awesome recipe!', 'Great job!', 1, 1, '2023-03-26 17:15:17', NULL, 13),
+('TestUser3', 'Reply', 'You should try it!', 1, 4, '2023-04-08 06:09:56', 3, 32),
+('TestUser3', 'Reply', 'I def enjoyed!', 1, 4, '2023-04-08 06:10:13', 12, 34),
+('TestUser3', 'Reply', 'That''s rude', 4, 8, '2023-04-08 06:14:26', 2, 42),
+('TestUser3', 'Looks delicious!', 'I''ll be sure to try it!', 4, 8, '2023-04-08 06:15:22', NULL, 44);
 
 -- --------------------------------------------------------
 
@@ -169,17 +174,17 @@ INSERT INTO `comments` (`Username`, `Title`, `Content`, `BID`, `PID`, `CommentPo
 -- Table structure for table `userinfo`
 --
 
-CREATE TABLE `userinfo` (
+CREATE TABLE IF NOT EXISTS `userinfo` (
   `Name` varchar(90) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `BirthDate` date NOT NULL,
   `Username` varchar(90) NOT NULL,
   `Password` varchar(200) NOT NULL,
-  `AccountCreated` timestamp NOT NULL DEFAULT current_timestamp(),
+  `AccountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ProfileImage` varchar(100) NOT NULL,
   `isAdmin` tinyint(1) NOT NULL,
-  `Status` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `Status` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `userinfo`
@@ -192,7 +197,8 @@ INSERT INTO `userinfo` (`Name`, `Email`, `BirthDate`, `Username`, `Password`, `A
 ('Kyra Barnes', 'kjbarnes6410@gmail.com', '2000-01-01', 'KyraJB', '$2y$10$hDrq9ZHS9essufpDL/NjYe5NgSFjA0ueGoEWZX0ZFClC/n2yF.zAy', '2023-03-22 03:01:46', 'images/641fda30bfec2.devpost_pfp.png', 1, 1),
 ('Mrunal Aroskar', 'mrunalaroskar17@gmail.com', '2000-09-03', 'Mrunal', '$2y$10$.bJx.ZeLb59qEJP9yp4aieZUBu60gDpCt4QOwn4bMZfeSluZFkBOS', '2023-03-22 22:14:47', 'images/641b7dd7c11ef.lexiuwu.png', 1, 1),
 ('Test User', 'test@gmail.com', '2000-09-03', 'TestUser', '$2y$10$bPRUWQAatqjrpxiSCruIAOQ0Tnb6p9kt7hlwDPpH/IlYch4LTaaxC', '2023-03-22 22:50:27', 'images/641b863366950.tulip.jpg', 0, 1),
-('Test UserTwo', 'testuser2@gmail.com', '1998-01-01', 'TestUser2', '$2y$10$n9zzf3VOhVTBm3SIHn48I.gJ.NZZ1eKoKqqGAqzKG6tkseUWX91W2', '2023-03-26 05:33:44', 'images/641fd937e96fc.profile.jpg', 0, 0);
+('Test UserTwo', 'testuser2@gmail.com', '1998-01-01', 'TestUser2', '$2y$10$n9zzf3VOhVTBm3SIHn48I.gJ.NZZ1eKoKqqGAqzKG6tkseUWX91W2', '2023-03-26 05:33:44', 'images/641fd937e96fc.profile.jpg', 0, 0),
+('Test UserFinal', 'final@email.com', '1999-01-01', 'TestUser3', '$2y$10$61BmAQ/BHR1SdnrtKlVhqegoPTx4KfMmnwpPAePMVJZaCgDadO67S', '2023-04-08 05:43:58', 'images/6430ff73bb6c5.2-0.png', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -242,20 +248,17 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `bloginfo`
 --
 ALTER TABLE `bloginfo`
-  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `blogpost`
 --
 ALTER TABLE `blogpost`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=56;
 --
 -- Constraints for dumped tables
 --
@@ -283,8 +286,7 @@ ALTER TABLE `blogpost`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`BID`,`PID`) REFERENCES `blogpost` (`BID`, `PID`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`BID`, `PID`) REFERENCES `blogpost` (`BID`, `PID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
