@@ -1,1 +1,1 @@
-{"version":1,"defects":{"unitTest::testLogin":8,"unitTest::testFindUser":8},"times":{"unitTest::testLogin":0.067,"unitTest::testFindUser":0.004}}
+{"version":1,"defects":{"unitTest::testLogin":8,"unitTest::testFindUser":8},"times":{"unitTest::testLogin":0.004,"unitTest::testFindUser":0.004}}
